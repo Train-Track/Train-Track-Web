@@ -5,7 +5,10 @@ threadsafe: true
 api_version: 1
 
 handlers:
-# Endpoints handler
+- url: /
+  static_files: index.html
+  upload: index.html
+
 - url: /_ah/spi/.*
   script: traintrack_api.APPLICATION
 
