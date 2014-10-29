@@ -1,4 +1,4 @@
 Train-Track-Web
 ===============
 
-For deploying to Google Cloud
+For deploying to Parse Cloud Hosting
