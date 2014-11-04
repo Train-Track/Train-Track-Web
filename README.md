@@ -8,3 +8,6 @@ To Deploy:
 - Create a new project directory: parse new Train-Track-Web
 - Clone this repository ontop of the application directory
 - Deploy: parse deploy
+
+To Contribute:
+Please feel free to make pull requests!
