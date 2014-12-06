@@ -1,34 +1,79 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <title>Train Track</title>
-  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
-  <style>
-    html,body {
-      height: 100%;
-      width: 100%;
-      padding: 0;
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An app that lets you manage your train journeys">
+  <meta name="author" content="Dylan Jones">
+  <link rel="icon" href="/favicon.ico">
+  <style type="text/css">
+    html, body {
       margin: 0;
-      background-color: #E5E5E5;
+      padding: 0;
+      width: 100%;
       font-family: sans-serif;
     }
-    h1 {
-      padding-top: 80px;
-      text-align: center;
-      font-size: 60px;
+    nav {
+      margin: 50px 0 0 0;
+      padding: 30px;
+      background: #eee;
     }
-    h2 {
+    nav a, nav a:active, nav a:hover, nav a:visited {
+      margin-right: 30px;
+      font-size: 20px;
+      color: #33b5e5;
+      text-decoration: none;
+    }
+    footer {
+      margin: 0;
+      padding: 30px;
+      background: #33b5e5;
+      color: #fff;
+    }
+    section {
+      margin: 0px;
+      padding: 30px;
+      width: 100%;
+      min-height: 360px;
+    }
+    #image {
+      height: 90px;
+      width: 90px;
+      vertical-align: middle;
+      margin: -30px 0;
+    }
+    .container {
+      margin: 0 auto;
+      width: 780px;
+    }
+    h1 {
+      margin: 0;
       padding: 0;
-      text-align: center;
-      font-size: 40px;
+      font-size: 67px;
+      color: #33b5e5;
     }
   </style>
-
+  <title>Train Track</title>
 </head>
-
 <body>
-  <h1>Train Track</h1>
-  <h2>Privacy</h2>
+  <nav>
+    <div class="container">
+      <a href="/" title="Train Track Home">
+        <img id="image" src="/web_hi_res_512.png">
+      </a>
+      <a href="/" title="Home">Home</a>
+      <a href="/about.html" title="About">About</a>
+      <a href="https://github.com/Train-Track" title="Contribute">Contribute</a>
+    </div>
+  </nav>
+  <section id="main" class="container">
+    <h1>Privacy</h1>
+  </section>
+  <footer>
+    <div class="container">
+      &copy; 2014 Train Track App
+    </div>
+  </footer>
+</body>
 </html>

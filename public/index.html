@@ -7,73 +7,73 @@
   <meta name="description" content="An app that lets you manage your train journeys">
   <meta name="author" content="Dylan Jones">
   <link rel="icon" href="/favicon.ico">
-
+  <style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      font-family: sans-serif;
+    }
+    nav {
+      margin: 50px 0 0 0;
+      padding: 30px;
+      background: #eee;
+    }
+    nav a, nav a:active, nav a:hover, nav a:visited {
+      margin-right: 30px;
+      font-size: 20px;
+      color: #33b5e5;
+      text-decoration: none;
+    }
+    footer {
+      margin: 0;
+      padding: 30px;
+      background: #33b5e5;
+      color: #fff;
+    }
+    section {
+      margin: 0px;
+      padding: 30px;
+      width: 100%;
+      min-height: 360px;
+    }
+    #image {
+      height: 90px;
+      width: 90px;
+      vertical-align: middle;
+      margin: -30px 0;
+    }
+    .container {
+      margin: 0 auto;
+      width: 780px;
+    }
+    h1 {
+      margin: 0;
+      padding: 0;
+      font-size: 67px;
+      color: #33b5e5;
+    }
+  </style>
   <title>Train Track</title>
-
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/css/ripples.min.css" rel="stylesheet">
-  <link href="/css/material-wfont.min.css" rel="stylesheet">
-  <link href="/css/home.css" rel="stylesheet">
-
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    </head>
-
-    <body role="document">
-
-      <!-- Fixed navbar -->
-      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Train Track</a>
-          </div>
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href="/about.html">About</a></li>
-              <li><a href="https://github.com/dylan8902/Train-Track-Android">Contribute</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <div class="container theme-showcase" role="main">
-
-        <div class="jumbotron">
-          <h1>Train Track</h1>
-          <p>This is the mobile app that lets you manage your train journeys.</p>
-          <p><a href="#" class="btn btn-primary btn-lg" role="button">Coming Soon!</a></p>
-        </div>
-
-        <p class="text-center">
-          <a href="https://plus.google.com/112545593138203953852" rel="publisher" class="btn btn-lg btn-danger">Google+</a>
-          <a href="https://twitter.com/traintrackapp" class="btn btn-lg btn-info">Twitter</a>
-          <a href="https://www.facebook.com/traintrackapp" class="btn btn-lg btn-primary">Facebook</a>
-          <a href="http://instagram.com/traintrackapp" class="btn btn-lg btn-success">Instagram</a>
-          <a href="https://www.flickr.com/photos/traintrackapp/" class="btn btn-lg btn-warning">Flickr</a>
-          <a href="https://github.com/dylan8902/Train-Track-Android" class="btn btn-lg btn-default">Github</a>
-        </p>
-
-      </div>
-
-      <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-      <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-      <script src="js/ripples.min.js"></script>
-      <script src="js/material.min.js"></script>
-      <script>
-        $(document).ready(function() {
-          $.material.init();
-        });
-      </script>
-    </body>
-    </html>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="/" title="Train Track Home">
+        <img id="image" src="/web_hi_res_512.png">
+      </a>
+      <a href="/" title="Home">Home</a>
+      <a href="/about.html" title="About">About</a>
+      <a href="https://github.com/Train-Track" title="Contribute">Contribute</a>
+    </div>
+  </nav>
+  <section id="main" class="container">
+    <h1>Train Track</h1>
+  </section>
+  <footer>
+    <div class="container">
+      &copy; 2014 Train Track App
+    </div>
+  </footer>
+</body>
+</html>
