@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Operators</h1>
+  
+  <table class="table table-striped">
+  <% @operators.each do |operator| %>
+    <tr>
+      <td><%= link_to operator, operator.url %></td>
+    </tr>
+  <% end %>
+  </table>
+  
+  <%= paginate @operators %>
+
+</div>
