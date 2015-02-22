@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'static_pages#index'
+  root to: 'static_pages#index'
+  get '/stations', to: 'stations#index'
+  get '/stations/:crs', to: 'stations#show'
 
 end

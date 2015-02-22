@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Stations</h1>
+  
+  <table class="table table-striped">
+  <% @stations.each do |station| %>
+    <tr>
+      <td><%= link_to station, station.url %></td>
+    </tr>
+  <% end %>
+  </table>
+  
+  <%= paginate @stations %>
+
+</div>
