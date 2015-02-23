@@ -174,19 +174,11 @@ body {
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="http://blog.traintrackapp.co.uk/">Blog</a></li>
                 <li><a href="https://github.com/Train-Track">Contribute</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">Action</a></li>
-                    <li><a href="#">Another action</a></li>
-                    <li><a href="#">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
               </ul>
+              <ul class="nav navbar-nav navbar-right">
+              <li><%= link_to "Login", new_user_session_path %></li>
+              <li><%= link_to "Sign Up", new_user_registration_path %></li>
+            </ul>
             </div>
           </div>
         </nav>
@@ -194,6 +186,12 @@ body {
       </div>
     </div>
 
+    <% if notice %>
+      <div class="container"><div class="alert alert-warning" role="alert"><%= notice %></div></div>
+    <% elsif alert %>
+      <div class="container"><div class="alert alert-danger" role="alert"><%= alert %></div></div>
+    <% end %>
+  
     <%= yield %>
 
     <!-- FOOTER -->

@@ -41,3 +41,4 @@ gem 'spring',        group: :development
 gem 'mysql2'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap'
+gem 'devise'
