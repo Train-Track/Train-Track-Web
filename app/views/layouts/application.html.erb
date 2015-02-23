@@ -171,14 +171,21 @@ body {
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="http://blog.traintrackapp.co.uk/">Blog</a></li>
-                <li><a href="https://github.com/Train-Track">Contribute</a></li>
-              </ul>
+              	<% css = if request.original_fullpath.starts_with? "/stations" then " class=\"active\"" else "" end  %>
+                <li<%= css.html_safe %>><%= link_to "Stations", stations_url %></li>
+                <% css = if request.original_fullpath.starts_with? "/operators" then " class=\"active\"" else "" end  %>
+                <li<%= css.html_safe %>><%= link_to "Operators", operators_url %></li>
+               </ul>
               <ul class="nav navbar-nav navbar-right">
-              <li><%= link_to "Login", new_user_session_path %></li>
-              <li><%= link_to "Sign Up", new_user_registration_path %></li>
-            </ul>
+              <% if user_signed_in? %>
+                <li>
+                  <a href="<%= current_user.url %>"><img src="<%= current_user.image_url %>" height="20"> <%= current_user %></a>
+                </li>
+              <% else %>
+                <li><%= link_to "Login", new_user_session_path %></li>
+                <li><%= link_to "Sign Up", new_user_registration_path %></li>
+              <% end %>
+              </ul>
             </div>
           </div>
         </nav>
@@ -198,7 +205,11 @@ body {
     <div class="container">
       <hr>
 	  <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p class="pull-right">
+          <a href="http://blog.traintrackapp.co.uk/">Blog</a> |
+          <a href="https://github.com/Train-Track">Contribute</a> |
+          <a href="#">Back to top</a>
+        </p>
         <p>&copy; <%= Time.now.year %> Train Track</p>
       </footer>
     </div>
