@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224014350) do
+ActiveRecord::Schema.define(version: 20150224085519) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -21,6 +21,30 @@ ActiveRecord::Schema.define(version: 20150224014350) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
   end
+
+  create_table "journey_legs", force: :cascade do |t|
+    t.integer  "journey_id",           limit: 4
+    t.integer  "departure_station_id", limit: 4,   null: false
+    t.integer  "arrival_station_id",   limit: 4,   null: false
+    t.datetime "scheduled_departure"
+    t.datetime "scheduled_arrival"
+    t.datetime "actual_departure"
+    t.datetime "actual_arrival"
+    t.string   "departure_platform",   limit: 255
+    t.string   "departure_arrival",    limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "journey_legs", ["journey_id"], name: "index_journey_legs_on_journey_id", using: :btree
+
+  create_table "journeys", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "journeys", ["user_id"], name: "index_journeys_on_user_id", using: :btree
 
   create_table "operators", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -67,4 +91,6 @@ ActiveRecord::Schema.define(version: 20150224014350) do
     t.datetime "updated_at",           null: false
   end
 
+  add_foreign_key "journey_legs", "journeys"
+  add_foreign_key "journeys", "users"
 end

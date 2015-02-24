@@ -170,11 +170,13 @@ body {
             </div>
             <div id="navbar" class="navbar-collapse collapse">
               <ul class="nav navbar-nav">
-              	<% css = if request.original_fullpath.starts_with? "/stations" then " class=\"active\"" else "" end  %>
+              	<% css = if request.original_fullpath.starts_with? "/stations" then " class=\"active\"" else "" end %>
                 <li<%= css.html_safe %>><%= link_to "Stations", stations_url %></li>
-                <% css = if request.original_fullpath.starts_with? "/operators" then " class=\"active\"" else "" end  %>
+                <% css = if request.original_fullpath.starts_with? "/operators" then " class=\"active\"" else "" end %>
                 <li<%= css.html_safe %>><%= link_to "Operators", operators_url %></li>
-               </ul>
+                <% css = if request.original_fullpath.starts_with? "/journeys" then " class=\"active\"" else "" end %>
+                <li<%= css.html_safe %>><%= link_to "Journeys", journeys_url %></li>
+              </ul>
               <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
                 <li>

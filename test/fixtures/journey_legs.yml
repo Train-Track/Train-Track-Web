@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  journey_id: 
+  station: 
+
+two:
+  journey_id: 
+  station: 
