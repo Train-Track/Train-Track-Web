@@ -20,7 +20,6 @@ body {
   color: #5a5a5a;
 }
 
-
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -208,6 +207,9 @@ body {
         <p class="pull-right">
           <a href="http://blog.traintrackapp.co.uk/">Blog</a> |
           <a href="https://github.com/Train-Track">Contribute</a> |
+          <% if user_signed_in? %>
+          <%= link_to "Logout", destroy_user_session_path %> |
+          <% end %>
           <a href="#">Back to top</a>
         </p>
         <p>&copy; <%= Time.now.year %> Train Track</p>
