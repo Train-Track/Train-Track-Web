@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223194125) do
+ActiveRecord::Schema.define(version: 20150224012429) do
+
+  create_table "badges", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.string   "image_url",   limit: 255
+    t.integer  "points",      limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+  end
 
   create_table "operators", force: :cascade do |t|
     t.string   "name",            limit: 255
