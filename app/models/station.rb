@@ -13,4 +13,8 @@ class Station < ActiveRecord::Base
     return NationalRailApiHelper.get_departure_board crs
   end
 
+  def get_arrival_board
+    return NationalRailApiHelper.get_arrival_board crs
+  end
+
 end

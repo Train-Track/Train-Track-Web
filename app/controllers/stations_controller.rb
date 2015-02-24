@@ -63,4 +63,18 @@ class StationsController < ApplicationController
   end
 
 
+  # GET /stations/1/arrivals
+  # GET /stations/1/arrivals.json
+  # GET /stations/1/arrivals.xml
+  def arrivals
+    @station = Station.find_by crs: params[:crs]
+    @arrival_board = @station.get_arrival_board
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @arrival_board }
+      format.json { render json: @arrival_board, callback: params['callback'] }
+    end
+  end
+
 end

@@ -1,4 +1,4 @@
-class DepartureBoard
+class StationBoard
   attr_reader :nrcc_messages, :train_services
   attr_writer :nrcc_messages, :train_services
 
