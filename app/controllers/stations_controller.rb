@@ -48,4 +48,19 @@ class StationsController < ApplicationController
   end
 
 
+  # GET /stations/1/departures
+  # GET /stations/1/departures.json
+  # GET /stations/1/departures.xml
+  def departures
+    @station = Station.find_by crs: params[:crs]
+    @departure_board = @station.get_departure_board
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @departure_board }
+      format.json { render json: @departure_board, callback: params['callback'] }
+    end
+  end
+
+
 end

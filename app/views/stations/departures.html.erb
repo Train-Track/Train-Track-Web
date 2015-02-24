@@ -1,0 +1,32 @@
+<div class="container">
+  <h1><%= @station.name %></h1>
+  <h3>Departure Board</h3>
+  <% @departure_board.nrcc_messages.each do |message| %>
+    <div class="alert alert-warning" role="alert"><%= message %></div>
+  <% end %>
+  	
+  <table class="table table-striped">
+  	<thead>
+      <tr>
+        <th><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Scheduled Departure</th>
+        <th><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Estimated Departure</th>
+        <th>Destination</th>
+        <th>Origin</th>
+        <th>Platform</th>
+        <th>Operator</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @departure_board.train_services.each do |service_item| %>
+      <tr>
+        <td><%= service_item.std %></td>
+        <td><%= service_item.etd %></td>
+        <td><%= link_to service_item.destination, service_item.destination.url %></td>
+        <td><%= link_to service_item.origin, service_item.origin.url %></td>
+        <td><%= service_item.platform %></td>
+        <td><%= link_to service_item.operator, service_item.operator.url %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
