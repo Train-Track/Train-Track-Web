@@ -1,3 +1,21 @@
 <div class="container">
-  <h1><%= @service.inspect %></h1>
+  <h1><%= @service %></h1>
+
+  <table class="table table-striped">
+  	<thead>
+      <tr>
+
+      </tr>
+    </thead>
+    <tbody>
+    <% @service.calling_points.each do |calling_point| %>
+      <tr<%= ' class="info"'.html_safe if calling_point.station == @service.station %>>
+        <td><%= calling_point.st %></td>
+        <td><%= calling_point.et %></td>
+        <td><%= calling_point.at %></td>
+        <td><%= link_to calling_point, calling_point.station.url %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
 </div>
