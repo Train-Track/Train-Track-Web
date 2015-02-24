@@ -26,12 +26,12 @@
     <tbody>
     <% @arrival_board.train_services.each do |service_item| %>
       <tr>
-        <td><%= service_item.sta %></td>
-        <td><%= service_item.eta %></td>
-        <td><%= link_to service_item.origin, service_item.origin.url %></td>
-        <td><%= link_to service_item.destination, service_item.destination.url %></td>
-        <td><%= service_item.platform %></td>
-        <td><%= link_to service_item.operator, service_item.operator.url %></td>
+        <td><%= link_to service_item.sta, service_item.url %></td>
+        <td><%= link_to service_item.eta, service_item.url %></td>
+        <td><%= link_to service_item.origin, service_item.url %></td>
+        <td><%= link_to service_item.destination, service_item.url %></td>
+        <td><%= link_to service_item.platform, service_item.url %></td>
+        <td><%= link_to service_item.operator, service_item.url %></td>
       </tr>
     <% end %>
     </tbody>
