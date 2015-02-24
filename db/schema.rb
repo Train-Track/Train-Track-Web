@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224012429) do
+ActiveRecord::Schema.define(version: 20150224014350) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -59,5 +59,12 @@ ActiveRecord::Schema.define(version: 20150224012429) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "users_badges_joins", force: :cascade do |t|
+    t.integer  "user_id",    limit: 4
+    t.integer  "badge_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
 
 end
