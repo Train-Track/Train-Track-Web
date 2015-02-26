@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  station_id: 
+  ppm: 1
+  on_time: 1
+  late: 1
+  cancel_very_late: 1
+  total: 1
+
+two:
+  station_id: 
+  ppm: 1
+  on_time: 1
+  late: 1
+  cancel_very_late: 1
+  total: 1

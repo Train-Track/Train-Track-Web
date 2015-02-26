@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150225212306) do
+ActiveRecord::Schema.define(version: 20150226012819) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -53,15 +53,30 @@ ActiveRecord::Schema.define(version: 20150225212306) do
     t.string   "delay_repay_url", limit: 255
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.string   "numeric_code",    limit: 255
   end
 
+  create_table "ppms", force: :cascade do |t|
+    t.integer  "operator_id",      limit: 4
+    t.integer  "ppm",              limit: 4
+    t.integer  "on_time",          limit: 4
+    t.integer  "late",             limit: 4
+    t.integer  "cancel_very_late", limit: 4
+    t.integer  "total",            limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id", using: :btree
+
   create_table "stations", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "crs",        limit: 255
-    t.decimal  "lat",                    precision: 10, scale: 7
-    t.decimal  "lng",                    precision: 10, scale: 7
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.string   "name",         limit: 255
+    t.string   "crs",          limit: 255
+    t.decimal  "lat",                      precision: 10, scale: 7
+    t.decimal  "lng",                      precision: 10, scale: 7
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
+    t.string   "numeric_code", limit: 255
   end
 
   create_table "users", force: :cascade do |t|
@@ -97,4 +112,5 @@ ActiveRecord::Schema.define(version: 20150225212306) do
 
   add_foreign_key "journey_legs", "journeys"
   add_foreign_key "journeys", "users"
+  add_foreign_key "ppms", "stations"
 end

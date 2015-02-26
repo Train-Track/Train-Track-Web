@@ -1,3 +1,31 @@
 <div class="container">
   <h1><%= @operator.name %></h1>
+  <p>PPM: <%= @operator.ppm.inspect %></p>
+  <div id="gauge" style="width:300px;height:300px;"></div>
 </div>
+
+<% if @operator.ppm %>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["gauge"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Label', 'Value'],
+      ['PPM', <%= @operator.ppm.ppm %>]
+    ]);
+    var options = {
+      width: 300, height: 300,
+      redFrom: 0, redTo: 80,
+      yellowFrom:80, yellowTo: 90,
+      greenFrom: 90, greenTo: 100,
+      minorTicks: 20,
+      animation: {
+      	startup: true
+      }
+    };
+    var gauge = new google.visualization.Gauge(document.getElementById('gauge'));
+    gauge.draw(data, options);
+  }
+</script>
+<% end %>

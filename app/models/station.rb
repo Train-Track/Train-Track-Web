@@ -1,5 +1,6 @@
 class Station < ActiveRecord::Base
   include NationalRailApiHelper
+  default_scope { order('name ASC') }
 
   def to_s
     name
