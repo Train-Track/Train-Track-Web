@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true, format: { with: /\A\w+\z/, message: "only letters, numbers and underscores" }
   has_and_belongs_to_many :badges, join_table: "users_badges_joins"
   has_many :journeys
+  belongs_to :home_station, class_name: "Station"
+  belongs_to :work_station, class_name: "Station"
  
   def image_url(size = 30)
     return "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(email.strip.downcase)}.jpg?s=#{size}&d=identicon"

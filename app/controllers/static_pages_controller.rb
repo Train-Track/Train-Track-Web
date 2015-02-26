@@ -5,13 +5,16 @@ class StaticPagesController < ApplicationController
   # GET /.json
   # GET /.xml
   def index
-    @journeys = []
+    if user_signed_in?
+      @user = current_user
 
-    respond_to do |format|
-      format.html
-      format.xml { render xml: @journeys }
-      format.json { render json: @journeys, callback: params['callback'] }
-    end
+      respond_to do |format|
+        format.html { render :home }
+        format.xml { render xml: @user }
+        format.json { render json: @user, callback: params['callback'] }
+      end
+
+    end    
   end
 
 
