@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226012819) do
+ActiveRecord::Schema.define(version: 20150226031244) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -63,8 +63,9 @@ ActiveRecord::Schema.define(version: 20150226012819) do
     t.integer  "late",             limit: 4
     t.integer  "cancel_very_late", limit: 4
     t.integer  "total",            limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "name",             limit: 255
   end
 
   add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id", using: :btree
@@ -112,5 +113,5 @@ ActiveRecord::Schema.define(version: 20150226012819) do
 
   add_foreign_key "journey_legs", "journeys"
   add_foreign_key "journeys", "users"
-  add_foreign_key "ppms", "stations"
+  add_foreign_key "ppms", "operators", name: "ppms_ibfk_1"
 end
