@@ -10,4 +10,9 @@ module ApplicationHelper
     will_paginate page, renderer: BootstrapPagination::Rails, bootstrap: 3
   end
 
+  #glyphicons
+  def icon type
+    "<span class=\"glyphicon glyphicon-#{type}\" aria-hidden=\"true\"></span>".html_safe
+  end
+
 end

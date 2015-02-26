@@ -1,7 +1,14 @@
 <div class="container">
   <h1><%= @service %></h1>
+  <h4><%= link_to @service.operator, @service.operator.url %></h4>
+<% if !@service.disruption_reason.empty? %>
+  <div class="alert alert-danger" role="alert">
+    <%= icon('exclamation-sign') %>
+    <%= @service.disruption_reason %>
+</div>
+<% end %>
 
-  <table class="table table-striped">
+  <table class="table">
   	<thead>
       <tr>
 
@@ -9,10 +16,9 @@
     </thead>
     <tbody>
     <% @service.calling_points.each do |calling_point| %>
-      <tr<%= ' class="info"'.html_safe if calling_point.station == @service.station %>>
+      <tr class="<%= calling_point.css(@service.station) %>">
         <td><%= calling_point.st %></td>
-        <td><%= calling_point.et %></td>
-        <td><%= calling_point.at %></td>
+        <td><%= calling_point.time %></td>
         <td><%= link_to calling_point, calling_point.station.url %></td>
       </tr>
     <% end %>

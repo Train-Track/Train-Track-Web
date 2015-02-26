@@ -9,7 +9,10 @@
   <h3>Departure Board</h3>
 
   <% @departure_board.nrcc_messages.each do |message| %>
-    <div class="alert alert-warning" role="alert"><%= message %></div>
+    <div class="alert alert-warning" role="alert">
+      <%= icon('info-sign') %>
+      <%= message %>
+    </div>
   <% end %>
 
   <table class="table table-striped">

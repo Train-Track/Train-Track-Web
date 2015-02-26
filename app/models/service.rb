@@ -1,48 +1,60 @@
 class Service
-  attr_reader :id, :service_type, :operator, :station, :sta, :eta, :ata, :std, :etd, :atd, :previous_calling_points, :subsequent_calling_points
-  attr_writer :id, :service_type, :operator, :station, :sta, :eta, :ata, :std, :etd, :atd, :previous_calling_points, :subsequent_calling_points
-
+  attr_accessor :id, :service_type, :operator, :station, :sta, :eta, :ata, :std, :etd, :atd
+  attr_accessor :previous_calling_points, :subsequent_calling_points, :is_cancelled, :disruption_reason, :overdue_message
 
   def initialize service_id
     self.id = service_id
   end
 
-
   def to_s
-    return origin.to_s + " to " + destination.to_s
+    return "#{origin.st} #{origin.to_s} to #{destination.to_s}"
   end
 
+  def is_cancelled?
+    is_cancelled
+  end
 
   def calling_points
     here = CallingPoint.new nil
     here.station = self.station
-    here.st = self.sta || self.std
-    here.et = self.eta || self.etd
-    here.at = self.ata || self.atd
+    if self.std.empty?
+      here.st = self.sta
+      here.et = self.eta
+      here.at = self.ata
+    else
+      here.st = self.std
+      here.et = self.etd
+      here.at = self.atd
+    end
+    if is_cancelled?
+      here.et = "Cancelled"
+    end
     return [previous_calling_points, [here], subsequent_calling_points].flatten
   end
-
 
   def origin
     return calling_points.first
   end
 
-
   def destination
     return calling_points.last
   end
 
-
   def parse xml
-    self.previous_calling_points = []
-    self.subsequent_calling_points = []
     self.service_type = xml.css('serviceType').text
+    self.is_cancelled = !xml.css('isCancelled').empty?
+    self.disruption_reason = xml.css('disruptionReason').text
+    self.overdue_message = xml.css('overdueMessage').text
     self.station = Station.find_by crs: xml.css('crs').first.text
     self.operator = Operator.find_by code: xml.css('operatorCode').text
     self.sta = xml.css('sta').text
+    self.eta = xml.css('eta').text
     self.ata = xml.css('ata').text
     self.std = xml.css('std').text
+    self.etd = xml.css('etd').text
     self.atd = xml.css('atd').text
+    self.previous_calling_points = []
+    self.subsequent_calling_points = []
     if xml.css('previousCallingPoints').children.size > 0
       xml.css('previousCallingPoints').css('callingPoint').each do |calling_point_xml|
         self.previous_calling_points << CallingPoint.new(calling_point_xml)
@@ -54,17 +66,13 @@ class Service
       end
     end
   end
-  
-  
+
   def self.get_service service_id
     NationalRailApiHelper.get_service service_id
   end
 
-
   class CallingPoint
-    attr_reader :station, :st, :et, :at
-    attr_writer :station, :st, :et, :at
-
+    attr_accessor :station, :st, :et, :at
 
     def initialize xml
       return if xml.nil?
@@ -74,12 +82,25 @@ class Service
       self.at = xml.css('at').text
     end
 
-
     def to_s
       station.to_s
     end
 
-  end
+    def is_cancelled?
+      self.et == "Cancelled"
+    end
 
+    def time
+      return at if !at.empty?
+      return et if !et.empty?
+    end
+
+    def css station
+      return "info" if self.station == station
+      return "active" if !at.empty?
+      return "danger" if is_cancelled?
+    end
+
+  end
 
 end
