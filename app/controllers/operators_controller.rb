@@ -5,8 +5,13 @@ class OperatorsController < ApplicationController
   # GET /operators
   # GET /operators.json
   # GET /operators.xml
-  def index    
-    @operators = Operator.page(params[:page])
+  def index 
+    @q = params[:q]   
+    if @q && !@q.empty?
+      @operators = Operator.where("code LIKE ? OR name LIKE ?", @q, "#{@q}%").page(params[:page])
+    else
+      @operators = Operator.page(params[:page])
+    end
 
     respond_to do |format|
       format.html
