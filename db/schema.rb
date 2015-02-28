@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20150228101300) do
     t.decimal  "lng",                      precision: 10, scale: 7
     t.datetime "created_at",                                        null: false
     t.datetime "updated_at",                                        null: false
-    t.string   "numeric_code", limit: 255
   end
 
   create_table "users", force: :cascade do |t|
