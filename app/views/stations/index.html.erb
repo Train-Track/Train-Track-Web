@@ -1,14 +1,38 @@
 <div class="container">
   <h1>Stations</h1>
   
-  <table class="table table-striped">
-  <% @stations.each do |station| %>
-    <tr>
-      <td><%= link_to station, station.url %></td>
-    </tr>
-  <% end %>
-  </table>
+<%= form_tag(stations_path, method: :get) do %>
+	<div class="input-append well">
+		<div class="input-group">
+			<%= text_field_tag(:q, @from, class: "form-control", placeholder: "Search for a location", autofocus: true, value: @q) %>
+			<a class="btn btn-success geo input-group-btn" data-field="q" data-url="<%= stations_path %>" title="Locate Me"><%= icon("location-arrow") %></a>
+		</div>
+	</div>
+<% end %>
   
-  <%= paginate @stations %>
+  <div class="row">
 
+  <% if signed_in? %>
+    <div class="col-md-4">
+      <h3>Favourites</h3>
+      <table class="table table-striped">
+        <tr><td><%= icon('home') %> <%= link_to current_user.home_station, current_user.home_station.url %></td></tr>
+        <tr><td><%= icon('briefcase') %> <%= link_to current_user.work_station, current_user.work_station.url %></td></tr>
+      </table>
+    </div>
+  <% end %>
+  	
+  	<div class="col-md-8">
+      <h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
+	  <table class="table table-striped">
+	  <% @stations.each do |station| %>
+	    <tr>
+	      <td><%= link_to station, station.url %></td>
+	    </tr>
+	  <% end %>
+	  </table>
+  	  <%= paginate @stations %>
+  	</div>
+
+  </div>
 </div>

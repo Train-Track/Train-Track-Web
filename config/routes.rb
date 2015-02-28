@@ -16,8 +16,9 @@ Rails.application.routes.draw do
   get '/operators', to: 'operators#index'
   get '/operators/:code', to: 'operators#show'
 
+  get '/users/:username', to: 'users#show', as: :user
+  put 'users', to: 'users#update'
   devise_for :users, path: "", path_names: { sign_in: 'login', sign_out: 'logout', password: 'secret', confirmation: 'verification', unlock: 'unblock', registration: 'users', sign_up: 'new' }
-  get '/users/:username', to: 'users#show'
 
   resources :badges, only: [:index, :show]
 
