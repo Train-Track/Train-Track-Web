@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226031244) do
+ActiveRecord::Schema.define(version: 20150228101300) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20150226031244) do
     t.datetime "actual_departure"
     t.datetime "actual_arrival"
     t.string   "departure_platform",   limit: 255
-    t.string   "departure_arrival",    limit: 255
+    t.string   "arrival_platform",     limit: 255
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
   end

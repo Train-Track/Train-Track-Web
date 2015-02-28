@@ -1,3 +1,14 @@
 <div class="container">
-  <h1><%= @journey %></h1>
+	<h1><%= @journey %></h1>
+  
+	<% if @journey.journey_legs.count > 1 %>
+	<div class="list-group">
+	<% @journey.journey_legs.each do |leg| %>
+		<a href="<%= leg.url %>" class="list-group-item">
+			<h4 class="list-group-item-heading"><%= leg %></h4>
+			<p class="list-group-item-text">Some information</p>
+		</a>
+	<% end %>
+	</div>
+  <% end %>
 </div>

@@ -11,4 +11,12 @@ class JourneyLeg < ActiveRecord::Base
     return arrival_station
   end
 
+  def to_s
+    "#{origin} to #{destination}"
+  end
+
+  def url
+    "/journeys/#{journey_id}/legs/#{id}"
+  end
+
 end

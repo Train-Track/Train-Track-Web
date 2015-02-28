@@ -18,9 +18,9 @@ class JourneysController < ApplicationController
   end
 
 
-  # GET /journey/1
-  # GET /journey/1.json
-  # GET /journey/1.xml
+  # GET /journeys/1
+  # GET /journeys/1.json
+  # GET /journeys/1.xml
   def show
     @journey = Journey.find(params[:id])
 
@@ -39,32 +39,6 @@ class JourneysController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @journey, methods: [:origin, :destination, :journey_legs], callback: params[:callback] }
       format.xml { render xml: @journey, methods: [:origin, :destination, :journey_legs] }
-    end
-  end
-
-
-  # GET /trains/journey/1/edit
-  def edit
-    @journey = Journey.find(params[:id])
-    render_403 and return if @journey.user_id != current_user.id
-  end
-
-
-  # POST /trains/journey
-  # POST /trains/journey.json
-  def create
-    @journey = Trains::Journey.new(user_id: current_user.id)
-
-    respond_to do |format|
-      if @journey.save
-        format.html { redirect_to new_trains_journey_journey_leg_path(@journey), notice: 'Journey was successfully created.' }
-        format.json { render json: @journey, status: :created, location: new_trains_journey_journey_leg_path(@journey) }
-        format.xml { render xml: @journey, status: :created, location: new_trains_journey_journey_leg_path(@journey) }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @journey.errors, status: :unprocessable_entity }
-        format.xml { render xml: @journey.errors, status: :unprocessable_entity }
-      end
     end
   end
 

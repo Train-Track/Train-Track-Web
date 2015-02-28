@@ -9,11 +9,6 @@
 <% end %>
 
   <table class="table">
-  	<thead>
-      <tr>
-
-      </tr>
-    </thead>
     <tbody>
     <% @service.calling_points.each do |calling_point| %>
       <tr class="<%= calling_point.css(@service.station) %>">
