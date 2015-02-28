@@ -14,4 +14,7 @@ class Operator < ActiveRecord::Base
      "/operators/" + code
   end
 
+  def tweet_url
+    "https://twitter.com/intent/tweet?via=traintrackapp&related=traintrackapp&text=@" + twitter
+  end
 end
