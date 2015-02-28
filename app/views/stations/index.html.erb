@@ -5,7 +5,9 @@
 	<div class="input-append well">
 		<div class="input-group">
 			<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for a station", autofocus: true, value: @q) %>
-			<a class="btn btn-success geo input-group-btn" data-field="q" data-url="<%= stations_path %>" title="Locate Me"><%= icon("location-arrow") %></a>
+			<span class="input-group-btn">
+				<a class="btn btn-success geo" data-field="q" data-url="<%= stations_path %>" title="Locate Me"><%= icon("map-marker") %></a>
+      		</span>
 		</div>
 	</div>
 <% end %>
