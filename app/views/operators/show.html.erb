@@ -1,7 +1,20 @@
 <div class="container">
   <h1><%= @operator.name %></h1>
-  <p>PPM: <%= @operator.ppm.inspect %></p>
-  <div id="gauge" style="width:300px;height:300px;"></div>
+  <div class="row">
+  <% if @operator.ppm %>
+  	<div class="col-md-3">
+  		<div id="gauge" style="margin:auto"></div>
+	  	<table class="table">
+		  <tr><td>On Time</td><td><%= @operator.ppm.on_time %></td></tr>
+		  <tr><td>Late</td><td><%= @operator.ppm.late %></td></tr>
+		  <tr><td>Very Late/Cancelled</td><td><%= @operator.ppm.cancel_very_late %></td></tr>
+		  <tr><td><strong>Total</strong></td><td><strong><%= @operator.ppm.total %></strong></td></tr>
+		</table>	
+  	</div>
+  	
+  	  	<div class="col-md-6">
+  	</div>
+  <% end %>
 </div>
 
 <% if @operator.ppm %>
@@ -15,7 +28,7 @@
       ['PPM', <%= @operator.ppm.ppm %>]
     ]);
     var options = {
-      width: 300, height: 300,
+      width: 240, height: 240,
       redFrom: 0, redTo: 89,
       yellowFrom:89, yellowTo: 92,
       greenFrom: 92, greenTo: 100,
