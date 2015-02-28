@@ -11,7 +11,7 @@ class StationsController < ApplicationController
     if params['lat'] and params['lng']
       lat = params['lat'].to_f
       lng = params['lng'].to_f
-      @stations =  Station.select("stations.*, #{distance_sql(lat,lng)} AS distance").where("lat IS NOT NULL AND lng IS NOT NULL").order("distance ASC")
+      @stations = Station.unscoped.select("stations.*, #{distance_sql(lat,lng)} AS distance").where("lat IS NOT NULL AND lng IS NOT NULL").order("distance ASC").limit(1)
     elsif @q && !@q.empty?
       @stations = Station.where("crs LIKE ? OR name LIKE ?", @q, "#{@q}%").page(params[:page])
     else

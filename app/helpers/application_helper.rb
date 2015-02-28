@@ -15,4 +15,16 @@ module ApplicationHelper
     "<span class=\"glyphicon glyphicon-#{type}\" aria-hidden=\"true\"></span>".html_safe
   end
 
+  # Returns HTML time element with correct timestamps and pretty printed time
+  def timestamp time, unknown = "Unknown"
+    return unknown if time.nil? or time == 0
+    time = Time.at(time.to_i)
+    if time.future?
+      future = "from now"
+    else
+      future = "ago"
+    end
+    "<time class=\"ago\" title=\"#{time}\" datetime=\"#{time.xmlschema}\" data-timestamp=\"#{time.to_i}\">#{time_ago_in_words time} #{future}</time>".html_safe
+  end
+
 end
