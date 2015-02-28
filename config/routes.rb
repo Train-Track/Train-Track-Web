@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
 
   get '/stations', to: 'stations#index'
-  get '/stations', to: 'stations#index'
+  get '/stations/all', to: 'stations#all'
   get '/stations/:crs', to: 'stations#show'
   get '/stations/:crs/departures', to: 'stations#departures'
   get '/stations/:crs/arrivals', to: 'stations#arrivals'
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/services/:service_id', to: 'services#show'
 
   get '/operators', to: 'operators#index'
+  get '/operators/all', to: 'operators#all'
   get '/operators/:code', to: 'operators#show'
 
   get '/users/:username', to: 'users#show', as: :user

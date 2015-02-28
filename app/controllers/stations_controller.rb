@@ -26,6 +26,20 @@ class StationsController < ApplicationController
   end
 
 
+  # GET /stations/all
+  # GET /stations/all.json
+  # GET /stations/all.xml
+  def all
+    @stations = Station.all
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @stations }
+      format.json { render json: @stations, callback: params['callback'] }
+    end
+  end
+
+
   # GET /stations/1
   # GET /stations/1.json
   # GET /stations/1.xml

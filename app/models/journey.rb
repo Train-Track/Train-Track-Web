@@ -1,6 +1,7 @@
 class Journey < ActiveRecord::Base
   belongs_to :user
   has_many :journey_legs
+  default_scope { order('created_at DESC') }
 
 
   def origin

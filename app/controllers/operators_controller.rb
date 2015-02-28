@@ -21,6 +21,19 @@ class OperatorsController < ApplicationController
   end
 
 
+  # GET /operators/all
+  # GET /operators/all.json
+  # GET /operators/all.xml
+  def all 
+    @operators = Operator.all
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @operators }
+      format.json { render json: @operators, callback: params['callback'] }
+    end
+  end
+
   # GET /operators/1
   # GET /operators/1.json
   # GET /operators/1.xml
