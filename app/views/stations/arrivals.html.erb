@@ -1,42 +1,42 @@
 <div class="container">
-  <h1><%= @station.name %></h1>
-  <ul class="nav nav-tabs">
-  	<li role="presentation"><a href="<%= @station.url %>">Summary</a></li>
-	<li role="presentation"><a href="<%= @station.url + "/departures" %>" rel="nofollow">Departures</a></li>
-	<li role="presentation" class="active"><a href="#">Arrivals</a></li>
-  </ul>
+	<h1><%= @station.name %></h1>
+	<ul class="nav nav-tabs">
+		<li role="presentation"><a href="<%= @station.url %>">Summary</a></li>
+		<li role="presentation"><a href="<%= @station.url + "/departures" %>" rel="nofollow">Departures</a></li>
+		<li role="presentation" class="active"><a href="#">Arrivals</a></li>
+	</ul>
 
-  <h3>Arrival Board</h3>
+	<h3>Arrival Board</h3>
 
-  <% @arrival_board.nrcc_messages.each do |message| %>
-    <div class="alert alert-warning" role="alert">
-      <%= icon('info-sign') %>
-      <%= message %>
-    </div>
-  <% end %>
+<% @arrival_board.nrcc_messages.each do |message| %>
+	<div class="alert alert-warning" role="alert">
+		<%= icon('info-sign') %>
+		<%= message %>
+	</div>
+<% end %>
 
-  <table class="table table-striped">
-  	<thead>
-      <tr>
-        <th>Scheduled Arrival</th>
-        <th>Scheduled Arrival</th>
-        <th>Origin</th>
-        <th>Destination</th>
-        <th>Platform</th>
-        <th>Operator</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @arrival_board.train_services.each do |service_item| %>
-      <tr>
-        <td><%= link_to service_item.sta, service_item.url %></td>
-        <td><%= link_to service_item.eta, service_item.url %></td>
-        <td><%= link_to service_item.origin, service_item.url %></td>
-        <td><%= link_to service_item.destination, service_item.url %></td>
-        <td><%= link_to service_item.platform, service_item.url %></td>
-        <td><%= link_to service_item.operator, service_item.url %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Scheduled Arrival</th>
+				<th>Scheduled Arrival</th>
+				<th>Origin</th>
+				<th>Destination</th>
+				<th>Platform</th>
+				<th>Operator</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @arrival_board.train_services.each do |service_item| %>
+			<tr>
+				<td><%= link_to service_item.sta, service_item.url %></td>
+				<td><%= link_to service_item.eta, service_item.url %></td>
+				<td><%= link_to service_item.origin, service_item.url %></td>
+				<td><%= link_to service_item.destination, service_item.url %></td>
+				<td><%= link_to service_item.platform, service_item.url %></td>
+				<td><%= link_to service_item.operator, service_item.url %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
 </div>

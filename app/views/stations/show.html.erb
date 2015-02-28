@@ -1,46 +1,48 @@
 <div class="container">
-  <h1><%= @station.name %></h1>
-  <ul class="nav nav-tabs" style="margin-bottom:20px;">
-  	<li role="presentation" class="active"><a href="#">Summary</a></li>
-	<li role="presentation"><a href="<%= @station.url + "/departures" %>"><%= icon('resize-full') %> Departures</a></li>
-	<li role="presentation"><a href="<%= @station.url + "/arrivals" %>"><%= icon('resize-small') %> Arrivals</a></li>
-  </ul>
+	<h1><%= @station.name %></h1>
+	<ul class="nav nav-tabs" style="margin-bottom:20px;">
+		<li role="presentation" class="active"><a href="#">Summary</a></li>
+		<li role="presentation"><a href="<%= @station.url + "/departures" %>"><%= icon('resize-full') %> Departures</a></li>
+		<li role="presentation"><a href="<%= @station.url + "/arrivals" %>"><%= icon('resize-small') %> Arrivals</a></li>
+	</ul>
 
-  <div class="row">
-    <div class="col-md-4">
-      <img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwBBACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="width:180px;height:180px">
-    </div>
-    <div class="col-md-4">
-	  
-    </div>
-  <% if signed_in? %>
-    <div class="col-md-4">
-	  <div class="well">
-	  <% if current_user.home_station == @station %>
-	  	  <div class="form-group">
-	        <button class="btn btn-primary btn-lg btn-block disabled"><%= icon('home') %> My Home Station</button>
-	      </div>
-	  <% else %>
-	  	<%= form_for(:user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
-	      <%= f.hidden_field :home_station_id, value: @station.id %>
-	      <div class="form-group">
-	        <button class="btn btn-primary btn-lg btn-block"><%= icon('home') %> Make my Home</button>
-	      </div>
-	    <% end %>
-	  <% end %>
+	<div class="row">
+		<div class="col-md-4">
+			<img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwBBACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="width:180px;height:180px">
+		</div>
+		<div class="col-md-4">
+  
+		</div>
 
-	  <% if current_user.work_station == @station %>
-	      <button class="btn btn-primary btn-lg btn-block disabled"><%= icon('briefcase') %> My Work Station</button>
-	  <% else %>
-	    <%= form_for(:user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
-	      <%= f.hidden_field :work_station_id, value: @station.id %>
-	      <button class="btn btn-info btn-lg btn-block"><%= icon('briefcase') %> Make my Work</button>
-	    <% end %>
-	  <% end %>
+	<% if signed_in? %>
+		<div class="col-md-4">
+			<div class="well">
 
-      </div>
-    </div>
-  <% end %>
-  </div>
+			<% if current_user.home_station == @station %>
+				<div class="form-group">
+					<button class="btn btn-primary btn-lg btn-block disabled"><%= icon('home') %> My Home Station</button>
+				</div>
+			<% else %>
+				<%= form_for(:user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
+					<%= f.hidden_field :home_station_id, value: @station.id %>
+					<div class="form-group">
+						<button class="btn btn-primary btn-lg btn-block"><%= icon('home') %> Make my Home</button>
+					</div>
+				<% end %>
+			<% end %>
+		
+			<% if current_user.work_station == @station %>
+				<button class="btn btn-primary btn-lg btn-block disabled"><%= icon('briefcase') %> My Work Station</button>
+			<% else %>
+				<%= form_for(:user, as: :user, url: registration_path(:user), html: { method: :put }) do |f| %>
+					<%= f.hidden_field :work_station_id, value: @station.id %>
+					<button class="btn btn-info btn-lg btn-block"><%= icon('briefcase') %> Make my Work</button>
+				<% end %>
+			<% end %>
+
+			</div>
+		</div>
+	<% end %>
+	</div>
 
 </div>

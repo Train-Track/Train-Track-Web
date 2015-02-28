@@ -12,29 +12,27 @@
 	</div>
 <% end %>
   
-  <div class="row">
+	<div class="row">
 
-  <% if signed_in? %>
-    <div class="col-md-4">
-      <h3>Favourites</h3>
-      <table class="table table-striped">
-        <tr><td><%= icon('home') %> <%= link_to current_user.home_station, current_user.home_station.url %></td></tr>
-        <tr><td><%= icon('briefcase') %> <%= link_to current_user.work_station, current_user.work_station.url %></td></tr>
-      </table>
-    </div>
-  <% end %>
-  	
-  	<div class="col-md-8">
-      <h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
-	  <table class="table table-striped">
-	  <% @stations.each do |station| %>
-	    <tr>
-	      <td><%= link_to station, station.url %></td>
-	    </tr>
-	  <% end %>
-	  </table>
-  	  <%= paginate @stations %>
-  	</div>
+	<% if signed_in? %>
+		<div class="col-md-4">
+			<h3>Favourites</h3>
+			<table class="table table-striped">
+				<tr><td><%= icon('home') %> <%= link_to current_user.home_station, current_user.home_station.url %></td></tr>
+				<tr><td><%= icon('briefcase') %> <%= link_to current_user.work_station, current_user.work_station.url %></td></tr>
+			</table>
+		</div>
+	<% end %>
 
-  </div>
+		<div class="col-md-8">
+			<h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
+			<table class="table table-striped">
+			<% @stations.each do |station| %>
+				<tr><td><%= link_to station, station.url %></td></tr>
+			<% end %>
+			</table>
+			<%= paginate @stations %>
+		</div>
+
+	</div>
 </div>

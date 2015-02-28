@@ -1,14 +1,12 @@
 <div class="container">
-  <h1>Badges</h1>
-  
-  <table class="table table-striped">
-  <% @badges.each do |badge| %>
-    <tr>
-      <td><%= link_to badge, badge %></td>
-    </tr>
-  <% end %>
-  </table>
-  
-  <%= paginate @badges %>
+	<h1>Badges</h1>
+	  
+	<table class="table table-striped">
+	<% @badges.each do |badge| %>
+		<tr><td><%= link_to badge, badge %></td></tr>
+	<% end %>
+	</table>
+
+	<%= paginate @badges %>
 
 </div>
