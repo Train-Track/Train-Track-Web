@@ -17,20 +17,20 @@
 	<% if signed_in? %>
 		<div class="col-md-4">
 			<h3>Favourites</h3>
-			<table class="table table-striped">
-				<tr><td><%= icon('home') %> <%= link_to current_user.home_station, current_user.home_station.url %></td></tr>
-				<tr><td><%= icon('briefcase') %> <%= link_to current_user.work_station, current_user.work_station.url %></td></tr>
-			</table>
+			<div class="list-group">
+				<%= link_to icon('home') + " " + current_user.home_station, current_user.home_station.url, class: "list-group-item" if current_user.home_station %>
+				<%= link_to icon('briefcase') + " " + current_user.work_station, current_user.work_station.url, class: "list-group-item" if current_user.work_station %>
+			</div>
 		</div>
 	<% end %>
 
 		<div class="col-md-8">
 			<h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
-			<table class="table table-striped">
+			<div class="list-group">
 			<% @stations.each do |station| %>
-				<tr><td><%= link_to station, station.url %></td></tr>
+		 		<%= link_to station, station.url, class: "list-group-item" %>
 			<% end %>
-			</table>
+			</div>
 			<%= paginate @stations %>
 		</div>
 

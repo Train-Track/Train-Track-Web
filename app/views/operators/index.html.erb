@@ -9,10 +9,7 @@
 
 	<div class="list-group">
 	<% @operators.each do |operator| %>
-		 <a href="<%= operator.url %>" class="list-group-item">
-			<h4 class="list-group-item-heading"><%= operator %></h4>
-			<p class="list-group-item-text">Some information</p>
-		</a>
+		 <%= link_to operator, operator.url, class: "list-group-item" %>
 	<% end %>
 	</div>
 
