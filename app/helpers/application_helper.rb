@@ -27,4 +27,7 @@ module ApplicationHelper
     "<time class=\"ago\" title=\"#{time}\" datetime=\"#{time.xmlschema}\" data-timestamp=\"#{time.to_i}\">#{time_ago_in_words time} #{future}</time>".html_safe
   end
 
+  def data_feeds_link
+    "<a href=\"/data-feeds\"><img src=\"/nre.png\" height=\"50\" alt=\"National Rail Enquiries\">".html_safe
+  end
 end

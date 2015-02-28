@@ -13,8 +13,7 @@ class StaticPagesController < ApplicationController
         format.xml { render xml: @user }
         format.json { render json: @user, callback: params['callback'] }
       end
-
-    end    
+    end
   end
 
 
@@ -58,4 +57,20 @@ class StaticPagesController < ApplicationController
       format.json { render json: @privacy, callback: params['callback'] }
     end
   end
+
+
+
+  # GET /data-feeds
+  # GET /data-feeds.json
+  # GET /data-feeds.xml
+  def data_feeds
+    @data_feeds = "Coming soon!"
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @data_feeds }
+      format.json { render json: @data_feeds, callback: params['callback'] }
+    end
+  end
+
 end
