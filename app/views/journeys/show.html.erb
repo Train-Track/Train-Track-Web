@@ -1,7 +1,7 @@
 <div class="container">
 	<h1><%= @journey %></h1>
   
-	<% if @journey.journey_legs.count > 1 %>
+<% if @journey.journey_legs.count > 1 %>
 	<div class="list-group">
 	<% @journey.journey_legs.each do |leg| %>
 		<a href="<%= leg.url %>" class="list-group-item">
@@ -10,5 +10,5 @@
 		</a>
 	<% end %>
 	</div>
-  <% end %>
+<% end %>
 </div>

@@ -1,22 +1,21 @@
 <div class="container">
-  <h1><%= @service %></h1>
-  <h4><%= link_to @service.operator, @service.operator.url %></h4>
+	<h1><%= @service %></h1>
+	<h4><%= link_to @service.operator, @service.operator.url %></h4>
+
 <% if !@service.disruption_reason.empty? %>
-  <div class="alert alert-danger" role="alert">
-    <%= icon('exclamation-sign') %>
-    <%= @service.disruption_reason %>
-</div>
+	<div class="alert alert-danger" role="alert">
+		<%= icon('exclamation-sign') %>
+		<%= @service.disruption_reason %>
+	</div>
 <% end %>
 
-  <table class="table">
-    <tbody>
-    <% @service.calling_points.each do |calling_point| %>
-      <tr class="<%= calling_point.css(@service.station) %>">
-        <td><%= calling_point.st %></td>
-        <td><%= calling_point.time %></td>
-        <td><%= link_to calling_point, calling_point.station.url %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+	<div class="list-group">
+	<% @service.calling_points.each do |calling_point| %>
+		<a href="<%= calling_point.form_url @service if calling_point.at.empty? %>" class="list-group-item <%= calling_point.css(@service.station) %>">
+			<h4 class="list-group-item-heading"><%= calling_point.st %> <%= calling_point %></h4>
+			<p class="list-group-item-text"><%= calling_point.time %></p>
+		</a>
+	<% end %>
+	</div>
+
 </div>

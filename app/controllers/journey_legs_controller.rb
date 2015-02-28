@@ -23,11 +23,21 @@ class JourneyLegsController < ApplicationController
   # GET /journeys/1/legs/new.json
   # GET /journeys/1/legs/new.xml
   def new
-    @journey = Journey.find(params[:journey_id])
-    render_403 and return if @journey.user_id != current_user.id
+    
+    if params[:journey_id]
+      @journey = Journey.find(params[:journey_id])
+      render_403 and return if @journey.user_id != current_user.id
 
-    @journey_leg = JourneyLeg.new
-    @url = "/journeys/#{@journey.id}/legs"
+      @journey_leg = JourneyLeg.new
+      @url = "/journeys/#{@journey.id}/legs"
+    elsif params[:journey_leg]
+      @journey_leg = JourneyLeg.new(journey_leg_params)
+      @url = "/journeys"
+    else
+      @journey_leg = JourneyLeg.new
+      @url = "/journeys" 
+    end
+
     @method = :POST
 
     respond_to do |format|

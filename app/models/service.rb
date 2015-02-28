@@ -1,5 +1,5 @@
 class Service
-  attr_accessor :id, :service_type, :operator, :station, :sta, :eta, :ata, :std, :etd, :atd
+  attr_accessor :id, :service_type, :operator, :station, :platform, :sta, :eta, :ata, :std, :etd, :atd
   attr_accessor :previous_calling_points, :subsequent_calling_points, :is_cancelled, :disruption_reason, :overdue_message
 
   def initialize service_id
@@ -47,6 +47,7 @@ class Service
     self.overdue_message = xml.css('overdueMessage').text
     self.station = Station.find_by crs: xml.css('crs').first.text
     self.operator = Operator.find_by code: xml.css('operatorCode').text
+    self.platform = xml.css('platfom').text
     self.sta = xml.css('sta').text
     self.eta = xml.css('eta').text
     self.ata = xml.css('ata').text
@@ -69,38 +70,6 @@ class Service
 
   def self.get_service service_id
     NationalRailApiHelper.get_service service_id
-  end
-
-  class CallingPoint
-    attr_accessor :station, :st, :et, :at
-
-    def initialize xml
-      return if xml.nil?
-      self.station = Station.find_by crs: xml.css('crs').text
-      self.st = xml.css('st').text
-      self.et = xml.css('et').text
-      self.at = xml.css('at').text
-    end
-
-    def to_s
-      station.to_s
-    end
-
-    def is_cancelled?
-      self.et == "Cancelled"
-    end
-
-    def time
-      return at if !at.empty?
-      return et if !et.empty?
-    end
-
-    def css station
-      return "info" if self.station == station
-      return "active" if !at.empty?
-      return "danger" if is_cancelled?
-    end
-
   end
 
 end

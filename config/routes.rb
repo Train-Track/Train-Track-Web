@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   resources :badges, only: [:index, :show]
 
+  get 'journeys/new', to: 'journey_legs#new', as: :new_journey_form
   post 'journeys', to: 'journey_legs#create', as: :new_journey
   resources :journeys, only: [:index, :show, :destroy] do
     resources :journey_legs, path: 'legs', except: [:index]

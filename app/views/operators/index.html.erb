@@ -1,20 +1,21 @@
 <div class="container">
-  <h1>Operators</h1>
+ 	<h1>Operators</h1>
   
-  <%= form_tag(operators_path, method: :get) do %>
-	<div class="well">
-		<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for an operator", autofocus: true, value: @q) %>
+	<%= form_tag(operators_path, method: :get) do %>
+		<div class="well">
+			<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for an operator", autofocus: true, value: @q) %>
+		</div>
+	<% end %>
+
+	<div class="list-group">
+	<% @operators.each do |operator| %>
+		 <a href="<%= operator.url %>" class="list-group-item">
+			<h4 class="list-group-item-heading"><%= operator %></h4>
+			<p class="list-group-item-text">Some information</p>
+		</a>
+	<% end %>
 	</div>
-  <% end %>
-  
-  <table class="table table-striped">
-  <% @operators.each do |operator| %>
-    <tr>
-      <td><%= link_to operator, operator.url %></td>
-    </tr>
-  <% end %>
-  </table>
-  
-  <%= paginate @operators %>
+
+	<%= paginate @operators %>
 
 </div>
