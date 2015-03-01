@@ -1,7 +1,7 @@
- <!-- Carousel
-================================================== -->
+<% provide(:title, "Train Track") %>
+<% provide(:description, "The personalised home of #{current_user}.") %>
+
 <div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top:-80px">
-  <!-- Indicators -->
   <ol class="carousel-indicators">
     <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
     <li data-target="#myCarousel" data-slide-to="1"></li>
@@ -47,39 +47,30 @@
     <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div><!-- /.carousel -->
-
-
-<!-- Marketing messaging and featurettes
-================================================== -->
-<!-- Wrap the rest of the page in another container to center all the content. -->
+</div>
 
 <div class="container marketing">
 
-  <!-- Three columns of text below the carousel -->
   <div class="row">
     <div class="col-lg-4">
       <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwBBACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
       <h2>Android</h2>
-      <p>Will be available on Android in the New Year as an Alpha release. Wohhoo!</p>
+      <p>Will be available on Android in the next few days as an Alpha release. Wohhoo!</p>
       <p><a class="btn btn-default" href="/download/android" role="button">View details &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
+    </div>
     <div class="col-lg-4">
       <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
       <h2>iOS</h2>
       <p>Hello Apple developers out there! Come and help build the iOS version so all you iWhats-its can play too!</p>
       <p><a class="btn btn-default" href="https://github.com/Train-Track/Train-Track-iOS" role="button">Project page &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
+    </div>
     <div class="col-lg-4">
       <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" style="width: 140px; height: 140px;">
       <h2>Online</h2>
       <p>And those who like the good old fasion web can also enjoy viewing stuff straight from this website.</p>
-      <p><a class="btn btn-default" href="/login" role="button">Login &raquo;</a></p>
-    </div><!-- /.col-lg-4 -->
-  </div><!-- /.row -->
-
-
-  <!-- START THE FEATURETTES -->
+      <p><a class="btn btn-default" href="<%= new_user_registration_path %>" role="button">Sign Up &raquo;</a></p>
+    </div>
+  </div>
 
   <hr class="featurette-divider">
 
@@ -116,10 +107,9 @@
       <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
     </div>
   </div>
-  
+
   <p class="text-center">
   	<a href="https://plus.google.com/+TrainTrackAppCoUk" rel="publisher">Google+</a>
   </p>
 
-  <!-- /END THE FEATURETTES -->
 </div>

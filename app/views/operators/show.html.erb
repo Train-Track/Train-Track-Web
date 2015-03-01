@@ -1,5 +1,8 @@
+<% provide(:title, @operator) %>
+<% provide(:description, "Details of this train operator.") %>
+
 <div class="container">
-	<h1><%= @operator.name %></h1>
+	<h1><%= @operator %></h1>
 	<div class="row">
 
 	<% if @operator.ppm %>

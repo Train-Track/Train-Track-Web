@@ -1,5 +1,8 @@
+<% provide(:title, @station) %>
+<% provide(:description, "Real-time train information for #{@station}.") %>
+
 <div class="container">
-	<h1><%= @station.name %></h1>
+	<h1><%= @station %></h1>
 	<ul class="nav nav-tabs" style="margin-bottom:20px;">
 		<li role="presentation" class="active"><a href="#">Summary</a></li>
 		<li role="presentation"><a href="<%= @station.url + "/departures" %>"><%= icon('resize-full') %> Departures</a></li>

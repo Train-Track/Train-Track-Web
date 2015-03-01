@@ -1,5 +1,8 @@
+<% provide(:title, @user) %>
+<% provide(:description, "Profile page for #{@user} on Train Track.") %>
+
 <div class="container">
-	<h1><%= @user.username %></h1>
+	<h1><%= @user %></h1>
 	<p><%= link_to "Journeys", journeys_path %>: <%= @user.journeys.includes(:journey_legs).inspect %></p>
 	<p><%= link_to "Badges", badges_path %>: <%= @user.badges.inspect %></p>
 	<p>Points: <%= @user.points %></p>

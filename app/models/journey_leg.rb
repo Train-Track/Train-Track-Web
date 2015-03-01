@@ -2,7 +2,7 @@ class JourneyLeg < ActiveRecord::Base
   belongs_to :journey
   belongs_to :departure_station, class_name: "Station"
   belongs_to :arrival_station, class_name: "Station"
-  default_scope { order('created_at DESC') }
+  default_scope { order('created_at ASC') }
 
   def origin
     return departure_station

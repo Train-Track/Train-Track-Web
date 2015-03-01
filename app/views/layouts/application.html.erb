@@ -4,26 +4,36 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="An app that tracks your train journeys.">
+		<meta name="description" content="<%= yield(:description) %>">
 		<meta name="p:domain_verify" content="eb1f9847fe89638c7d2175342f79d9ab"/>
+		<%= csrf_meta_tags %>
+		<meta name="twitter:card" content="app">
+		<meta name="twitter:site" content="@traintrackapp">
+		<meta name="twitter:description" content="Track the train journeys you go on.">
+		<meta name="twitter:app:country" content="uk">
+		<meta name="twitter:app:name:googleplay" content="Train Track">
+		<meta name="twitter:app:id:googleplay" content="">
+		<meta name="twitter:app:url:googleplay" content="http://cannonball.fabric.io/poem/5149e249222f9e600a7540ef">
+<% if @og then %>
+	<% @og.each do |k, v| %>
+		<meta property="<%= k %>" content="<%= v %>">
+	<% end %>
+<% else %>
+		<meta property="og:title" content="<%= yield(:title) %>">
+		<meta property="og:description" content="<%= yield(:description) %>">
+	<% if yield(:image) != "" %>
+		<meta property="og:image" content="<%= yield(:image) %>">
+	<% end %>
+<% end %>
 		<link rel="icon" href="/favicon.ico">
-		<title>Train Track</title>
+		<title><%= yield(:title) %></title>
 		<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<style>
-		/* GLOBAL STYLES
-		-------------------------------------------------- */
-		/* Padding below the footer and lighter body text */
-		
 		body {
 		  padding-bottom: 40px;
 		  padding-top: 80px;
 		  color: #5a5a5a;
 		}
-		
-		/* CUSTOMIZE THE NAVBAR
-		-------------------------------------------------- */
-		
-		/* Special class on .container surrounding .navbar, used for positioning it into place. */
 		.navbar-wrapper {
 		  position: absolute;
 		  top: 0;
@@ -31,8 +41,6 @@
 		  left: 0;
 		  z-index: 20;
 		}
-		
-		/* Flip around the padding for proper display in narrow viewports */
 		.navbar-wrapper > .container {
 		  padding-right: 0;
 		  padding-left: 0;
@@ -44,22 +52,13 @@
 		.navbar-wrapper .navbar .container {
 		  width: auto;
 		}
-		
-		
-		/* CUSTOMIZE THE CAROUSEL
-		-------------------------------------------------- */
-		
-		/* Carousel base class */
 		.carousel {
 		  height: 500px;
 		  margin-bottom: 60px;
 		}
-		/* Since positioning the image, we need to help out the caption */
 		.carousel-caption {
 		  z-index: 10;
 		}
-		
-		/* Declare heights because of positioning of img element */
 		.carousel .item {
 		  height: 500px;
 		  background-color: #33b5e5;
@@ -71,12 +70,6 @@
 		  min-width: 100%;
 		  height: 500px;
 		}
-		
-		
-		/* MARKETING CONTENT
-		-------------------------------------------------- */
-		
-		/* Center align the text within the three columns below the carousel */
 		.marketing .col-lg-4 {
 		  margin-bottom: 20px;
 		  text-align: center;
@@ -88,28 +81,15 @@
 		  margin-right: 10px;
 		  margin-left: 10px;
 		}
-		
-		
-		/* Featurettes
-		------------------------- */
-		
 		.featurette-divider {
-		  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+		  margin: 80px 0;
 		}
-		
-		/* Thin out the marketing headings */
 		.featurette-heading {
 		  font-weight: 300;
 		  line-height: 1;
 		  letter-spacing: -1px;
 		}
-		
-		
-		/* RESPONSIVE CSS
-		-------------------------------------------------- */
-		
 		@media (min-width: 768px) {
-		  /* Navbar positioning foo */
 		  .navbar-wrapper {
 		    margin-top: 20px;
 		  }
@@ -121,24 +101,18 @@
 		    padding-right: 0;
 		    padding-left: 0;
 		  }
-		
-		  /* The navbar becomes detached from the top, so we round the corners */
 		  .navbar-wrapper .navbar {
 		    border-radius: 4px;
 		  }
-		
-		  /* Bump up size of carousel content */
 		  .carousel-caption p {
 		    margin-bottom: 20px;
 		    font-size: 21px;
 		    line-height: 1.4;
 		  }
-		
 		  .featurette-heading {
 		    font-size: 50px;
 		  }
 		}
-		
 		@media (min-width: 992px) {
 		  .featurette-heading {
 		    margin-top: 120px;
