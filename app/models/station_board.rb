@@ -1,6 +1,5 @@
 class StationBoard
-  attr_reader :nrcc_messages, :train_services
-  attr_writer :nrcc_messages, :train_services
+  attr_accessor :platform_available, :services_available, :nrcc_messages, :train_services
 
   def initialize
     @nrcc_messages = []
@@ -8,6 +7,8 @@ class StationBoard
   end
 
   def parse xml
+    self.platform_available = xml.css('platformAvailable').text == "true"
+    self.services_available = xml.css('areServicesAvailable').text == "" || xml.css('areServicesAvailable').text == "true"
     xml.css('nrccMessages').children.each do |message|
       self.nrcc_messages << message.text.html_safe
     end
