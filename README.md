@@ -5,15 +5,15 @@ To Deploy:
 
 - Sign up to Web Faction
 - Create a rails application
-- Create a database
+- Create the database
 - Clone this repo into the application folder
-- Set up environmental variables
+- Set up environment variables
 
-  bundle install
-  rake db:migrate RAILS_ENV=production
-  rake assets:precompile
+    bundle install
+    rake db:migrate RAILS_ENV=production
+    rake assets:precompile
 
-- Restart the nginx server
+- Restart the nginx server with config pointing to this app
 
 
 To Contribute:
