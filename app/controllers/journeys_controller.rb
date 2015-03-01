@@ -37,8 +37,8 @@ class JourneysController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @journey, methods: [:origin, :destination, :journey_legs], callback: params[:callback] }
-      format.xml { render xml: @journey, methods: [:origin, :destination, :journey_legs] }
+      format.json { render json: @journey, callback: params[:callback] }
+      format.xml { render xml: @journey }
     end
   end
 

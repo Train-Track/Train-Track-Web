@@ -144,7 +144,8 @@ class JourneyLegsController < ApplicationController
         :arrival_station_id,
         :arrival_platform,
         :scheduled_arrival,
-        :actual_arrival
+        :actual_arrival,
+        :operator_id
       )
     end
 

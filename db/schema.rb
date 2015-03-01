@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228101300) do
+ActiveRecord::Schema.define(version: 20150301014432) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -34,9 +34,11 @@ ActiveRecord::Schema.define(version: 20150228101300) do
     t.string   "arrival_platform",     limit: 255
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.integer  "operator_id",          limit: 4
   end
 
   add_index "journey_legs", ["journey_id"], name: "index_journey_legs_on_journey_id", using: :btree
+  add_index "journey_legs", ["operator_id"], name: "fk_rails_04623ba596", using: :btree
 
   create_table "journeys", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -71,12 +73,12 @@ ActiveRecord::Schema.define(version: 20150228101300) do
   add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id", using: :btree
 
   create_table "stations", force: :cascade do |t|
-    t.string   "name",         limit: 255
-    t.string   "crs",          limit: 255
-    t.decimal  "lat",                      precision: 10, scale: 7
-    t.decimal  "lng",                      precision: 10, scale: 7
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.string   "name",       limit: 255
+    t.string   "crs",        limit: 255
+    t.decimal  "lat",                    precision: 10, scale: 7
+    t.decimal  "lng",                    precision: 10, scale: 7
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -111,6 +113,7 @@ ActiveRecord::Schema.define(version: 20150228101300) do
   end
 
   add_foreign_key "journey_legs", "journeys"
+  add_foreign_key "journey_legs", "operators"
   add_foreign_key "journeys", "users"
   add_foreign_key "ppms", "operators", name: "ppms_ibfk_1"
 end

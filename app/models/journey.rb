@@ -50,6 +50,10 @@ class Journey < ActiveRecord::Base
     return "" if self.departure_time.nil?
     return self.departure_time.strftime("%d/%m/%Y - %H:%M")
   end
-  
+
+
+  def as_json(options={})
+    super(include: [:origin, :destination, :journey_legs])
+  end
 
 end

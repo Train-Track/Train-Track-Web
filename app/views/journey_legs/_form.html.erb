@@ -6,21 +6,18 @@
 			<div class="form-group">
 				<%= f.label :departure_station_id, "Station", class: "control-label" %>
 				<%= f.collection_select :departure_station_id, Station.order(:name), :id, :name, {}, class: "form-control" %>
-				<span class="help-block"></span>
 			</div>
 		</article>
 		<article class="col-md-1">
 			<div class="form-group">
 				<%= f.label :departure_platform, "Platform", class: "control-label" %>
 				<%= f.text_field :departure_platform, class: "form-control" %>
-				<span class="help-block"></span>
 			</div>
 		</article>
 		<article class="col-md-2">
 			<div class="form-group">
 				<%= f.label :scheduled_departure, "Time", class: "control-label" %>
 				<%= f.time_field :scheduled_departure, class: "form-control", required: true %>
-				<span class="help-block"></span>
 			</div>
 		</article>
 	</section>
@@ -31,21 +28,27 @@
 			<div class="form-group">
 				<%= f.label :arrival_station_id, "Station", class: "control-label" %>
 				<%= f.collection_select :arrival_station_id, Station.order(:name), :id, :name, {}, class: "form-control" %>
-				<span class="help-block"></span>
 			</div>
 		</article>
 		<article class="col-md-1">
 			<div class="form-group">
 				<%= f.label :arrival_platform, "Platform", class: "control-label" %>
 				<%= f.text_field :arrival_platform, class: "form-control" %>
-				<span class="help-block"></span>
 			</div>
 		</article>
 		<article class="col-md-2">
 			<div class="form-group>">
 				<%= f.label :scheduled_arrival, "Time", class: "control-label" %>
 				<%= f.time_field :scheduled_arrival, class: "form-control", required: true %>
-				<span class="help-block"></span>
+			</div>
+		</article>
+	</section>
+
+	<section class="row">
+		<article class="col-md-3">
+			<div class="form-group">
+				<%= f.label :operator_id, "Operator", class: "control-label" %>
+				<%= f.collection_select :operator_id, Operator.order(:name), :id, :name, {}, class: "form-control" %>
 			</div>
 		</article>
 	</section>

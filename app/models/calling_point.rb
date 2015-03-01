@@ -36,7 +36,8 @@ class CallingPoint
     "journey_leg[scheduled_departure]=#{service.std}&" +
     "journey_leg[actual_departure]=#{service.etd}&" +
     "journey_leg[scheduled_arrival]=#{st}&" +
-    "journey_leg[actual_arrival]=#{et}&"
+    "journey_leg[actual_arrival]=#{et}&" +
+    "journey_leg[operator_id]=#{service.operator.id}&"
   end
 
 end

@@ -2,6 +2,7 @@ class JourneyLeg < ActiveRecord::Base
   belongs_to :journey
   belongs_to :departure_station, class_name: "Station"
   belongs_to :arrival_station, class_name: "Station"
+  belongs_to :operator
   default_scope { order('created_at ASC') }
 
   def origin
@@ -18,6 +19,10 @@ class JourneyLeg < ActiveRecord::Base
 
   def url
     "/journeys/#{journey_id}/legs/#{id}"
+  end
+
+  def as_json(options={})
+    super(include: [:origin, :destination, :operator])
   end
 
 end
