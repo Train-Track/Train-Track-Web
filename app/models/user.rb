@@ -23,4 +23,8 @@ class User < ActiveRecord::Base
     badges.sum(:points)
   end
 
+  def as_json(options={})
+    super(include: [:home_station, :work_station], methods: [:points, :image_url])
+  end
+
 end

@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301014432) do
+ActiveRecord::Schema.define(version: 20150301105147) do
 
   create_table "badges", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "description", limit: 255
-    t.string   "image_url",   limit: 255
-    t.integer  "points",      limit: 4
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name",                  limit: 255
+    t.string   "description",           limit: 255
+    t.string   "image_url",             limit: 255
+    t.integer  "points",                limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "google_achievement_id", limit: 255
   end
 
   create_table "journey_legs", force: :cascade do |t|
