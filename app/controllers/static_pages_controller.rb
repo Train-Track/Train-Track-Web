@@ -73,4 +73,19 @@ class StaticPagesController < ApplicationController
     end
   end
 
+
+
+  # GET /download
+  # GET /download.json
+  # GET /download.xml
+  def data_feeds
+    @download = "Coming soon!"
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @download }
+      format.json { render json: @download, callback: params['callback'] }
+    end
+  end
+
 end
