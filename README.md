@@ -9,9 +9,11 @@ To Deploy:
 - Clone this repo into the application folder
 - Set up environment variables
 
+
     bundle install
     rake db:migrate RAILS_ENV=production
     rake assets:precompile
+
 
 - Restart the nginx server with config pointing to this app
 
