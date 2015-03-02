@@ -4,6 +4,7 @@ class JourneyLeg < ActiveRecord::Base
   belongs_to :arrival_station, class_name: "Station"
   belongs_to :operator
   default_scope { order('created_at ASC') }
+  before_validation :add_uuid
 
   def origin
     return departure_station
@@ -23,6 +24,12 @@ class JourneyLeg < ActiveRecord::Base
 
   def as_json(options={})
     super(include: [:origin, :destination, :operator])
+  end
+
+  protected
+
+  def add_uuid
+    self.uuid = SecureRandom.uuid
   end
 
 end

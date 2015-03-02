@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301105147) do
+ActiveRecord::Schema.define(version: 20150302174325) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -36,18 +36,22 @@ ActiveRecord::Schema.define(version: 20150301105147) do
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.integer  "operator_id",          limit: 4
+    t.string   "uuid",                 limit: 255
   end
 
   add_index "journey_legs", ["journey_id"], name: "index_journey_legs_on_journey_id", using: :btree
   add_index "journey_legs", ["operator_id"], name: "fk_rails_04623ba596", using: :btree
+  add_index "journey_legs", ["uuid"], name: "index_journey_legs_on_uuid", unique: true, using: :btree
 
   create_table "journeys", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.string   "uuid",       limit: 255
   end
 
   add_index "journeys", ["user_id"], name: "index_journeys_on_user_id", using: :btree
+  add_index "journeys", ["uuid"], name: "index_journeys_on_uuid", unique: true, using: :btree
 
   create_table "operators", force: :cascade do |t|
     t.string   "name",            limit: 255
@@ -99,11 +103,13 @@ ActiveRecord::Schema.define(version: 20150301105147) do
     t.datetime "updated_at"
     t.integer  "home_station_id",        limit: 4
     t.integer  "work_station_id",        limit: 4
+    t.string   "uuid",                   limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["home_station_id"], name: "index_users_on_home_station_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uuid"], name: "index_users_on_uuid", unique: true, using: :btree
   add_index "users", ["work_station_id"], name: "index_users_on_work_station_id", using: :btree
 
   create_table "users_badges_joins", force: :cascade do |t|

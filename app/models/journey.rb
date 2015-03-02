@@ -1,7 +1,9 @@
 class Journey < ActiveRecord::Base
   belongs_to :user
   has_many :journey_legs
+  validates :uuid, presence: true, uniqueness: true
   default_scope { order('created_at DESC') }
+  before_validation :add_uuid
 
 
   def origin
@@ -54,6 +56,13 @@ class Journey < ActiveRecord::Base
 
   def as_json(options={})
     super(include: [:origin, :destination, :user, { journey_legs: {include: [:origin, :destination, :operator] } }])
+  end
+
+
+  protected
+  
+  def add_uuid
+    self.uuid = SecureRandom.uuid
   end
 
 end

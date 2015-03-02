@@ -18,4 +18,12 @@ class Station < ActiveRecord::Base
     return NationalRailApiHelper.get_arrival_board crs
   end
 
+  def favourite? user
+    if user
+      return user.favourite_stations.include? self
+    else
+      return false
+    end
+  end
+
 end

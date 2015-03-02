@@ -2,11 +2,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :username, presence: true, uniqueness: true, format: { with: /\A\w+\z/, message: "only letters, numbers and underscores" }
+  validates :uuid, presence: true, uniqueness: true
   has_and_belongs_to_many :badges, join_table: "users_badges_joins"
   has_many :journeys
   belongs_to :home_station, class_name: "Station"
   belongs_to :work_station, class_name: "Station"
- 
+  before_validation :add_uuid
+
   def image_url(size = 30)
     return "https://secure.gravatar.com/avatar/#{Digest::MD5::hexdigest(email.strip.downcase)}.jpg?s=#{size}&d=identicon"
   end
@@ -22,9 +24,19 @@ class User < ActiveRecord::Base
   def points
     badges.sum(:points)
   end
+  
+  def favourite_stations
+    return []
+  end
 
   def as_json(options={})
     super(include: [:home_station, :work_station], methods: [:points, :image_url])
+  end
+
+  protected
+  
+  def add_uuid
+    self.uuid = SecureRandom.uuid
   end
 
 end
