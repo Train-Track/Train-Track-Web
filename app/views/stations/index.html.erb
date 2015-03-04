@@ -23,6 +23,9 @@
 			<div class="list-group">
 				<%= link_to icon('home') + " " + current_user.home_station, current_user.home_station.url, class: "list-group-item" if current_user.home_station %>
 				<%= link_to icon('briefcase') + " " + current_user.work_station, current_user.work_station.url, class: "list-group-item" if current_user.work_station %>
+			<% current_user.favourite_stations.each do |station| %>
+				<%= link_to icon('star') + " " + station, station.url, class: "list-group-item" %>
+			<% end %>
 			</div>
 		</div>
 	<% end %>

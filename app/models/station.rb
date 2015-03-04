@@ -1,6 +1,8 @@
 class Station < ActiveRecord::Base
   include NationalRailApiHelper
   default_scope { order('name ASC') }
+  # Stations source from:
+  # http://www.nationalrail.co.uk/static/documents/content/station_codes.csv
 
   def to_s
     name

@@ -6,4 +6,5 @@
 	<p><%= link_to "Journeys", journeys_path %>: <%= @user.journeys.includes(:journey_legs).inspect %></p>
 	<p><%= link_to "Badges", badges_path %>: <%= @user.badges.inspect %></p>
 	<p>Points: <%= @user.points %></p>
+	<p>Favourite Stations: <%= @user.favourite_stations.inspect %></p>
 </div>

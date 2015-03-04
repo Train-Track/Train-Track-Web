@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :username, presence: true, uniqueness: true, format: { with: /\A\w+\z/, message: "only letters, numbers and underscores" }
   validates :uuid, presence: true, uniqueness: true
-  has_and_belongs_to_many :badges, join_table: "users_badges_joins"
+  has_and_belongs_to_many :badges, join_table: "user_badges"
+  has_and_belongs_to_many :stations, join_table: "user_favourite_stations"
   has_many :journeys
   belongs_to :home_station, class_name: "Station"
   belongs_to :work_station, class_name: "Station"
@@ -26,11 +27,11 @@ class User < ActiveRecord::Base
   end
   
   def favourite_stations
-    return []
+    return stations
   end
 
   def as_json(options={})
-    super(include: [:home_station, :work_station], methods: [:points, :image_url])
+    super(include: [:home_station, :work_station], methods: [:points, :image_url, :favourite_stations])
   end
 
   protected
