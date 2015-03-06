@@ -18,4 +18,9 @@ class ApplicationController < ActionController::Base
       redirect_to 'http://traintrackapp.co.uk' + request.fullpath, status: :moved_permanently
     end
   end
+
+  def verified_request?
+    super || request.headers['API-KEY']
+  end
+
 end
