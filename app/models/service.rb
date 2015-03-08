@@ -43,8 +43,8 @@ class Service
   def parse xml
     self.service_type = xml.css('serviceType').text
     self.is_cancelled = !xml.css('isCancelled').empty?
-    self.disruption_reason = xml.css('disruptionReason').text
-    self.overdue_message = xml.css('overdueMessage').text
+    self.disruption_reason = ActionView::Base.full_sanitizer.sanitize(xml.css('disruptionReason').text)
+    self.overdue_message = ActionView::Base.full_sanitizer.sanitize(xml.css('overdueMessage').text)
     self.station = Station.find_by crs: xml.css('crs').first.text
     self.operator = Operator.find_by code: xml.css('operatorCode').text
     self.platform = xml.css('platfom').text
