@@ -55,7 +55,7 @@ class Journey < ActiveRecord::Base
 
 
   def as_json(options={})
-    super(include: [:origin, :destination, :user, { journey_legs: {include: [:origin, :destination, :operator] } }])
+    super(include: [:origin, :destination, :user, { journey_legs: { include: [:origin, :destination, :operator] } }])
   end
 
 

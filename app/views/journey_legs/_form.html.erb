@@ -16,8 +16,14 @@
 		</article>
 		<article class="col-md-2">
 			<div class="form-group">
-				<%= f.label :scheduled_departure, "Time", class: "control-label" %>
+				<%= f.label :scheduled_departure, "Scheduled Time", class: "control-label" %>
 				<%= f.time_field :scheduled_departure, class: "form-control", required: true %>
+			</div>
+		</article>
+		<article class="col-md-2">
+			<div class="form-group">
+				<%= f.label :actual_departure, "Actual Time", class: "control-label" %>
+				<%= f.time_field :actual_departure, class: "form-control", required: true %>
 			</div>
 		</article>
 	</section>
@@ -38,8 +44,14 @@
 		</article>
 		<article class="col-md-2">
 			<div class="form-group>">
-				<%= f.label :scheduled_arrival, "Time", class: "control-label" %>
+				<%= f.label :scheduled_arrival, "Scheduled Time", class: "control-label" %>
 				<%= f.time_field :scheduled_arrival, class: "form-control", required: true %>
+			</div>
+		</article>
+		<article class="col-md-2">
+			<div class="form-group>">
+				<%= f.label :actual_arrival, "Actual Time", class: "control-label" %>
+				<%= f.time_field :actual_arrival, class: "form-control", required: true %>
 			</div>
 		</article>
 	</section>

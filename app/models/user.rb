@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super(include: [:home_station, :work_station], methods: [:points, :image_url, :favourite_stations])
+    super(include: [:home_station, :work_station, { journeys: { include: [journey_legs: { include: [:origin, :destination, :operator] } ] } } ], methods: [:points, :image_url, :favourite_stations])
   end
 
   protected
