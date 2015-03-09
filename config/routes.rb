@@ -29,7 +29,8 @@ Rails.application.routes.draw do
     registration: 'users',
     sign_up: 'new'
   }, controllers: {
-    sessions: 'sessions'
+    sessions: 'sessions',
+    registrations: 'registrations'
   }
   get '/users/:username', to: 'users#show', as: :user
 
