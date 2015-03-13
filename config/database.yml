@@ -4,8 +4,8 @@ development:
   encoding: utf8
   database: trains
   pool: 5
-  username: <%= ENV['TRAINS_DATABASE_USER'] %>
-  password: <%= ENV['TRAINS_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.secrets.database_user %>
+  password: <%= Rails.application.secrets.database_password %>
   host: localhost
 
 test:
@@ -19,6 +19,6 @@ production:
   encoding: utf8
   database: trains
   pool: 5
-  username: <%= ENV['TRAINS_DATABASE_USER'] %>
-  password: <%= ENV['TRAINS_DATABASE_PASSWORD'] %>
+  username: <%= Rails.application.secrets.database_user %>
+  password: <%= Rails.application.secrets.database_password %>
   host: localhost

@@ -3,7 +3,7 @@ module NationalRailApiHelper
 
   DEBUG = true
   URL = 'https://lite.realtime.nationalrail.co.uk/OpenLDBWS/ldb6.asmx'
-  ACCESS_TOKEN = ENV['TRAINS_ACCESS_TOKEN']
+  ACCESS_TOKEN = Rails.application.secrets.access_token
   SOAP_HEADERS = '<?xml version="1.0"?><SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns1="http://thalesgroup.com/RTTI/2014-02-20/ldb/" xmlns:ns2="http://thalesgroup.com/RTTI/2010-11-01/ldb/commontypes"><SOAP-ENV:Header><ns2:AccessToken><ns2:TokenValue>' + ACCESS_TOKEN + '</ns2:TokenValue></ns2:AccessToken></SOAP-ENV:Header>'
 
 
