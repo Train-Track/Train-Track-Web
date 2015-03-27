@@ -41,6 +41,10 @@ class Station < ActiveRecord::Base
     end
   end
 
+  def facilities
+    return JSON.parse(read_attribute(:facilities))
+  end
+
   def is_underground?
     underground
   end
