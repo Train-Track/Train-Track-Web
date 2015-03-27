@@ -147,6 +147,8 @@
 								<li<%= css.html_safe %>><%= link_to "Operators", operators_url %></li>
 								<% css = if request.original_fullpath.starts_with? "/journeys" then " class=\"active\"" else "" end %>
 								<li<%= css.html_safe %>><%= link_to "Journeys", journeys_url %></li>
+								<% css = if request.original_fullpath.starts_with? "/tube" then " class=\"active\"" else "" end %>
+								<li<%= css.html_safe %>><%= link_to "Tube", tube_root_url %></li>
 			  				</ul>
 							<ul class="nav navbar-nav navbar-right">
 							<% if user_signed_in? %>

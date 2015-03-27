@@ -21,8 +21,8 @@ Rails.application.routes.draw do
 
   namespace :tube do
     root to: 'static_pages#index'
-    resources :stations, only: [:index, :show]
     resources :lines, only: [:index, :show]
+    get '/:underground_code', to: 'static_pages#show'
   end
 
   put 'users', to: 'users#update'

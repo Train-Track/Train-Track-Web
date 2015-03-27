@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327083033) do
+ActiveRecord::Schema.define(version: 20150327140002) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -77,14 +77,32 @@ ActiveRecord::Schema.define(version: 20150327083033) do
 
   add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id", using: :btree
 
-  create_table "stations", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "crs",        limit: 255
-    t.decimal  "lat",                    precision: 10, scale: 7
-    t.decimal  "lng",                    precision: 10, scale: 7
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+  create_table "station_tube_lines", id: false, force: :cascade do |t|
+    t.integer "tube_station_id", limit: 4
+    t.integer "tube_line_id",    limit: 4
+    t.integer "id",              limit: 4
   end
+
+  add_index "station_tube_lines", ["id"], name: "index_station_tube_lines_on_id", using: :btree
+  add_index "station_tube_lines", ["tube_station_id", "tube_line_id"], name: "index_station_tube_lines_on_tube_station_id_and_tube_line_id", using: :btree
+
+  create_table "stations", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.string   "crs",               limit: 255
+    t.decimal  "lat",                             precision: 10, scale: 7
+    t.decimal  "lng",                             precision: 10, scale: 7
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.string   "number",            limit: 255
+    t.text     "facilities",        limit: 65535
+    t.string   "address",           limit: 255
+    t.string   "phone",             limit: 255
+    t.string   "underground_zones", limit: 255
+    t.boolean  "underground",       limit: 1
+    t.string   "underground_code",  limit: 255
+  end
+
+  add_index "stations", ["number"], name: "index_stations_on_number", using: :btree
 
   create_table "tube_lines", force: :cascade do |t|
     t.string   "name",              limit: 255
@@ -97,29 +115,6 @@ ActiveRecord::Schema.define(version: 20150327083033) do
   end
 
   add_index "tube_lines", ["code", "number"], name: "index_tube_lines_on_code_and_number", using: :btree
-
-  create_table "tube_station_lines", id: false, force: :cascade do |t|
-    t.integer "tube_station_id", limit: 4
-    t.integer "tube_line_id",    limit: 4
-  end
-
-  add_index "tube_station_lines", ["tube_station_id", "tube_line_id"], name: "index_tube_station_lines_on_tube_station_id_and_tube_line_id", using: :btree
-
-  create_table "tube_stations", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "code",       limit: 255
-    t.string   "number",     limit: 255
-    t.text     "facilities", limit: 65535
-    t.text     "address",    limit: 65535
-    t.string   "phone",      limit: 255
-    t.string   "zones",      limit: 255
-    t.decimal  "lat",                      precision: 10, scale: 7
-    t.decimal  "lng",                      precision: 10, scale: 7
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-  end
-
-  add_index "tube_stations", ["code", "number"], name: "index_tube_stations_on_code_and_number", using: :btree
 
   create_table "user_badges", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
