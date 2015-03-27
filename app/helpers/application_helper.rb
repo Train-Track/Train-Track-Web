@@ -30,4 +30,9 @@ module ApplicationHelper
   def data_feeds_link
     "<a href=\"/data-feeds\"><img src=\"/nre.png\" height=\"50\" alt=\"National Rail Enquiries\">".html_safe
   end
+
+  def attribution source
+    " - <a href=\"/data-feeds\" title=\"Data Feeds\">#{source}</a>".html_safe unless source.empty?
+  end
+
 end
