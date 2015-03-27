@@ -1,0 +1,22 @@
+<% provide(:title, "Tube") %>
+<% provide(:description, "Real-time train information for UK train stations.") %>
+
+<div class="container">
+	<h1>The Tube</h1>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="list-group">
+			<% @lines.each do |line| %>
+				<a href="<%= line.url %>" class="list-group-item" style="<%= line.style %>">
+					<div class="pull-left"><%= line %></div>
+					<div class="pull-right"><%= line.status %></div>
+					<div class="clearfix"></div>
+				</a>
+			<% end %>
+			</div>
+		</div>
+		<div class="col-md-8">
+			
+		</div>
+	</div>
+</div>

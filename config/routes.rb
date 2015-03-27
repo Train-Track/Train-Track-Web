@@ -19,6 +19,12 @@ Rails.application.routes.draw do
   get '/operators/all', to: 'operators#all'
   get '/operators/:code', to: 'operators#show'
 
+  namespace :tube do
+    root to: 'static_pages#index'
+    resources :stations, only: [:index, :show]
+    resources :lines, only: [:index, :show]
+  end
+
   put 'users', to: 'users#update'
   devise_for :users, path: "", path_names: {
     sign_in: 'login',
