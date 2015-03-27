@@ -2,9 +2,10 @@
 <% provide(:description, "Real-time train information for UK train stations.") %>
 
 <div class="container">
-	<h1>The Tube</h1>
+	<h1>Tube</h1>
 	<div class="row">
 		<div class="col-md-4">
+			<h3>Status</h3>
 			<div class="list-group">
 			<% @lines.each do |line| %>
 				<a href="<%= line.url %>" class="list-group-item" style="<%= line.style %>">
