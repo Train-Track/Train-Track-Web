@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   # GET /users/1.xml
   def show
-    @user = User.find_by username: params[:username]
+    @user = User.find_by! username: params[:username]
     render_404 and return unless @user
 
     @og = {

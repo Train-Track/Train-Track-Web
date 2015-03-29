@@ -44,7 +44,7 @@ class StationsController < ApplicationController
   # GET /stations/1.json
   # GET /stations/1.xml
   def show
-    @station = Station.find_by crs: params[:crs]
+    @station = Station.find_by! crs: params[:crs]
 
     @og = {
         "og:title" => @location,
@@ -68,7 +68,7 @@ class StationsController < ApplicationController
   # GET /stations/1/departures.json
   # GET /stations/1/departures.xml
   def departures
-    @station = Station.find_by crs: params[:crs]
+    @station = Station.find_by! crs: params[:crs]
     @departure_board = @station.get_departure_board
 
     respond_to do |format|
@@ -83,7 +83,7 @@ class StationsController < ApplicationController
   # GET /stations/1/arrivals.json
   # GET /stations/1/arrivals.xml
   def arrivals
-    @station = Station.find_by crs: params[:crs]
+    @station = Station.find_by! crs: params[:crs]
     @arrival_board = @station.get_arrival_board
 
     respond_to do |format|

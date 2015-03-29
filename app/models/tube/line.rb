@@ -1,6 +1,6 @@
 class Tube::Line < ActiveRecord::Base
   self.table_name = "tube_lines"
-  attr_accessor :status
+  attr_accessor :status, :status_details
   has_and_belongs_to_many :stations
 
   STATUS_URL = "http://cloud.tfl.gov.uk/TrackerNet/LineStatus"
@@ -8,16 +8,18 @@ class Tube::Line < ActiveRecord::Base
 
   def self.get_status
     lines = []
-#    response = RestClient.get STATUS_URL
-#    xml = Nokogiri::XML(response.body)
-#    xml.remove_namespaces!
-#    xml.css('LineStatus').each do |line_status|
-#      number = line_status.attr('ID').to_s
-#      name = line_status.css('Line').attr('Name').text
-#      line = Tube::Line.where(number: number).first_or_create(name: name)
-#      line.status = line_status.css('Status').attr('Description').text
-#      lines << line
-#    end
+    response = RestClient.get STATUS_URL
+    xml = Nokogiri::XML(response.body)
+    xml.remove_namespaces!
+    puts xml
+    xml.css('LineStatus').each do |line_status|
+      number = line_status.attr('ID').to_s
+      name = line_status.css('Line').attr('Name').text
+      line = Tube::Line.where(number: number).first_or_create(name: name)
+      line.status_details = line_status.attr('StatusDetails').to_s
+      line.status = line_status.css('Status').attr('Description').text
+      lines << line
+    end
     return lines
   end
 

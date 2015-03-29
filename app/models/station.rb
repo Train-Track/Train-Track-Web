@@ -42,11 +42,17 @@ class Station < ActiveRecord::Base
   end
 
   def facilities
-    return JSON.parse(read_attribute(:facilities))
+    json = read_attribute(:facilities)
+    return [] if json.nil?
+    return JSON.parse(json)
   end
 
   def is_underground?
     underground
+  end
+
+  def self.underground
+    where(underground: true)
   end
 
   def self.update_underground_station_facilities
@@ -62,16 +68,20 @@ class Station < ActiveRecord::Base
         facilities << { facility.attr('name') => facility.text.strip } unless facility.attr('name').nil?
       end
       coords = station.css('coordinates').first.text.split(",")
-      lat = coords[0].to_f
-      lng = coords[1].to_f
+      lat = coords[1].to_f
+      lng = coords[0].to_f
       station_attributes = {
-        name: name, address: address,
-        phone: phone, underground: true,
+        name: name,
+        address: address,
+        phone: phone,
+        underground: true,
         underground_zones: zones,
         facilities: facilities.to_json,
-        lat: lat, lng: lng
+        lat: lat,
+        lng: lng
       }
-      station = Station.where(number: number).first_or_create(station_attributes)
+      station = Station.where(number: number).first_or_create
+      Station.update(station.id, station_attributes)
     end
   end
 
