@@ -11,7 +11,6 @@ class Tube::Line < ActiveRecord::Base
     response = RestClient.get STATUS_URL
     xml = Nokogiri::XML(response.body)
     xml.remove_namespaces!
-    puts xml
     xml.css('LineStatus').each do |line_status|
       number = line_status.attr('ID').to_s
       name = line_status.css('Line').attr('Name').text

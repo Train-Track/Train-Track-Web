@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150327140002) do
+ActiveRecord::Schema.define(version: 20150329164820) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -61,7 +61,10 @@ ActiveRecord::Schema.define(version: 20150327140002) do
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
     t.string   "numeric_code",    limit: 255
+    t.string   "uuid",            limit: 255
   end
+
+  add_index "operators", ["uuid"], name: "index_operators_on_uuid", unique: true, using: :btree
 
   create_table "ppms", force: :cascade do |t|
     t.integer  "operator_id",      limit: 4
@@ -100,9 +103,12 @@ ActiveRecord::Schema.define(version: 20150327140002) do
     t.string   "underground_zones", limit: 255
     t.boolean  "underground",       limit: 1
     t.string   "underground_code",  limit: 255
+    t.string   "uuid",              limit: 255
+    t.boolean  "national_rail",     limit: 1
   end
 
   add_index "stations", ["number"], name: "index_stations_on_number", using: :btree
+  add_index "stations", ["uuid"], name: "index_stations_on_uuid", unique: true, using: :btree
 
   create_table "tube_lines", force: :cascade do |t|
     t.string   "name",              limit: 255

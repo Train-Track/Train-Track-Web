@@ -38,7 +38,7 @@ class OperatorsController < ApplicationController
   # GET /operators/1.json
   # GET /operators/1.xml
   def show
-    @operator = Operator.find_by! code: params[:code]
+    @operator = Operator.find_by! uuid: params[:uuid]
 
     @og = {
         "og:title" => @operator,

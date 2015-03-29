@@ -11,7 +11,7 @@ class Operator < ActiveRecord::Base
   end
 
   def url
-     "/operators/" + code
+     "/operators/" + uuid
   end
 
   def tweet_url

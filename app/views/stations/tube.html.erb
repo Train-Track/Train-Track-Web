@@ -4,26 +4,12 @@
 
 <div class="container">
 	<h1><%= @station %></h1>
+
+<%= render 'navigation' %>
+
 	<div class="row">
 		<div class="col-md-4">
 
-			<h3>Details</h3>
-			<p><%= @station.address %></p>
-			<p><%= link_to @station.phone %></p>
-			
-			<h3>Facilities</h3>
-			<table class="table-striped">
-				<% @station.facilities.each do |facitity| %>
-				<tr>
-					<td><%= facitity.to_hash.first[0] %></td>
-					<td><%= facitity.to_hash.first[1] %></td>
-				</tr>
-			<% end %>
-			</table>
-
-		</div>
-		<div class="col-md-8">
-			
 			<h3>Lines</h3>
 			<div class="list-group">
 			<% @station.tube_lines.each do |line| %>
@@ -34,6 +20,9 @@
 				</a>
 			<% end %>
 			</div>
+
+		</div>
+		<div class="col-md-8">
 
 			<h3>Next Train</h3>
 			<div class="list-group">

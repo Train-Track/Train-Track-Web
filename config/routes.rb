@@ -9,20 +9,20 @@ Rails.application.routes.draw do
 
   get '/stations', to: 'stations#index'
   get '/stations/all', to: 'stations#all'
-  get '/stations/:crs', to: 'stations#show'
-  get '/stations/:crs/departures', to: 'stations#departures'
-  get '/stations/:crs/arrivals', to: 'stations#arrivals'
+  get '/stations/:uuid', to: 'stations#show'
+  get '/stations/:uuid/departures', to: 'stations#departures'
+  get '/stations/:uuid/arrivals', to: 'stations#arrivals'
+  get '/stations/:uuid/tube', to: 'stations#tube'
 
   get '/services/:service_id', to: 'services#show'
 
   get '/operators', to: 'operators#index'
   get '/operators/all', to: 'operators#all'
-  get '/operators/:code', to: 'operators#show'
+  get '/operators/:uuid', to: 'operators#show'
 
   namespace :tube do
     root to: 'static_pages#index'
     resources :lines, only: [:index, :show]
-    get '/:underground_code', to: 'static_pages#show'
   end
 
   put 'users', to: 'users#update'

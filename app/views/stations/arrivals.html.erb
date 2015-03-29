@@ -3,11 +3,8 @@
 
 <div class="container">
 	<h1><%= @station %></h1>
-	<ul class="nav nav-tabs">
-		<li role="presentation"><a href="<%= @station.url %>">Summary</a></li>
-		<li role="presentation"><a href="<%= @station.url + "/departures" %>" rel="nofollow">Departures</a></li>
-		<li role="presentation" class="active"><a href="#">Arrivals</a></li>
-	</ul>
+
+<%= render 'navigation' %>
 
 	<h3>Arrival Board</h3>
 

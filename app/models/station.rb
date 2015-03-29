@@ -10,25 +10,17 @@ class Station < ActiveRecord::Base
   end
 
   def url
-    if is_underground? and underground_code
-      return "/tube/" + underground_code
-    elsif crs
-      return "/stations/" + crs
-    end
+    "/stations/" + uuid
   end
 
   def get_departure_board
-    if is_underground?
-      return nil
-    else
+    if national_rail?
       return NationalRailApiHelper.get_departure_board crs
     end
   end
 
   def get_arrival_board
-    if is_underground?
-      return nil
-    else
+    if national_rail?
       return NationalRailApiHelper.get_arrival_board crs
     end
   end
@@ -47,8 +39,12 @@ class Station < ActiveRecord::Base
     return JSON.parse(json)
   end
 
-  def is_underground?
+  def underground?
     underground
+  end
+
+  def national_rail?
+    national_rail
   end
 
   def self.underground
@@ -67,6 +63,10 @@ class Station < ActiveRecord::Base
       station.css('facilities').first.children.each do |facility|
         facilities << { facility.attr('name') => facility.text.strip } unless facility.attr('name').nil?
       end
+      lines = []
+      station.css('servingLines').first.children.each do |line|
+        lines << line.text.strip unless line.text.strip.empty?
+      end
       coords = station.css('coordinates').first.text.split(",")
       lat = coords[1].to_f
       lng = coords[0].to_f
@@ -80,7 +80,7 @@ class Station < ActiveRecord::Base
         lat: lat,
         lng: lng
       }
-      station = Station.where(number: number).first_or_create
+      station = Station.where(number: number).first_or_create(uuid: SecureRandom.uuid)
       Station.update(station.id, station_attributes)
     end
   end

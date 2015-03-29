@@ -27,19 +27,4 @@ class Tube::StaticPagesController < ApplicationController
   end
 
 
-  # GET /tube/ABC
-  # GET /tube/ABC.json
-  # GET /tube/ABC.xml
-  def show
-    @station = Station.find_by! underground_code: params[:underground_code]
-    @trains = []
-
-    respond_to do |format|
-      format.html
-      format.xml { render xml: @station }
-      format.json { render json: @station, callback: params['callback'] }
-    end
-  end
-
-
 end

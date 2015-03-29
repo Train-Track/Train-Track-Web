@@ -3,15 +3,28 @@
 
 <div class="container">
 	<h1><%= @station %></h1>
-	<ul class="nav nav-tabs" style="margin-bottom:20px;">
-		<li role="presentation" class="active"><a href="#">Summary</a></li>
-		<li role="presentation"><a href="<%= @station.url + "/departures" %>"><%= icon('resize-full') %> Departures</a></li>
-		<li role="presentation"><a href="<%= @station.url + "/arrivals" %>"><%= icon('resize-small') %> Arrivals</a></li>
-	</ul>
+
+<%= render 'navigation' %>
 
 	<div class="row">
 		<div class="col-md-4">
+
 			<img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwBBACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="width:180px;height:180px">
+
+			<h3>Details</h3>
+			<p><%= @station.address %></p>
+			<p><%= link_to @station.phone %></p>
+
+			<h3>Facilities</h3>
+			<table class="table-striped">
+				<% @station.facilities.each do |facitity| %>
+				<tr>
+					<td><%= facitity.to_hash.first[0] %></td>
+					<td><%= facitity.to_hash.first[1] %></td>
+				</tr>
+			<% end %>
+			</table>
+
 		</div>
 		<div class="col-md-4">
   
