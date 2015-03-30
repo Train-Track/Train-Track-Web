@@ -20,7 +20,7 @@ class BadgesController < ApplicationController
   # GET /badges/1.json
   # GET /badges/1.xml
   def show
-    @badge = Badge.find(params[:id])
+    @badge = Badge.find_by! uuid: params[:uuid]
 
     respond_to do |format|
       format.html

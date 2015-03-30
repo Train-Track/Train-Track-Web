@@ -1,0 +1,28 @@
+<% provide(:title, "Tube Lines") %>
+<% provide(:description, "Real-time train information for UK train stations.") %>
+<% provide(:attribution, "Powered by TfL Open Data") %>
+
+<div class="container">
+  <h1>Tube Lines</h1>
+  
+<%= form_tag(tube_lines_path, method: :get) do %>
+	<div class="well">
+		<div class="input">
+			<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for a line", autofocus: true, value: @q) %>
+		</div>
+	</div>
+<% end %>
+  
+	<div class="row">
+
+		<div class="col-md-8">
+			<h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
+			<div class="list-group">
+			<% @lines.each do |line| %>
+		 		<%= link_to line, line.url, class: "list-group-item", style: line.style %>
+			<% end %>
+			</div>
+		</div>
+
+	</div>
+</div>

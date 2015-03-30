@@ -22,7 +22,8 @@ Rails.application.routes.draw do
 
   namespace :tube do
     root to: 'static_pages#index'
-    resources :lines, only: [:index, :show]
+    get '/lines', to: 'lines#index'
+    get '/lines/:uuid', to: 'lines#show'
   end
 
   put 'users', to: 'users#update'
@@ -40,8 +41,10 @@ Rails.application.routes.draw do
   }
   get '/users/:username', to: 'users#show', as: :user
 
-  resources :badges, only: [:index, :show]
-
+  get '/badges', to: 'badges#index'
+  get '/badges/all', to: 'badges#all'
+  get '/badges/:uuid', to: 'badges#show'
+ 
   get 'journeys/new', to: 'journey_legs#new', as: :new_journey_form
   post 'journeys', to: 'journey_legs#create', as: :new_journey
   resources :journeys, only: [:index, :show, :destroy] do

@@ -20,6 +20,10 @@
 		<div class="col-md-4">
 
 			<h3>Lines</h3>
+			<ul class="nav nav-tabs" style="margin-bottom:20px;">
+				<li role="presentation" class="active"><a href="#"><%= icon('time') %> Now</a></li>
+				<li role="presentation"><a href="<%= tube_lines_path %>"><%= icon('calendar') %> This Weekend</a></li>
+			</ul>
 			<div class="list-group">
 			<% @lines.each do |line| %>
 				<a href="<%= line.url %>" class="list-group-item" style="<%= line.style %>" title="<%= line.status_details %>">

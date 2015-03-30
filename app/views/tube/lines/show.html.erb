@@ -1,0 +1,30 @@
+<% provide(:title, @line) %>
+<% provide(:description, "Real-time train information for #{@line}.") %>
+<% provide(:attribution, "Powered by TfL Open Data") %>
+
+<div class="container">
+	<h1><%= @line %></h1>
+
+<% @line.next_trains.each do |station| %>
+	<h3><%= station %></h3>
+	<% station.platforms.each do |platform| %>
+		<h5><%= platform[:name] %></h5>
+		<ol>
+		<% platform[:next_trains].each do |next_train| %>
+			<li>
+				<%= next_train[:eta] %>
+				<% if next_train[:destination] %>
+					<%= link_to next_train[:destination], next_train[:destination].url %>
+				<% else %>
+					<%= next_train[:destination_name] %>
+				<% end %>
+				<%= next_train[:location] %>
+			</li>
+		<% end %>
+		</ol>
+	<% end %>	
+<% end %>	
+
+
+
+</div>

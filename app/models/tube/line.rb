@@ -1,25 +1,24 @@
 class Tube::Line < ActiveRecord::Base
+  include UndergroundApiHelper
   self.table_name = "tube_lines"
-  attr_accessor :status, :status_details
+  attr_accessor :status, :status_details, :next_trains
   has_and_belongs_to_many :stations
-
-  STATUS_URL = "http://cloud.tfl.gov.uk/TrackerNet/LineStatus"
+  validates :uuid, presence: true, uniqueness: true
+  before_validation :add_uuid
 
 
   def self.get_status
-    lines = []
-    response = RestClient.get STATUS_URL
-    xml = Nokogiri::XML(response.body)
-    xml.remove_namespaces!
-    xml.css('LineStatus').each do |line_status|
-      number = line_status.attr('ID').to_s
-      name = line_status.css('Line').attr('Name').text
-      line = Tube::Line.where(number: number).first_or_create(name: name)
-      line.status_details = line_status.attr('StatusDetails').to_s
-      line.status = line_status.css('Status').attr('Description').text
-      lines << line
-    end
-    return lines
+    UndergroundApiHelper.get_status
+  end
+
+
+  def self.get_weekend
+    UndergroundApiHelper.get_weekend
+  end
+
+
+  def next_trains
+   return UndergroundApiHelper.get_line_prediction code
   end
 
 
@@ -29,12 +28,19 @@ class Tube::Line < ActiveRecord::Base
 
 
   def url
-    "/tube/lines/#{code}"
+    "/tube/lines/#{uuid}"
   end
 
 
   def style
     "background:##{background_colour};color:##{text_colour}"
+  end
+
+
+  protected
+
+  def add_uuid
+    self.uuid = SecureRandom.uuid if uuid.nil?
   end
 
 

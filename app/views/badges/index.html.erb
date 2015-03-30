@@ -6,7 +6,7 @@
 	  
 	<table class="table table-striped">
 	<% @badges.each do |badge| %>
-		<tr><td><%= link_to badge, badge %></td></tr>
+		<tr><td><%= link_to badge, badge.url %></td></tr>
 	<% end %>
 	</table>
 

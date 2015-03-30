@@ -29,7 +29,7 @@ class JourneyLeg < ActiveRecord::Base
   protected
 
   def add_uuid
-    self.uuid = SecureRandom.uuid
+    self.uuid = SecureRandom.uuid if uuid.nil?
   end
 
 end

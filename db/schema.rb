@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329164820) do
+ActiveRecord::Schema.define(version: 20150329212536) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -21,7 +21,10 @@ ActiveRecord::Schema.define(version: 20150329164820) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.string   "google_achievement_id", limit: 255
+    t.string   "uuid",                  limit: 255
   end
+
+  add_index "badges", ["uuid"], name: "index_badges_on_uuid", unique: true, using: :btree
 
   create_table "journey_legs", force: :cascade do |t|
     t.integer  "journey_id",           limit: 4
@@ -118,9 +121,11 @@ ActiveRecord::Schema.define(version: 20150329164820) do
     t.string   "text_colour",       limit: 255
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "uuid",              limit: 255
   end
 
   add_index "tube_lines", ["code", "number"], name: "index_tube_lines_on_code_and_number", using: :btree
+  add_index "tube_lines", ["uuid"], name: "index_tube_lines_on_uuid", unique: true, using: :btree
 
   create_table "user_badges", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
