@@ -79,12 +79,13 @@ module UndergroundApiHelper
     else
       current_time = Time.now
     end
+    operator = Operator.where(name: "London Underground").first
     xml.css('P').each do |p|
       platform = p.attr('N').strip.gsub('Platform ', '')
       xml.css('T').each do |t|
         service_item = ServiceItem.new
         service_item.service_id = "TUBE-" + line_code + "-" + station_code + "-" + t.attr('LCID').strip
-        service_item.operator = Operator.where(name: "London Underground").first
+        service_item.operator = operator
         service_item.platform = platform
         service_item.origin = nil
         service_item.destination = Station.where(name: t.attr('Destination').strip).first
