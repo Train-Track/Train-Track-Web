@@ -1,5 +1,5 @@
 class StationBoard
-  attr_accessor :platform_available, :services_available, :nrcc_messages, :train_services, :tube_lines
+  attr_accessor :nrcc_messages, :train_services, :tube_lines
 
   def initialize
     @nrcc_messages = []
@@ -8,8 +8,8 @@ class StationBoard
   end
 
   def parse xml
-    self.platform_available = xml.css('platformAvailable').text == "true"
-    self.services_available = xml.css('areServicesAvailable').text == "" || xml.css('areServicesAvailable').text == "true"
+    #self.platform_available = xml.css('platformAvailable').text == "true"
+    #self.services_available = xml.css('areServicesAvailable').text == "" || xml.css('areServicesAvailable').text == "true"
     xml.css('nrccMessages').children.each do |message|
       self.nrcc_messages << ActionView::Base.full_sanitizer.sanitize(message.text)
     end
