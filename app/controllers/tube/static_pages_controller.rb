@@ -1,5 +1,6 @@
 class Tube::StaticPagesController < ApplicationController
   include ApplicationHelper
+  include UndergroundApiHelper
 
 
   # GET /tube
@@ -7,6 +8,7 @@ class Tube::StaticPagesController < ApplicationController
   # GET /tube.xml
   def index
     @lines = Tube::Line.get_status
+    @weekend = Tube::Line.get_weekend
     @q = params['q']
 
     if params['lat'] and params['lng']

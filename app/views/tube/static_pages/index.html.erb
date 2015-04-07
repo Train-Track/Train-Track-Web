@@ -20,19 +20,35 @@
 		<div class="col-md-4">
 
 			<h3><%= link_to "Lines", tube_lines_path %></h3>
-			<ul class="nav nav-tabs" style="margin-bottom:20px;">
-				<li role="presentation" class="active"><a href="#"><%= icon('time') %> Now</a></li>
-				<li role="presentation"><a href="<%= tube_lines_path %>"><%= icon('calendar') %> This Weekend</a></li>
-			</ul>
-			<div class="list-group">
-			<% @lines.each do |line| %>
-				<a href="<%= line.url %>" class="list-group-item" style="<%= line.style %>" title="<%= line.status_details %>">
-					<div class="pull-left"><%= line %></div>
-					<div class="pull-right"><%= line.status %></div>
-					<div class="clearfix"></div>
-				</a>
-			<% end %>
-
+			<div role="tabpanel">
+				<ul class="nav nav-tabs" role="tablist" style="padding-bottom:15px">
+					<li role="presentation" class="active"><a href="#now" aria-controls="now" role="tab" data-toggle="tab"><%= icon('time') %> Now</a></a></li>
+					<li role="presentation"><a href="#weekend" aria-controls="weekend" role="tab" data-toggle="tab"><%= icon('calendar') %> This Weekend</a></li>
+				</ul>
+				<div class="tab-content">
+ 					<div role="tabpanel" class="tab-pane active" id="now">
+ 						<div class="list-group">
+						<% @lines.each do |line| %>
+							<a href="<%= line.url %>" class="list-group-item" style="<%= line.style %>" title="<%= line.status_details %>">
+								<div class="pull-left"><%= line %></div>
+								<div class="pull-right"><%= line.status %></div>
+								<div class="clearfix"></div>
+							</a>
+						<% end %>
+						</div>
+ 					</div>
+ 					<div role="tabpanel" class="tab-pane" id="weekend">
+ 						<div class="list-group">
+						<% @weekend.each do |line| %>
+							<a href="<%= line.url %>" class="list-group-item" style="<%= line.style %>" title="<%= line.status_details %>">
+								<div class="pull-left"><%= line %></div>
+								<div class="pull-right"><%= line.status %></div>
+								<div class="clearfix"></div>
+							</a>
+						<% end %>
+						</div>
+ 					</div>
+ 				</div>
 			</div>
 		</div>
 		<div class="col-md-8">

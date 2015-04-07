@@ -6,31 +6,33 @@
 	<h1><%= @station %></h1>
 
 <%= render 'navigation' %>
-
-	<div class="row">
-		<div class="col-md-4">
-
-			<h3>Lines</h3>
-			<div class="list-group">
-			<% @station.tube_lines.each do |line| %>
-				<a href="<%= line.url %>" class="list-group-item" style="<%= line.style %>">
-					<div class="pull-left"><%= line %></div>
-					<div class="pull-right"><%= line.status %></div>
-					<div class="clearfix"></div>
-				</a>
-			<% end %>
-			</div>
-
-		</div>
-		<div class="col-md-8">
-
-			<h3>Next Train</h3>
-			<div class="list-group">
-			<% @trains.each do |train| %>
-				
-			<% end %>
-			</div>
-
-		</div>
+	<h3>Underground Departure Board</h3>
+	
+<% @tube_board.nrcc_messages.each do |message| %>
+	<div class="alert alert-warning" role="alert">
+		<%= icon('info-sign') %>
+		<%= message %>
 	</div>
+<% end %>
+
+<% @tube_board.tube_lines.each do |line| %>
+	<h4><%= link_to line, line.url %></h4>
+	<div class="list-group">
+	<% line.services.each do |service_item| %>
+	    <a href="<%= service_item.url %>" class="list-group-item">
+	    	<div class="row">
+	    		<div class="col-xs-10">
+					<h4 class="list-group-item-heading"><%= service_item.std %> <%= service_item.destination || "Unknown" %></h4>
+					<p class="list-group-item-text text-<%= service_item.css %>"><%= service_item.etd %></p>					
+					<p class="list-group-item-text">From <%= service_item.origin %> - <%= service_item.operator %></p>
+				</div>
+				<div class="col-xs-2 text-right">
+					<h3><%= service_item.platform %></h3>	
+				</div>
+			</div>
+		</a>
+	<% end %>
+	</div>
+<% end %>
+
 </div>

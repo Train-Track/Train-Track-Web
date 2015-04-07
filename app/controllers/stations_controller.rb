@@ -99,12 +99,12 @@ class StationsController < ApplicationController
   # GET /stations/1/tube.xml
   def tube
     @station = Station.find_by! uuid: params[:uuid]
-    @trains = []
+    @tube_board = @station.get_tube_board
     
     respond_to do |format|
       format.html
-      format.xml { render xml: @station }
-      format.json { render json: @station, callback: params['callback'] }
+      format.xml { render xml: @tube_board }
+      format.json { render json: @tube_board, callback: params['callback'] }
     end
   end
   

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150329212536) do
+ActiveRecord::Schema.define(version: 20150330193843) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -84,13 +84,17 @@ ActiveRecord::Schema.define(version: 20150329212536) do
   add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id", using: :btree
 
   create_table "station_tube_lines", id: false, force: :cascade do |t|
-    t.integer "tube_station_id", limit: 4
-    t.integer "tube_line_id",    limit: 4
-    t.integer "id",              limit: 4
+    t.integer "tube_line_id", limit: 4
+    t.integer "id",           limit: 4
+    t.integer "running_time", limit: 4
+    t.integer "distance",     limit: 4
+    t.integer "from_id",      limit: 4
+    t.integer "to_id",        limit: 4
+    t.string  "direction",    limit: 255
   end
 
   add_index "station_tube_lines", ["id"], name: "index_station_tube_lines_on_id", using: :btree
-  add_index "station_tube_lines", ["tube_station_id", "tube_line_id"], name: "index_station_tube_lines_on_tube_station_id_and_tube_line_id", using: :btree
+  add_index "station_tube_lines", ["tube_line_id"], name: "index_station_tube_lines_on_tube_station_id_and_tube_line_id", using: :btree
 
   create_table "stations", force: :cascade do |t|
     t.string   "name",              limit: 255

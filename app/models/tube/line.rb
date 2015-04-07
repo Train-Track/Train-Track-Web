@@ -1,8 +1,7 @@
 class Tube::Line < ActiveRecord::Base
   include UndergroundApiHelper
   self.table_name = "tube_lines"
-  attr_accessor :status, :status_details, :next_trains
-  has_and_belongs_to_many :stations
+  attr_accessor :status, :status_details, :platforms, :services
   validates :uuid, presence: true, uniqueness: true
   before_validation :add_uuid
 

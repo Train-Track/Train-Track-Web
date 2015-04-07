@@ -1,9 +1,10 @@
 class StationBoard
-  attr_accessor :platform_available, :services_available, :nrcc_messages, :train_services
+  attr_accessor :platform_available, :services_available, :nrcc_messages, :train_services, :tube_lines
 
   def initialize
     @nrcc_messages = []
     @train_services = []
+    @tube_lines = []
   end
 
   def parse xml

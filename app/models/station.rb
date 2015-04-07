@@ -34,14 +34,14 @@ class Station < ActiveRecord::Base
   end
 
 
-  def get_next_trains
+  def get_tube_board
     if underground?
-      lines = []
+      station_board = StationBoard.new
       tube_lines.each do |line|
-        line.next_trains = UndergroundApiHelper.get_station_prediction line.code, underground_code
-        lines << line
+        line.services = UndergroundApiHelper.get_service_items_for_line_at_station(line.code, underground_code)
+        station_board.tube_lines << line        
       end
-      return lines
+      return station_board
     end
   end
 
@@ -78,8 +78,14 @@ class Station < ActiveRecord::Base
 
 
   def tube_lines
-    return []
+    tube_lines = []
+    station_tube_lines = Tube::StationTubeLine.where("from_id = ? OR to_id = ?", id, id)
+    station_tube_lines.each do |station_tube_line|
+      tube_lines << Tube::Line.find(station_tube_line.tube_line_id)
+    end
+    return tube_lines.uniq
   end
+
 
   protected
   
