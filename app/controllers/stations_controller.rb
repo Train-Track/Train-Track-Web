@@ -8,12 +8,17 @@ class StationsController < ApplicationController
   def index
     @q = params['q']
 
+    if params['underground']
+      tube = " AND underground = 1"
+    else
+      tube = ""
+    end
     if params['lat'] and params['lng']
       lat = params['lat'].to_f
       lng = params['lng'].to_f
-      @stations = Station.unscoped.select("stations.*, #{distance_sql(lat,lng)} AS distance").where("lat IS NOT NULL AND lng IS NOT NULL").order("distance ASC").limit(1)
+      @stations = Station.unscoped.select("stations.*, #{distance_sql(lat,lng)} AS distance").where("lat IS NOT NULL AND lng IS NOT NULL" + tube).order("distance ASC").limit(1)
     elsif @q && !@q.empty?
-      @stations = Station.where("crs LIKE ? OR name LIKE ?", @q, "#{@q}%").page(params[:page])
+      @stations = Station.where("crs LIKE ? OR name LIKE ?" + tube, @q, "#{@q}%").page(params[:page])
     else
       @stations = Station.page(params[:page])
     end

@@ -7,7 +7,11 @@ $(document).ready(function() {
 	      $.ajax({
 		      type     : 'GET',
 		      dataType : 'jsonp',
-		      url      : url + '.json',
+		      headers: { 
+		        "Accept"      : "application/json; charset=utf-8",
+		        "Content-Type": "application/json; charset=utf-8"
+		      },
+		      url      : url,
 		      data     : 'lat='+position.coords.latitude+'&lng='+position.coords.longitude,
 		      success  : 
 		        function(data) {

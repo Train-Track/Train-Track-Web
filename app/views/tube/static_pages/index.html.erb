@@ -10,7 +10,7 @@
 		<div class="input-group">
 			<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for a tube station", autofocus: true, value: @q) %>
 			<span class="input-group-btn">
-				<a class="btn btn-success geo" data-field="q" data-url="<%= tube_root_path %>" title="Locate Me"><%= icon("map-marker") %></a>
+				<a class="btn btn-success geo" data-field="q" data-url="<%= stations_path %>?underground=1" title="Locate Me"><%= icon("map-marker") %></a>
       		</span>
 		</div>
 	</div>

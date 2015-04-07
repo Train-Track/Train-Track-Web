@@ -36,6 +36,11 @@ class Tube::Line < ActiveRecord::Base
   end
 
 
+  def as_json(options={})
+    super(methods: [:status, :status_details])
+  end
+
+
   protected
 
   def add_uuid

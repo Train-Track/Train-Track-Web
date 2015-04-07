@@ -23,8 +23,8 @@ class Tube::StaticPagesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.xml { render xml: @stations }
-      format.json { render json: @stations, callback: params['callback'] }
+      format.xml { render xml: @lines }
+      format.json { render json: @lines, callback: params['callback'] }
     end
   end
 
