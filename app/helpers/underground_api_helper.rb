@@ -147,10 +147,11 @@ module UndergroundApiHelper
     end
     xml.remove_namespaces!
     xml.css('Line').each do |l|
-      name = l.css('Name').text.strip.gsub('&', 'and')
+      name = l.css('Name').text.strip.gsub('H\'smith', 'Hammersmith').gsub('  ', ' and ')
+      puts name
       line = Tube::Line.where(name: name).first_or_create
-      line.status = l.css('Status').css('Text').text.strip
-      line.status_details = l.css('Status').css('Message').text.strip
+      line.status = l.css('Status').css('Text').first.text.strip
+      line.status_details = l.css('Status').css('Message').css('Text').text.strip
       lines << line
     end
     return lines
