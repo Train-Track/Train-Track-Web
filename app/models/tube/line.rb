@@ -37,7 +37,7 @@ class Tube::Line < ActiveRecord::Base
 
 
   def as_json(options={})
-    super(methods: [:status, :status_details])
+    super(methods: [:status, :status_details, :services])
   end
 
 
