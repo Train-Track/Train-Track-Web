@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150330193843) do
+ActiveRecord::Schema.define(version: 20150409203530) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(version: 20150330193843) do
     t.string   "underground_code",  limit: 255
     t.string   "uuid",              limit: 255
     t.boolean  "national_rail",     limit: 1
+    t.string   "twitter",           limit: 255
   end
 
   add_index "stations", ["number"], name: "index_stations_on_number", using: :btree
