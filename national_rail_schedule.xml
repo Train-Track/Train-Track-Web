@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PportTimetable xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" timetableID="20150408020840" xmlns="http://www.thalesgroup.com/rtti/XmlTimetable/v8">
+  <Journey rid="201504091282194" uid="C31641" trainId="2M65" ssd="2015-04-09" toc="AW">
+    <OR tpl="SWANSEA" act="TB" plat="1" ptd="18:21" wtd="18:21" />
+    <PP tpl="SWANSLE" wtp="18:23" />
+    <PP tpl="SWANSLW" wtp="18:25" />
+    <IP tpl="GOWERTN" act="T " pta="18:32" ptd="18:32" wta="18:32" wtd="18:32:30" />
+    <PP tpl="LLDELOJ" wtp="18:37:30" />
+    <IP tpl="LLNLLI" act="T RM" plat="1" pta="18:37" ptd="18:40" wta="18:39" wtd="18:42" />
+    <PP tpl="LLDELOJ" wtp="18:44:30" />
+    <IP tpl="BYNEA" act="R " pta="18:44" ptd="18:44" wta="18:46:30" wtd="18:46:30" />
+    <IP tpl="LLGNNCH" act="R " pta="18:48" ptd="18:48" wta="18:50" wtd="18:50" />
+    <PP tpl="MORLASJ" wtp="18:51:30" />
+    <PP tpl="HENDYJ" wtp="18:53" />
+    <IP tpl="PNTADLS" act="R " pta="18:52" ptd="18:52" wta="18:54" wtd="18:54" />
+    <IP tpl="PNTYFYN" act="T " pta="18:59" ptd="18:59" wta="19:00:30" wtd="19:01:30" />
+    <IP tpl="AMMANFD" act="T " plat="1" pta="19:02" ptd="19:02" wta="19:04" wtd="19:04:30" />
+    <IP tpl="LLDYBIE" act="T " pta="19:07" ptd="19:07" wta="19:08:30" wtd="19:09" />
+    <IP tpl="FFAIRFC" act="R " pta="19:14" ptd="19:14" wta="19:16" wtd="19:16" />
+    <IP tpl="LLDEILO" act="T " pta="19:16" ptd="19:19" wta="19:18" wtd="19:21" />
+    <IP tpl="LLGADOG" act="T " plat="1" pta="19:28" ptd="19:28" wta="19:30" wtd="19:30:30" />
+    <IP tpl="LLWRDA" act="T " plat="1" pta="19:32" ptd="19:32" wta="19:33:30" wtd="19:34" />
+    <IP tpl="LLDVERY" act="T " pta="19:38" ptd="19:41" wta="19:40" wtd="19:43" />
+    <IP tpl="CYNGHRD" act="R " pta="19:49" ptd="19:49" wta="19:51" wtd="19:51" />
+    <IP tpl="SGRLOAF" act="R " pta="19:57" ptd="19:57" wta="19:59" wtd="19:59" />
+    <IP tpl="LLWRTYW" act="T X " pta="20:03" ptd="20:08" wta="20:04:30" wtd="20:10:30" />
+    <IP tpl="LLGMMRW" act="R " pta="20:14" ptd="20:14" wta="20:16" wtd="20:16" />
+    <IP tpl="GARTH" act="R " pta="20:18" ptd="20:18" wta="20:19:30" wtd="20:20" />
+    <IP tpl="CILMERY" act="R " pta="20:23" ptd="20:23" wta="20:25" wtd="20:25" />
+    <IP tpl="BUILTHR" act="R " pta="20:26" ptd="20:26" wta="20:28" wtd="20:28" />
+    <IP tpl="LLDODW" act="T " pta="20:37" ptd="20:42" wta="20:39" wtd="20:42" />
+    <OPIP tpl="LLDODGF" act="OP" wta="20:43:30" wtd="20:44:30" />
+    <IP tpl="PYBONT" act="R " pta="20:49" ptd="20:49" wta="20:49" wtd="20:49" />
+    <IP tpl="DOLAU" act="T " pta="20:54" ptd="20:54" wta="20:53:30" wtd="20:54" />
+    <IP tpl="LLBSTRD" act="R " pta="20:59" ptd="20:59" wta="20:59:30" wtd="20:59:30" />
+    <IP tpl="LLGUNLO" act="R " pta="21:04" ptd="21:04" wta="21:04:30" wtd="21:04:30" />
+    <IP tpl="KNUCKLS" act="R " pta="21:10" ptd="21:10" wta="21:10:30" wtd="21:10:30" />
+    <IP tpl="KNIGHTN" act="T " pta="21:16" ptd="21:18" wta="21:15:30" wtd="21:18:30" />
+    <IP tpl="BKNELL" act="T " pta="21:24" ptd="21:24" wta="21:24" wtd="21:24:30" />
+    <IP tpl="HOPTONH" act="R " pta="21:28" ptd="21:28" wta="21:28:30" wtd="21:28:30" />
+    <IP tpl="BROOME" act="R " pta="21:32" ptd="21:32" wta="21:32:30" wtd="21:32:30" />
+    <IP tpl="CRAVENA" act="T " plat="1" pta="21:39" ptd="21:40" wta="21:39" wtd="21:40" />
+    <PP tpl="MSHBRKX" wtp="21:48:30" />
+    <IP tpl="CSTR" act="T " plat="1" pta="21:52" ptd="21:52" wta="21:52" wtd="21:52:30" />
+    <PP tpl="DORNGTN" wtp="21:58:30" />
+    <PP tpl="SHRWSBJ" wtp="22:04:30" />
+    <PP tpl="SHRWEBJ" wtp="22:05:30" />
+    <DT tpl="SHRWBY" act="TF" plat="5" pta="22:08" wta="22:07" />
+  </Journey>
+  <Journey rid="201504081234195" uid="Y55297" trainId="2N30" ssd="2015-04-08" toc="NT">
+    <OR tpl="SHEFFLD" act="TB" plat="4A" ptd="15:14" wtd="15:14" />
+    <PP tpl="NNRYMLJ" wtp="15:15:30" />
+    <PP tpl="WNCOJN" wtp="15:19:30" />
+    <IP tpl="MEADWHL" act="T " plat="2" pta="15:20" ptd="15:21" wta="15:20" wtd="15:21" />
+    <PP tpl="ROTHHJN" wtp="15:24" />
+    <IP tpl="ROTHCEN" act="T " plat="2" pta="15:26" ptd="15:27" wta="15:26" wtd="15:27" />
+    <PP tpl="ALDWRKJ" wtp="15:32:30" />
+    <IP tpl="SWINTN" act="T " pta="15:36" ptd="15:37" wta="15:36" wtd="15:37" />
+    <IP tpl="BLTNODR" act="T " plat="2" pta="15:41" ptd="15:41" wta="15:40:30" wtd="15:41:30" />
+    <IP tpl="GLDTHRP" act="T " plat="2" pta="15:44" ptd="15:44" wta="15:43:30" wtd="15:44:30" />
+    <IP tpl="TRNO" act="T " plat="2" pta="15:47" ptd="15:47" wta="15:46:30" wtd="15:47:30" />
+    <IP tpl="MORTHRP" act="T " plat="2" pta="15:52" ptd="15:53" wta="15:52" wtd="15:53" />
+    <PP tpl="SKIRBYJ" wtp="15:54" />
+    <IP tpl="FITZWLM" act="T " plat="2" pta="15:58" ptd="15:59" wta="15:58" wtd="15:59" />
+    <PP tpl="HAREPKJ" wtp="16:02:30" />
+    <IP tpl="SABR" act="T " plat="2" pta="16:05" ptd="16:05" wta="16:04:30" wtd="16:05" />
+    <IP tpl="WKFLDWG" act="T " plat="2" pta="16:09" ptd="16:09" wta="16:08:30" wtd="16:09:30" />
+    <IP tpl="OUTWOOD" act="T " plat="2" pta="16:14" ptd="16:14" wta="16:14" wtd="16:14:30" />
+    <PP tpl="HOLBJCN" wtp="16:27" />
+    <PP tpl="WHRDJN" wtp="16:27:30" />
+    <PP tpl="LEEDSWJ" wtp="16:28" />
+    <DT tpl="LEEDS" act="TF" plat="6C" pta="16:30" wta="16:30" />
+  </Journey>
+  <Journey rid="201504091267713" uid="L21085" trainId="0B00" ssd="2015-04-09" toc="CC" status="B" trainCat="BS">
+    <OR tpl="TLBYRSD" act="TB" ptd="05:50" wtd="05:50" />
+    <DT tpl="TLBYTWN" act="TF" pta="05:58" wta="05:58" />
+  </Journey>
+  <Journey rid="201504091284040" uid="G56899" trainId="0S00" ssd="2015-04-09" toc="SR" status="S" trainCat="">
+    <OR tpl="CNRYNP" act="TB" ptd="03:45" wtd="03:45" />
+    <DT tpl="BLFSTPT" act="TF" pta="06:00" wta="06:00" />
+  </Journey>
+  <Journey rid="201504091267709" uid="G91209" trainId="1S25" ssd="2015-04-09" toc="CS" trainCat="XZ">
+    <OR tpl="EUSTON" act="TBK " ptd="21:15" wtd="21:16" />
+    <PP tpl="CMDNSTH" wtp="21:19" />
+    <PP tpl="CMDNJN" wtp="21:19:30" />
+    <PP tpl="WLSDWLJ" wtp="21:23" />
+    <PP tpl="WMBY" plat="3" wtp="21:25" />
+    <PP tpl="HROW" plat="3" wtp="21:27:30" />
+    <IP tpl="WATFDJ" act="U " plat="6" ptd="21:33" wta="21:32:30" wtd="21:34:30" />
+    <PP tpl="BONENDJ" wtp="21:42" />
+    <PP tpl="TRING" plat="1" wtp="21:46:30" />
+    <PP tpl="LEDBRNJ" wtp="21:51" />
+    <PP tpl="BLTCHLY" plat="1" wtp="21:56:30" />
+    <PP tpl="MKNSCEN" plat="6" wtp="21:58:30" />
+    <PP tpl="HANSLPJ" wtp="22:04" />
+    <PP tpl="WEEDON" wtp="22:13" />
+    <PP tpl="HMTNJ" wtp="22:22:30" />
+    <PP tpl="RUGBY" plat="2" wtp="22:24:30" />
+    <PP tpl="RUGBTVJ" wtp="22:26" />
+    <PP tpl="BRINKLW" wtp="22:34" />
+    <PP tpl="ATLBRJN" wtp="22:41" />
+    <PP tpl="NNTN" plat="2" wtp="22:44" />
+    <PP tpl="AMNGTNJ" wtp="22:55" />
+    <PP tpl="LCHTNJ" wtp="23:01" />
+    <PP tpl="RUGLYNJ" wtp="23:05:30" />
+    <PP tpl="COLWICH" wtp="23:10:30" />
+    <PP tpl="MFDB" wtp="23:12" />
+    <PP tpl="STAFTVJ" wtp="23:16" />
+    <PP tpl="STAFFRD" plat="5" wtp="23:17" />
+    <PP tpl="NTNB" wtp="23:29:30" />
+    <PP tpl="MADELEY" wtp="23:42:30" />
+    <PP tpl="CREWBHJ" wtp="23:49:30" />
+    <IP tpl="CREWE" act="K U " plat="6" ptd="23:56" wta="23:53:30" wtd="23:56:30" />
+    <PP tpl="CREWECY" wtp="23:59" />
+    <PP tpl="WNSFD" wtp="00:05:30" />
+    <PP tpl="HARTFDJ" wtp="00:10" />
+    <PP tpl="ACBG" wtp="00:11:30" />
+    <PP tpl="WEAVERJ" wtp="00:13" />
+    <PP tpl="ACGJN" wtp="00:17:30" />
+    <PP tpl="WRGTWOJ" wtp="00:19:30" />
+    <OPIP tpl="WRGTNBQ" act="C N " plat="3" wta="00:22:30" wtd="00:24:30" />
+    <PP tpl="DALAMBR" wtp="00:26:30" />
+    <PP tpl="WINWCKJ" wtp="00:28" />
+    <PP tpl="GOLBRNJ" wtp="00:31" />
+    <PP tpl="SPRBJN" wtp="00:37" />
+    <PP tpl="WIGASJN" wtp="00:38" />
+    <PP tpl="WIGANNW" plat="5" wtp="00:39" />
+    <PP tpl="BALSHWL" wtp="00:47" />
+    <PP tpl="EUXTONJ" wtp="00:49:30" />
+    <PP tpl="FRNGTNC" wtp="00:53:30" />
+    <IP tpl="PRST" act="U K " plat="3" ptd="01:00" wta="00:57:30" wtd="01:02:30" />
+    <PP tpl="GSTANG" wtp="01:11" />
+    <PP tpl="LANCSTR" wtp="01:20:30" />
+    <PP tpl="MORCMSJ" wtp="01:22" />
+    <PP tpl="CRNFNJN" wtp="01:25" />
+    <PP tpl="OXENHLM" plat="2" wtp="01:35" />
+    <PP tpl="TEBAY" wtp="01:48" />
+    <PP tpl="PNTH" plat="2" wtp="02:05:30" />
+    <OPIP tpl="CARLILE" act="N K " plat="3" wta="02:23" wtd="02:24" />
+    <PP tpl="GRETNAJ" wtp="02:32:30" />
+    <PP tpl="KRKP863" wtp="02:35:30" />
+    <PP tpl="LCKRBIE" plat="1" wtp="02:45:30" />
+    <PP tpl="BEATCK" plat="DM" wtp="02:56" />
+    <PP tpl="BEATCKS" plat="DM" wtp="03:04" />
+    <PP tpl="ABINGTN" plat="DM" wtp="03:10" />
+    <PP tpl="CRSTRSS" wtp="03:24:30" />
+    <PP tpl="CRSTRSE" wtp="03:28" />
+    <PP tpl="ACHNGRY" wtp="03:33" />
+    <PP tpl="COBB713" wtp="03:35:30" />
+    <PP tpl="MDCLDRJ" wtp="03:41:30" />
+    <PP tpl="SLATFDJ" wtp="03:50:30" />
+    <PP tpl="HAYMRKT" plat="3" wtp="03:52:30" />
+    <PP tpl="PRNCSTG" wtp="03:54" />
+    <OPIP tpl="EDINBUR" act="L -DRR" plat="11" wta="03:56" wtd="04:15" />
+    <PP tpl="PRNCSTG" wtp="04:16" />
+    <PP tpl="HAYMRKT" plat="4" wtp="04:18" />
+    <PP tpl="HAYMRWJ" wtp="04:19:30" />
+    <PP tpl="NWBG" wtp="04:26" />
+    <PP tpl="WNCBROJ" wtp="04:29:30" />
+    <PP tpl="LNLTHGW" plat="2" wtp="04:33:30" />
+    <PP tpl="POLMONT" wtp="04:38" />
+    <PP tpl="GRNGMTJ" wtp="04:42" />
+    <PP tpl="CRMRSEJ" wtp="04:45:30" />
+    <PP tpl="LARBERJ" wtp="04:46:30" />
+    <IP tpl="STIRLNG" act="D " plat="2" pta="04:55" wta="04:53:30" wtd="04:55:30" />
+    <IP tpl="DUNANE" act="D " plat="2" pta="05:04" wta="05:03:30" wtd="05:05:30" />
+    <PP tpl="BLFD" wtp="05:16:30" />
+    <IP tpl="GLNEGLS" act="D " plat="2" pta="05:19" wta="05:18:30" wtd="05:21:30" />
+    <PP tpl="HILTONJ" wtp="05:35" />
+    <IP tpl="PERTH" act="D " plat="7" pta="05:39" wta="05:38:30" wtd="05:41:30" />
+    <PP tpl="STNY" wtp="05:51" />
+    <IP tpl="DUNKELD" act="D " plat="2" pta="06:00" wta="06:00" wtd="06:02" />
+    <IP tpl="PTLCHRY" act="D " plat="2" pta="06:16" wta="06:14:30" wtd="06:17:30" />
+    <IP tpl="BLARATH" act="D " plat="2" pta="06:28" wta="06:28" wtd="06:29:30" />
+    <PP tpl="DLNCRDH" wtp="06:41:30" />
+    <PP tpl="DLNSPDL" wtp="06:49:30" />
+    <IP tpl="DALWHIN" act="D " plat="2" pta="07:00" wta="06:59" wtd="07:00:30" />
+    <IP tpl="NWTM" act="D " plat="1" pta="07:12" wta="07:10:30" wtd="07:13:30" />
+    <IP tpl="KGUSSIE" act="T " pta="07:18" ptd="07:19" wta="07:17:30" wtd="07:19:30" />
+    <OPIP tpl="KNCRAIG" act="A X " wta="07:26" wtd="07:33:30" />
+    <IP tpl="AVIEMRE" act="T " pta="07:40" ptd="07:43" wta="07:40" wtd="07:43" />
+    <IP tpl="CARRBDG" act="T " plat="1" pta="07:53" ptd="07:56" wta="07:53" wtd="07:56" />
+    <PP tpl="SLOCHD" wtp="08:04" />
+    <OPIP tpl="TOMATIN" act="A X " wta="08:08:30" wtd="08:15:30" />
+    <PP tpl="MOYY" wtp="08:20" />
+    <PP tpl="CULDNMR" wtp="08:26:30" />
+    <PP tpl="CRAHALL" wtp="08:30:30" />
+    <PP tpl="MILBRNJ" wtp="08:34" />
+    <DT tpl="IVRNESS" act="TF" plat="1" pta="08:36" wta="08:36" />
+  </Journey>
+  <Journey rid="201504081233238" uid="C24155" trainId="5K24" ssd="2015-04-08" toc="GW" trainCat="EE" isPassengerSvc="false">
+    <OPOR tpl="RDNGTCD" act="TBN " wtd="05:55" />
+    <OPIP tpl="RDNGSTN" act="-D" plat="15" wta="05:58" wtd="06:04" />
+    <PP tpl="RDNGKBJ" wtp="06:06" />
+    <PP tpl="RDNGKBL" act="RM" wtp="06:10" />
+    <PP tpl="RDNGKBJ" wtp="06:10:30" />
+    <OPDT tpl="RDNGSTN" act="TF" plat="7" wta="06:13" />
+  </Journey>
+  <Journey rid="201504071203524" uid="W45666" trainId="2K86" ssd="2015-04-07" toc="SE">
+    <OR tpl="GLNGHMK" act="TB" plat="2" ptd="19:43" wtd="19:43" />
+    <IP tpl="CHATHAM" act="T " plat="1" pta="19:47" ptd="19:47" wta="19:46:30" wtd="19:47:30" />
+    <IP tpl="RCHT" act="T " plat="2" pta="19:49" ptd="19:50" wta="19:49" wtd="19:50" />
+    <PP tpl="RCHTBDJ" wtp="19:52" />
+    <IP tpl="SOLEST" act="T " plat="1" pta="20:00" ptd="20:00" wta="20:00" wtd="20:00:30" />
+    <IP tpl="MEOPHAM" act="T " plat="1" pta="20:03" ptd="20:03" wta="20:02:30" wtd="20:03" />
+    <IP tpl="LGFD" act="T " plat="1" pta="20:07" ptd="20:07" wta="20:06:30" wtd="20:07:30" />
+    <PP tpl="FAWKHMJ" wtp="20:08:30" />
+    <IP tpl="FRNNGRD" act="T " plat="1" pta="20:11" ptd="20:11" wta="20:10:30" wtd="20:11" />
+    <DT tpl="SWLY" act="TF" planAct="T " plat="3" pta="20:17" wta="20:16:30" />
+    <IP tpl="STMRYC" act="T " can="true" plat="3" pta="20:21" ptd="20:21" wta="20:21" wtd="20:21:30" />
+    <PP tpl="STMRYCJ" can="true" wtp="20:23:30" />
+    <PP tpl="BICKLYJ" can="true" wtp="20:24:30" />
+    <PP tpl="BICKLEY" can="true" plat="3" wtp="20:25" />
+    <IP tpl="BROMLYS" act="T " can="true" plat="3" pta="20:27" ptd="20:28" wta="20:27" wtd="20:28:30" />
+    <PP tpl="SHRTLND" can="true" plat="3" wtp="20:29" />
+    <PP tpl="SHRTLNJ" can="true" wtp="20:30" />
+    <PP tpl="RBRN" can="true" plat="1" wtp="20:32" />
+    <PP tpl="BCKNHMH" can="true" plat="1" wtp="20:32" />
+    <PP tpl="BELNGHM" can="true" plat="1" wtp="20:32:30" />
+    <PP tpl="CATFORD" can="true" plat="1" wtp="20:33" />
+    <PP tpl="CFPK" can="true" plat="1" wtp="20:34" />
+    <PP tpl="NUNHEAD" can="true" plat="1" wtp="20:36:30" />
+    <PP tpl="PCKHMRY" can="true" wtp="20:38" />
+    <PP tpl="CFTNRJN" can="true" wtp="20:38:30" />
+    <IP tpl="DENMRKH" act="T " can="true" plat="1" pta="20:40" ptd="20:41" wta="20:40" wtd="20:41" />
+    <PP tpl="SHPSHLA" can="true" wtp="20:44:37" />
+    <PP tpl="CLPHHS" can="true" wtp="20:45" />
+    <PP tpl="VOLTRDJ" can="true" wtp="20:45:30" />
+    <PP tpl="WNDSWRD" can="true" wtp="20:45:45" />
+    <PP tpl="FACTRYJ" can="true" wtp="20:46" />
+    <PP tpl="STWTJN" can="true" wtp="20:47:45" />
+    <PP tpl="GRVRBGJ" can="true" wtp="20:49:30" />
+    <DT tpl="VICTRIE" act="TF" can="true" plat="4" pta="20:55" wta="20:55" />
+    <cancelReason tiploc="       ">158</cancelReason>
+  </Journey>
+</PportTimetable>
