@@ -160,12 +160,6 @@ module UndergroundApiHelper
 
 
   def self.update_underground_station_facilities
-    if DEBUG
-      xml = Nokogiri::XML(File.open('underground_station_facilities.xml'))
-    else
-      STATION_FACILITIES_URL
-    end
-    
     begin
       if DEBUG
         xml = Nokogiri::XML(File.open('underground_station_facilities.xml'))
