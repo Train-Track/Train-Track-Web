@@ -4,6 +4,7 @@ class Station < ActiveRecord::Base
   default_scope { order('name ASC') }
   validates :uuid, presence: true, uniqueness: true
   before_validation :add_uuid
+  belongs_to :operator
 
   # Stations source from:
   # http://www.nationalrail.co.uk/static/documents/content/station_codes.csv
