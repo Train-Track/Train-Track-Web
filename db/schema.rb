@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419091230) do
+ActiveRecord::Schema.define(version: 20150419104357) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -139,9 +139,11 @@ ActiveRecord::Schema.define(version: 20150419091230) do
     t.decimal  "lng",                    precision: 10, scale: 7
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
+    t.string   "stanox",     limit: 255
   end
 
   add_index "timing_points", ["code", "uuid", "station_id"], name: "index_timing_points_on_code_and_uuid_and_station_id", using: :btree
+  add_index "timing_points", ["stanox"], name: "index_timing_points_on_stanox", using: :btree
 
   create_table "train_location_distances", force: :cascade do |t|
     t.string   "origin_tiploc",      limit: 255

@@ -290,13 +290,23 @@ module ReferenceDataHelper
     timing_points = Array.new    
     json = JSON.parse(File.read('CORPUSExtract.json'))
     json["TIPLOCDATA"].each do |entry|
-      unless entry["TIPLOC"].strip.empty?
-        unless entry["3ALPHA"].strip.empty?
-          station = Station.where(crs: entry["3ALPHA"]).first
-          station_id = station.id if station
-        end
-        timing_points << TimingPoint.where(code: entry["TIPLOC"]).first_or_create(name: entry["NLCDESC"], station_id: station_id)
+      code = entry["TIPLOC"].strip
+      if code.empty?
+        next
       end
+      crs = entry["3ALPHA"].strip
+      if crs.empty?
+        station_id = nil
+      else
+        station = Station.where(crs: crs).first
+        station_id = station.id if station
+      end
+      stanox = entry["STANOX"].strip
+      if stanox.empty?
+        stanox = nil
+      end
+      name = entry["NLCDESC"].strip
+      timing_points << TimingPoint.where(code: code).first_or_create(name: name, station_id: station_id, stanox: stanox)
     end
     return timing_points
   end
