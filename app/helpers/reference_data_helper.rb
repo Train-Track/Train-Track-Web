@@ -284,6 +284,17 @@ module ReferenceDataHelper
   }
 
 
+  CALLING_POINT_TYPES = {
+    "OR" => "Passenger Origin",
+    "OPOR" => "Operational Origin",
+    "IP" => "Passenger Calling Point",
+    "OPIP" =>  "Operational Calling Point",
+    "PP" => "Passing Point",
+    "DT" => "Passenger Destination",
+    "OPDT" => "Operational Destination"
+  }
+
+
   #This file is from Network Rail Data Feeds
   #http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS
   def self.update_corpus
@@ -314,10 +325,14 @@ module ReferenceDataHelper
 
   #This file is from National Rail FTP site
   def self.update_schedule
-    schedules = Array.new
+    Timetable.connection.execute("TRUNCATE timetables");
+    TimetableCallingPoint.connection.execute("TRUNCATE timetable_calling_points");
+
+    timetables = Array.new
+
     xml = Nokogiri::XML(File.open('national_rail_schedule.xml'))
     xml.css('Journey').each do |journey|
-      schedule = Hash.new
+      attr = Hash.new
 
       passenger_service = journey.attr('isPassengerSvc')
       if passenger_service == "false"
@@ -326,74 +341,65 @@ module ReferenceDataHelper
 
       operator = Operator.where(code: journey.attr('toc')).first
       if operator
-        schedule[:operator_id] = operator.id
+        attr[:operator_id] = operator.id
       end
 
-      schedule[:rtti_id] = journey.attr('rid')
-      schedule[:train_id] = journey.attr('trainId')
-      schedule[:schedule_id] = journey.attr('uid')
-      schedule[:type] = STATUS_CODES[journey.attr('status') || "P"]
-      schedule[:late_running_reason] = LATE_RUNNING_CODES[journey.css('lateRunningReason').text]
-      schedule[:cancellation_reason] = CANCELLATION_CODES[journey.css('cancelReason').text]
-      schedule[:train_category] = CATEGORY_CODES[journey.attr('trainCat') || "OO"]
+      attr[:rtti_id] = journey.attr('rid')
+      attr[:train_id] = journey.attr('trainId')
+      attr[:schedule_id] = journey.attr('uid')
+      attr[:start_date] = journey.attr('ssd')
+      attr[:train_type] = STATUS_CODES[journey.attr('status') || "P"]
+      attr[:late_running_reason] = LATE_RUNNING_CODES[journey.css('lateRunningReason').text]
+      attr[:cancellation_reason] = CANCELLATION_CODES[journey.css('cancelReason').text]
+      attr[:train_category] = CATEGORY_CODES[journey.attr('trainCat') || "OO"]
 
-      schedule[:calling_points] = Array.new
+      timetable = Timetable.create(attr)
+
       journey.children.each do |point|
-        calling_point = Hash.new
-        
-        if point.node_name == "OR"
-          calling_point[:type] = "Passenger Origin"
-        elsif point.node_name == "OPOR"
-          calling_point[:type] = "Operational Origin"
-        elsif point.node_name == "IP"
-          calling_point[:type] = "Passenger Calling Point"
-        elsif point.node_name == "OPIP"
-          calling_point[:type] = "Operational Calling Point"
-        elsif point.node_name == "PP"
-          calling_point[:type] = "Passing Point"
-        elsif point.node_name == "DT"
-          calling_point[:type] = "Passenger Destination"
-        elsif point.node_name == "OPDT"
-          calling_point[:type] = "Operational Destination"
-        else
-          next
-        end
+        attr = Hash.new
+        attr[:timetable_id] = timetable.id
 
-        calling_point[:cancelled] = if ((point.attr('can') == "false") or point.attr('can').nil?) then false else true end
-        calling_point[:tiploc_code] = point.attr('tpl')
-        calling_point[:timing_point] = TimingPoint.where(code: calling_point[:tiploc_code]).first
-        calling_point[:station] = calling_point[:timing_point].station if calling_point[:timing_point]
-        calling_point[:pta] = point.attr('pta')
-        calling_point[:ptd] = point.attr('ptd')
-        calling_point[:wta] = point.attr('wta')
-        calling_point[:wtd] = point.attr('wtd')
-        calling_point[:wtp] = point.attr('wtp')
-        calling_point[:platform] = point.attr('plat')
+        attr[:calling_point_type] = CALLING_POINT_TYPES[point.node_name]
+        next unless attr[:calling_point_type]
 
-        calling_point[:activities] = Array.new
+        attr[:cancelled] = if ((point.attr('can') == "false") or point.attr('can').nil?) then false else true end
+        attr[:tiploc_code] = point.attr('tpl')
+        tp = TimingPoint.where(code: attr[:tiploc_code]).first
+        attr[:timing_point_id] = tp.id if tp
+        attr[:station_id] = tp.station_id if tp
+        attr[:public_time_arrival] = point.attr('pta')
+        attr[:public_time_departure] = point.attr('ptd')
+        attr[:working_time_arrival] = point.attr('wta')
+        attr[:working_time_departure] = point.attr('wtd')
+        attr[:working_time_passing] = point.attr('wtp')
+        attr[:platform] = point.attr('plat')
+
+        activitiesJSON = Array.new
         activities = point.attr('act')
         ACTIVITY_CODES.to_a.reverse.to_h.each do |key, value|
           if activities and activities.include? key
             activities = activities.gsub(key, '')
-            calling_point[:activities] << { key => value }
+            activitiesJSON << { key => value }
           end
         end
+        attr[:activities] = activitiesJSON.to_json
 
-        calling_point[:planned_activities] = Array.new
+        activitiesJSON = Array.new
         activities = point.attr('planAct') || point.attr('act')
         ACTIVITY_CODES.to_a.reverse.to_h.each do |key, value|
           if activities and activities.include? key
             activities = activities.gsub(key, '')
-            calling_point[:planned_activities] << { key => value }
+            activitiesJSON << { key => value }
           end
         end
+        attr[:planned_activities] = activitiesJSON.to_json
 
-        schedule[:calling_points] << calling_point
+        TimetableCallingPoint.create(attr)
       end
 
-      schedules << schedule
+      timetables << timetable
     end
-    return schedules
+    return timetables
   end
 
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419104357) do
+ActiveRecord::Schema.define(version: 20150419152605) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -129,6 +129,46 @@ ActiveRecord::Schema.define(version: 20150419104357) do
 
   add_index "stations", ["number"], name: "index_stations_on_number", using: :btree
   add_index "stations", ["uuid"], name: "index_stations_on_uuid", unique: true, using: :btree
+
+  create_table "timetable_calling_points", force: :cascade do |t|
+    t.integer  "timetable_id",           limit: 4
+    t.string   "calling_point_type",     limit: 255
+    t.boolean  "cancelled",              limit: 1
+    t.string   "tiploc_code",            limit: 255
+    t.integer  "timing_point_id",        limit: 4
+    t.integer  "station_id",             limit: 4
+    t.string   "public_time_arrival",    limit: 255
+    t.string   "public_time_departure",  limit: 255
+    t.string   "working_time_arrival",   limit: 255
+    t.string   "working_time_departure", limit: 255
+    t.string   "working_time_passing",   limit: 255
+    t.string   "platform",               limit: 255
+    t.text     "activities",             limit: 65535
+    t.text     "planned_activities",     limit: 65535
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "timetable_calling_points", ["station_id"], name: "index_timetable_calling_points_on_station_id", using: :btree
+  add_index "timetable_calling_points", ["timetable_id"], name: "index_timetable_calling_points_on_timetable_id", using: :btree
+  add_index "timetable_calling_points", ["timing_point_id"], name: "index_timetable_calling_points_on_timing_point_id", using: :btree
+
+  create_table "timetables", force: :cascade do |t|
+    t.string   "rtti_id",             limit: 255
+    t.string   "uuid",                limit: 255
+    t.integer  "operator_id",         limit: 4
+    t.string   "train_id",            limit: 255
+    t.string   "schedule_id",         limit: 255
+    t.date     "start_date"
+    t.string   "train_type",          limit: 255
+    t.string   "train_category",      limit: 255
+    t.text     "late_running_reason", limit: 65535
+    t.text     "cancellation_reason", limit: 65535
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "timetables", ["uuid"], name: "index_timetables_on_uuid", using: :btree
 
   create_table "timing_points", force: :cascade do |t|
     t.string   "name",       limit: 255
