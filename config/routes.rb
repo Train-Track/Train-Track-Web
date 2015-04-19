@@ -20,6 +20,8 @@ Rails.application.routes.draw do
   get '/operators/all', to: 'operators#all'
   get '/operators/:uuid', to: 'operators#show'
 
+  get '/timetables/:uuid', to: 'timetables#show'
+
   namespace :tube do
     root to: 'static_pages#index'
     get '/lines', to: 'lines#index'

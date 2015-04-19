@@ -1,0 +1,55 @@
+<% provide(:title, @timetable) %>
+<% provide(:description, "Details of the #{@timetable} timetable.") %>
+
+<div class="container">
+	<h1><%= @timetable %></h1>
+	<h4>
+		<%= @timetable.train_id %>
+		<%= @timetable.train_category %>
+		<%= link_to @timetable.operator, @timetable.operator.url %>
+	</h4>
+
+<% if @timetable.cancellation_reason %>
+	<div class="alert alert-danger" role="alert">
+		<%= icon('exclamation-sign') %>
+		<%= @timetable.cancellation_reason %>
+	</div>
+<% end %>
+
+<% if @timetable.late_running_reason %>
+	<div class="alert alert-danger" role="alert">
+		<%= icon('exclamation-sign') %>
+		<%= @timetable.late_running_reason %>
+	</div>
+<% end %>
+
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Location</th>
+				<th>Arr.</th>
+				<th>W. Arr.</th>
+				<th>Pass</th>
+				<th>Dep.</th>
+				<th>W. Dep.</th>
+				<th>Pfm</th>
+			</tr>
+		</thead>
+		<tbody>
+		<% @timetable.timetable_calling_points.each do |calling_point| %>
+			<tr>
+				<td><a href="<%= calling_point.url %>"><%= calling_point %></a></td>
+				<td><%= calling_point.public_time_arrival %></td>
+				<td><%= calling_point.working_time_arrival %></td>
+				<td><%= calling_point.working_time_passing %></td>
+				<td><%= calling_point.public_time_departure %></td>
+				<td><%= calling_point.working_time_departure %></td>
+				<td><%= calling_point.platform %></td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
+
+	<%= data_feeds_link %>
+
+</div>
