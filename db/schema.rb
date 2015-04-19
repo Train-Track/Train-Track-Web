@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412192525) do
+ActiveRecord::Schema.define(version: 20150419091230) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -25,6 +25,17 @@ ActiveRecord::Schema.define(version: 20150412192525) do
   end
 
   add_index "badges", ["uuid"], name: "index_badges_on_uuid", unique: true, using: :btree
+
+  create_table "catering", force: :cascade do |t|
+    t.string   "code",       limit: 255
+    t.string   "name",       limit: 255
+    t.string   "uuid",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "catering", ["code"], name: "index_catering_on_code", unique: true, using: :btree
+  add_index "catering", ["uuid"], name: "index_catering_on_uuid", unique: true, using: :btree
 
   create_table "journey_legs", force: :cascade do |t|
     t.integer  "journey_id",           limit: 4
@@ -114,11 +125,37 @@ ActiveRecord::Schema.define(version: 20150412192525) do
     t.boolean  "national_rail",     limit: 1
     t.string   "twitter",           limit: 255
     t.integer  "operator_id",       limit: 4
-    t.string   "tiploc_code",       limit: 255
   end
 
   add_index "stations", ["number"], name: "index_stations_on_number", using: :btree
   add_index "stations", ["uuid"], name: "index_stations_on_uuid", unique: true, using: :btree
+
+  create_table "timing_points", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.string   "code",       limit: 255
+    t.string   "uuid",       limit: 255
+    t.integer  "station_id", limit: 4
+    t.decimal  "lat",                    precision: 10, scale: 7
+    t.decimal  "lng",                    precision: 10, scale: 7
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+  end
+
+  add_index "timing_points", ["code", "uuid", "station_id"], name: "index_timing_points_on_code_and_uuid_and_station_id", using: :btree
+
+  create_table "train_location_distances", force: :cascade do |t|
+    t.string   "origin_tiploc",      limit: 255
+    t.string   "destination_tiploc", limit: 255
+    t.integer  "distance",           limit: 4
+    t.string   "initial_direction",  limit: 255
+    t.string   "final_direction",    limit: 255
+    t.string   "line",               limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "train_location_distances", ["destination_tiploc"], name: "index_train_location_distances_on_destination", using: :btree
+  add_index "train_location_distances", ["origin_tiploc"], name: "index_train_location_distances_on_origin", using: :btree
 
   create_table "tube_lines", force: :cascade do |t|
     t.string   "name",              limit: 255

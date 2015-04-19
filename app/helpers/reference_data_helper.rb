@@ -284,6 +284,25 @@ module ReferenceDataHelper
   }
 
 
+  #This file is from Network Rail Data Feeds
+  #http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS
+  def self.update_corpus
+    timing_points = Array.new    
+    json = JSON.parse(File.read('CORPUSExtract.json'))
+    json["TIPLOCDATA"].each do |entry|
+      unless entry["TIPLOC"].strip.empty?
+        unless entry["3ALPHA"].strip.empty?
+          station = Station.where(crs: entry["3ALPHA"]).first
+          station_id = station.id if station
+        end
+        timing_points << TimingPoint.where(code: entry["TIPLOC"]).first_or_create(name: entry["NLCDESC"], station_id: station_id)
+      end
+    end
+    return timing_points
+  end
+
+
+  #This file is from National Rail FTP site
   def self.update_schedule
     schedules = Array.new
     xml = Nokogiri::XML(File.open('national_rail_schedule.xml'))
@@ -332,7 +351,8 @@ module ReferenceDataHelper
 
         calling_point[:cancelled] = if ((point.attr('can') == "false") or point.attr('can').nil?) then false else true end
         calling_point[:tiploc_code] = point.attr('tpl')
-        calling_point[:station] = Station.where(tiploc_code: calling_point[:tiploc_code]).first
+        calling_point[:timing_point] = TimingPoint.where(code: calling_point[:tiploc_code]).first
+        calling_point[:station] = calling_point[:timing_point].station if calling_point[:timing_point]
         calling_point[:pta] = point.attr('pta')
         calling_point[:ptd] = point.attr('ptd')
         calling_point[:wta] = point.attr('wta')
@@ -367,7 +387,8 @@ module ReferenceDataHelper
   end
 
 
-  def self.update_national_rail_reference_data
+  #This file is from National Rail FTP site
+  def self.update_reference_data
     xml = Nokogiri::XML(File.open('national_rail_reference_data.xml'))
     xml.css('LocationRef').each do |location|
       ReferenceDataHelper.update_location location
