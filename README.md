@@ -41,6 +41,14 @@ To Deploy:
     service unicorn restart
 
 
+To Update:
+    cd /home/rails
+    git pull
+    rake db:migrate RAILS_ENV=production
+    rake assets:precompile RAILS_ENV=production
+    service unicorn restart
+
+
 To Contribute:
 
 Please feel free to make pull requests!
