@@ -41,7 +41,7 @@ Rails.application.routes.draw do
     sessions: 'sessions',
     registrations: 'registrations'
   }
-  get '/users/:username', to: 'users#show', as: :user
+  get '/users/:uuid', to: 'users#show', as: :user
 
   get '/badges', to: 'badges#index'
   get '/badges/all', to: 'badges#all'
