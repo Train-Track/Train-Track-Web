@@ -15,7 +15,8 @@
 				<tr><td>Late</td><td><%= @operator.ppm.late %></td></tr>
 				<tr><td>Very Late/Cancelled</td><td><%= @operator.ppm.cancel_very_late %></td></tr>
 				<tr><td><strong>Total</strong></td><td><strong><%= @operator.ppm.total %></strong></td></tr>
-			</table>	
+			</table>
+			<p>Last updated: <%= @operator.ppm.created_at %></p>	
 		</div>
 	<% end %>
 
