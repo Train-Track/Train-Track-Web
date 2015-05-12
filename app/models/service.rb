@@ -6,8 +6,12 @@ class Service
     self.id = service_id
   end
 
+  def uuid
+    "#{operator.code}#{origin.st}#{origin.station.crs}"
+  end
+
   def to_s
-    return "#{origin.st} #{origin.to_s} to #{destination.to_s}"
+    "#{origin.st} #{origin.to_s} to #{destination.to_s}"
   end
 
   def is_cancelled?
