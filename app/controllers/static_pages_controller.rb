@@ -22,6 +22,7 @@ class StaticPagesController < ApplicationController
   # GET /help.xml
   def help
     @help = "Coming soon!"
+    @help = ReferenceDataHelper.update_schedule
 
     respond_to do |format|
       format.html
@@ -78,7 +79,7 @@ class StaticPagesController < ApplicationController
   # GET /download
   # GET /download.json
   # GET /download.xml
-  def data_feeds
+  def download
     @download = "Coming soon!"
 
     respond_to do |format|
