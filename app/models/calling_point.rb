@@ -4,6 +4,7 @@ class CallingPoint
   def initialize xml
     return if xml.nil?
     self.station = Station.find_by crs: xml.css('crs').text
+    Rails.logger.error "Cannot find station with CRS: " + xml.css('crs').text if self.station.nil?
     self.st = xml.css('st').text
     self.et = xml.css('et').text
     self.at = xml.css('at').text

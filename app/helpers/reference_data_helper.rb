@@ -1,8 +1,18 @@
 module ReferenceDataHelper
 
-  #Constants from Appendix 1 of CIF Specification
-  #http://www.atoc.org/clientfiles/files/RSPS5004%20v27.pdf
+  # Updating the Reference Data
+  #
+  # National Rail Train Operators and Train Stations:
+  #   Download ftp://datafeeds.nationalrail.co.uk/ to national_rail_reference_data.xml
+  #   ReferenceDataHelper.update_reference_data
+  # Timing Points:
+  #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
+  #   ReferenceDataHelper.update_corpus
+  # Underground Stations:
+  #   ReferenceDataHelper.update_underground_station_facilities
 
+  # Constants from Appendix 1 of CIF Specification
+  # http://www.atoc.org/clientfiles/files/RSPS5004%20v27.pdf
   ACTIVITY_CODES = {
     "A" => "Stops or shunts for other trains to pass",
     "AE" => "Attach/detach assisting locomotive",
@@ -295,10 +305,10 @@ module ReferenceDataHelper
   }
 
 
-  #This file is from Network Rail Data Feeds
-  #http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS
+  # This file is from Network Rail Data Feeds - it adds all timing points (tiplocs)
+  # http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS
   def self.update_corpus
-    timing_points = Array.new    
+    timing_points = Array.new
     json = JSON.parse(File.read('CORPUSExtract.json'))
     json["TIPLOCDATA"].each do |entry|
       code = entry["TIPLOC"].strip
@@ -319,11 +329,11 @@ module ReferenceDataHelper
       name = entry["NLCDESC"].strip
       timing_points << TimingPoint.where(code: code).first_or_create(name: name, station_id: station_id, stanox: stanox)
     end
-    return timing_points
   end
 
 
-  #This file is from National Rail FTP site
+  # This file is from National Rail FTP site and updates the timetables
+  # ftp://datafeeds.nationalrail.co.uk
   def self.update_schedule
     Timetable.connection.execute("TRUNCATE timetables");
     TimetableCallingPoint.connection.execute("TRUNCATE timetable_calling_points");
@@ -396,25 +406,25 @@ module ReferenceDataHelper
 
         TimetableCallingPoint.create(attr)
       end
-
-      timetables << timetable
     end
-    return timetables
   end
 
 
-  #This file is from National Rail FTP site
+  # This file is from National Rail FTP site and updates national rail stations and train operators
+  # ftp://datafeeds.nationalrail.co.uk
   def self.update_reference_data
     xml = Nokogiri::XML(File.open('national_rail_reference_data.xml'))
-    xml.css('LocationRef').each do |location|
-      ReferenceDataHelper.update_location location
-    end
     xml.css('TocRef').each do |toc|
       ReferenceDataHelper.update_operator toc
     end
+    xml.css('LocationRef').each do |location|
+      ReferenceDataHelper.update_location location
+    end
   end
 
 
+  # Update Train Operators from National Rail Reference Data
+  # Called by ReferenceDataHelper.update_reference_data
   def self.update_operator toc
     attr = Hash.new
 
@@ -438,32 +448,28 @@ module ReferenceDataHelper
     else
       operator.update(attr)
     end
-    return operator
   end
 
-
+  # Update Train Station Locations from National Rail Reference Data
+  # Called by ReferenceDataHelper.update_reference_data
   def self.update_location location
+
     attr = { national_rail: true }
 
-    crs = location.attr('crs')
-    if crs.nil?
-      return
-    else
-      attr[:crs] = crs
-    end
-
     name = location.attr('locname')
-    if name.nil? or name.include? '(Bus)'
+    # Not interested in things that don't look like train stations
+    if name.nil? or name.include? '(Bus)' or name == location.attr('tpl')
       return
     else
       attr[:name] = name
     end
 
-    tiploc_code = location.attr('tpl')
-    if tiploc_code.nil? or tiploc_code == name
+    crs = location.attr('crs')
+    # no good to us without a crs code
+    if crs.nil?
       return
-    elsif tiploc_code
-      attr[:tiploc_code] = tiploc_code
+    else
+      attr[:crs] = crs
     end
 
     operator_code = location.attr('toc')
@@ -477,11 +483,125 @@ module ReferenceDataHelper
     station = Station.where(crs: crs, national_rail: true).first
     if station.nil?
       # Not going to create it yet because it prob is not a UK train station
-      #Station.create(attr)
+      # Station.create(attr)
+      Rails.logger.info "Station does not exist: " + attr.inspect
     else
       station.update(attr)
     end
   end
 
+
+  # Update Underground Stations directly from API call
+  def self.update_underground_station_facilities
+    begin
+      response = RestClient.get "http://data.tfl.gov.uk/tfl/syndication/feeds/stations-facilities.xml"
+      xml = Nokogiri::XML(response.body)
+    rescue => e
+      puts e.inspect
+      return
+    end
+    xml.css('station').each do |station|
+      number = station.attr('id').strip
+      name = station.css('name').first.text.strip
+      address = station.css('address').first.text.strip
+      phone = station.css('phone').first.text.strip
+      zones = station.css('zones').first.text.strip
+      facilities = []
+      station.css('facilities').first.children.each do |facility|
+        facilities << { facility.attr('name') => facility.text.strip } unless facility.attr('name').nil?
+      end
+      lines = []
+      station.css('servingLines').first.children.each do |line|
+        lines << line.text.strip unless line.text.strip.empty?
+      end
+      coords = station.css('coordinates').first.text.split(",")
+      lat = coords[1].to_f
+      lng = coords[0].to_f
+      station_attributes = {
+        name: name,
+        address: address,
+        phone: phone,
+        underground: true,
+        underground_zones: zones,
+        facilities: facilities.to_json,
+        lat: lat,
+        lng: lng
+      }
+      station = Station.where(number: number).first_or_create(uuid: SecureRandom.uuid)
+      Station.update(station.id, station_attributes)
+    end
+  end
+
+
+  def self.update_train_station_distances
+    problems = []
+    File.open("Tube Station Distances.csv", "r") do |f|
+      f.each_line do |line|
+        parts = line.split(',')
+
+        line = Tube::Line.where("name LIKE ?", parts[0].gsub('&', 'and')).first
+        if line.nil?
+          problems << "Cannot find line: #{parts[0]}"
+          next
+        end
+
+        [2,3].each do |i|
+
+          parts[i].gsub!("SHEPHERDS BUSH", "Shepherd's Bush")
+          parts[i].gsub!("QUEENS PARK", "Queen's Park")
+          parts[i].gsub!("KINGS CROSS", "King's Cross St. Pancras")
+          parts[i].gsub!("REGENTS PARK", "Regent's Park")
+          parts[i].gsub!("ST PAULS", "St. Paul's")
+          parts[i].gsub!("ST JOHNS WOOD", "St. John's Wood")
+          parts[i].gsub!("HEATHROW TERMINAL FOUR", "Heathrow Terminal 4")
+          parts[i].gsub!("HEATHROW 123", "Heathrow Terminals 1, 2, 3")
+          parts[i].gsub!("EARLS COURT", "Earl's Court")
+          parts[i].gsub!("King's Cross St. Pancras ST PANCRAS", "King's Cross St. Pancras")
+          parts[i].gsub!("BAKER STREET (METROPOLITAN)", "Baker Street")
+          parts[i].gsub!("BAKER STREET (MET)", "Baker Street")
+          parts[i].gsub!("BAKER STREET (CIRCLE)", "Baker Street")
+          parts[i].gsub!("KENNINGTON (CITY)", "Kennington")
+          parts[i].gsub!("KENNINGTON (CX)", "Kennington")
+          parts[i].gsub!("EUSTON (CITY)", "Euston")
+          parts[i].gsub!("EUSTON (CX)", "Euston")
+          parts[i].gsub!("HIGHBURY", "Highbury & Islington")
+          parts[i].gsub!("PADDINGTON (CIRCLE)", "Paddington")
+          parts[i].gsub!("PADDINGTON (Dis)", "Paddington")
+          parts[i].gsub!("BROMLEY BY BOW", "Bromley-By-Bow")
+          parts[i].gsub!("WALTHAMSTOW", "Walthamstow Central")
+          parts[i].gsub!("HAMMERSMITH (DISTRICT)", "Hammersmith")
+          parts[i].gsub!("FINCHLEY CENTRAL (HB)", "Finchley Central")
+
+          if parts[i].upcase == "EDGWARE ROAD"
+            parts[i] = "EDGWARE ROAD " + parts[0].upcase
+          end
+
+        end
+
+        from = Station.where("name LIKE ?", parts[2]).first
+        if from.nil?
+          problems << "Cannot find from: #{parts[2]}"
+          next
+        end
+
+        to = Station.where("name LIKE ?", parts[3]).first
+        if to.nil?
+          problems << "Cannot find to: #{parts[3]}"
+          next
+        end
+
+        station_tube_line = {
+          tube_line_id: line.id,
+          direction: parts[1],
+          from_id: from.id,
+          to_id: to.id,
+          distance: (parts[4].to_f * 1000).round,
+          running_time: (parts[5].to_f * 60).round
+        }
+        Tube::StationTubeLine.where(station_tube_line).first_or_create
+      end
+    end
+    return problems
+  end
 
 end

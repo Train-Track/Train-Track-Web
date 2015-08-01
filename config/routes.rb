@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/stations/:uuid/departures', to: 'stations#departures'
   get '/stations/:uuid/arrivals', to: 'stations#arrivals'
   get '/stations/:uuid/tube', to: 'stations#tube'
+  get '/stations/:uuid/detailed', to: 'stations#detailed'
 
   get '/services/:service_id', to: 'services#show'
 
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
   get '/badges', to: 'badges#index'
   get '/badges/all', to: 'badges#all'
   get '/badges/:uuid', to: 'badges#show'
- 
+
   get 'journeys/new', to: 'journey_legs#new', as: :new_journey_form
   post 'journeys', to: 'journey_legs#create', as: :new_journey
   resources :journeys, only: [:index, :show, :destroy] do

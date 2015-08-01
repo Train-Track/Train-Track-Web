@@ -1,12 +1,11 @@
 require 'rest_client'
 module UndergroundApiHelper
-  
+
   DEBUG = false
   STATUS_URL = "http://cloud.tfl.gov.uk/TrackerNet/LineStatus"
   WEEKEND_URL = "http://data.tfl.gov.uk/tfl/syndication/feeds/TubeThisWeekend_v2.xml"
   PREDICTION_BASE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionSummary/"
   STATION_PREDICTION_BASE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionDetailed/"
-  STATION_FACILITIES_URL = "http://data.tfl.gov.uk/tfl/syndication/feeds/stations-facilities.xml"
 
 
   def self.get_line_prediction code
@@ -99,7 +98,7 @@ module UndergroundApiHelper
         service_item.eta = "On time"
         service_items << service_item
       end
-      
+
     end
     return service_items
   end
@@ -159,120 +158,5 @@ module UndergroundApiHelper
   end
 
 
-  def self.update_underground_station_facilities
-    begin
-      if DEBUG
-        xml = Nokogiri::XML(File.open('underground_station_facilities.xml'))
-      else
-        response = RestClient.get STATION_FACILITIES_URL
-        xml = Nokogiri::XML(response.body)
-      end
-    rescue => e
-      puts e.inspect
-      return
-    end
-    xml.css('station').each do |station|
-      number = station.attr('id').strip
-      name = station.css('name').first.text.strip
-      address = station.css('address').first.text.strip
-      phone = station.css('phone').first.text.strip
-      zones = station.css('zones').first.text.strip
-      facilities = []
-      station.css('facilities').first.children.each do |facility|
-        facilities << { facility.attr('name') => facility.text.strip } unless facility.attr('name').nil?
-      end
-      lines = []
-      station.css('servingLines').first.children.each do |line|
-        lines << line.text.strip unless line.text.strip.empty?
-      end
-      coords = station.css('coordinates').first.text.split(",")
-      lat = coords[1].to_f
-      lng = coords[0].to_f
-      station_attributes = {
-        name: name,
-        address: address,
-        phone: phone,
-        underground: true,
-        underground_zones: zones,
-        facilities: facilities.to_json,
-        lat: lat,
-        lng: lng
-      }
-      station = Station.where(number: number).first_or_create(uuid: SecureRandom.uuid)
-      Station.update(station.id, station_attributes)
-    end
-  end
-
-
-  def self.update_train_station_distances
-    problems = []
-    File.open("Tube Station Distances.csv", "r") do |f|
-      f.each_line do |line|
-        parts = line.split(',')
-
-        line = Tube::Line.where("name LIKE ?", parts[0].gsub('&', 'and')).first
-        if line.nil?
-          problems << "Cannot find line: #{parts[0]}"
-          next
-        end
-       
-        [2,3].each do |i|
-
-          parts[i].gsub!("SHEPHERDS BUSH", "Shepherd's Bush")
-          parts[i].gsub!("QUEENS PARK", "Queen's Park")
-          parts[i].gsub!("KINGS CROSS", "King's Cross St. Pancras")
-          parts[i].gsub!("REGENTS PARK", "Regent's Park")
-          parts[i].gsub!("ST PAULS", "St. Paul's")
-          parts[i].gsub!("ST JOHNS WOOD", "St. John's Wood")
-          parts[i].gsub!("HEATHROW TERMINAL FOUR", "Heathrow Terminal 4")
-          parts[i].gsub!("HEATHROW 123", "Heathrow Terminals 1, 2, 3")
-          parts[i].gsub!("EARLS COURT", "Earl's Court")
-          parts[i].gsub!("King's Cross St. Pancras ST PANCRAS", "King's Cross St. Pancras")
-          parts[i].gsub!("BAKER STREET (METROPOLITAN)", "Baker Street")
-          parts[i].gsub!("BAKER STREET (MET)", "Baker Street")
-          parts[i].gsub!("BAKER STREET (CIRCLE)", "Baker Street")
-          parts[i].gsub!("KENNINGTON (CITY)", "Kennington")
-          parts[i].gsub!("KENNINGTON (CX)", "Kennington")
-          parts[i].gsub!("EUSTON (CITY)", "Euston")
-          parts[i].gsub!("EUSTON (CX)", "Euston")
-          parts[i].gsub!("HIGHBURY", "Highbury & Islington")
-          parts[i].gsub!("PADDINGTON (CIRCLE)", "Paddington")
-          parts[i].gsub!("PADDINGTON (Dis)", "Paddington")
-          parts[i].gsub!("BROMLEY BY BOW", "Bromley-By-Bow")
-          parts[i].gsub!("WALTHAMSTOW", "Walthamstow Central")
-          parts[i].gsub!("HAMMERSMITH (DISTRICT)", "Hammersmith")
-          parts[i].gsub!("FINCHLEY CENTRAL (HB)", "Finchley Central")
-
-          if parts[i].upcase == "EDGWARE ROAD"
-            parts[i] = "EDGWARE ROAD " + parts[0].upcase
-          end
-
-        end
-
-        from = Station.where("name LIKE ?", parts[2]).first
-        if from.nil?
-          problems << "Cannot find from: #{parts[2]}"
-          next
-        end
-        
-        to = Station.where("name LIKE ?", parts[3]).first
-        if to.nil?
-          problems << "Cannot find to: #{parts[3]}"
-          next
-        end
-
-        station_tube_line = {
-          tube_line_id: line.id,
-          direction: parts[1],
-          from_id: from.id,
-          to_id: to.id,
-          distance: (parts[4].to_f * 1000).round,
-          running_time: (parts[5].to_f * 60).round
-        }
-        Tube::StationTubeLine.where(station_tube_line).first_or_create
-      end
-    end
-    return problems
-  end
 
 end

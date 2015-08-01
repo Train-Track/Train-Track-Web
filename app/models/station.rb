@@ -6,10 +6,6 @@ class Station < ActiveRecord::Base
   before_validation :add_uuid
   belongs_to :operator
 
-  # Stations source from:
-  # http://www.nationalrail.co.uk/static/documents/content/station_codes.csv
-  # http://data.tfl.gov.uk/tfl/syndication/feeds/stations-facilities.xml
-
 
   def to_s
     name
@@ -40,12 +36,17 @@ class Station < ActiveRecord::Base
       station_board = StationBoard.new
       tube_lines.each do |line|
         line.services = UndergroundApiHelper.get_service_items_for_line_at_station(line.code, underground_code)
-        station_board.tube_lines << line        
+        station_board.tube_lines << line
       end
       return station_board
     end
   end
 
+  def get_detailed_board
+    if national_rail?
+      return NationalRailApiHelper.get_detailed_board crs
+    end
+  end
 
   def favourite? user
     if user
@@ -89,7 +90,7 @@ class Station < ActiveRecord::Base
 
 
   protected
-  
+
   def add_uuid
     self.uuid = SecureRandom.uuid if uuid.nil?
   end

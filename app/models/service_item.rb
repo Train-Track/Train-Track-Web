@@ -1,6 +1,6 @@
 class ServiceItem
-  attr_reader :origin, :destination, :sta, :eta, :std, :etd, :platform, :operator, :service_id
-  attr_writer :origin, :destination, :sta, :eta, :std, :etd, :platform, :operator, :service_id
+  attr_reader :origin, :destination, :sta, :eta, :std, :etd, :platform, :operator, :service_id, :previous_calling_points, :subsequent_calling_points
+  attr_writer :origin, :destination, :sta, :eta, :std, :etd, :platform, :operator, :service_id, :previous_calling_points, :subsequent_calling_points
 
   def initialize
   end
@@ -15,6 +15,18 @@ class ServiceItem
     self.platform = xml.css('platform').text
     self.operator = Operator.find_by code: xml.css('operatorCode').text
     self.service_id = xml.css('serviceID').text
+    self.previous_calling_points = []
+    self.subsequent_calling_points = []
+    if xml.css('previousCallingPoints').children.size > 0
+      xml.css('previousCallingPoints').css('callingPoint').each do |calling_point_xml|
+        self.previous_calling_points << CallingPoint.new(calling_point_xml)
+      end
+    end
+    if xml.css('subsequentCallingPoints').children.size > 0
+      xml.css('subsequentCallingPoints').css('callingPoint').each do |calling_point_xml|
+        self.subsequent_calling_points << CallingPoint.new(calling_point_xml)
+      end
+    end
   end
 
   def url

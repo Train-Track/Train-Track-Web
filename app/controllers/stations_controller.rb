@@ -105,12 +105,27 @@ class StationsController < ApplicationController
   def tube
     @station = Station.find_by! uuid: params[:uuid]
     @tube_board = @station.get_tube_board
-    
+
     respond_to do |format|
       format.html
       format.xml { render xml: @tube_board }
       format.json { render json: @tube_board, callback: params['callback'] }
     end
   end
-  
+
+
+  # GET /stations/1/detailed
+  # GET /stations/1/detailed.json
+  # GET /stations/1/detailed.xml
+  def detailed
+    @station = Station.find_by! uuid: params[:uuid]
+    @board = @station.get_detailed_board
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @board }
+      format.json { render json: @board, callback: params['callback'] }
+    end
+  end
+
 end
