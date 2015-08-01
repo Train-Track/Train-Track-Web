@@ -1,7 +1,7 @@
 require 'rest_client'
 module UndergroundApiHelper
   
-  DEBUG = true
+  DEBUG = false
   STATUS_URL = "http://cloud.tfl.gov.uk/TrackerNet/LineStatus"
   WEEKEND_URL = "http://data.tfl.gov.uk/tfl/syndication/feeds/TubeThisWeekend_v2.xml"
   PREDICTION_BASE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionSummary/"
