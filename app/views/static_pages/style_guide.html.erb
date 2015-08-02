@@ -1,0 +1,12 @@
+<% provide(:title, "Style Guide") %>
+<% provide(:description, "A guide to developing the site and the apps.") %>
+
+<div class="container">
+	<h1>Style Guide</h1>
+	<% @guide.each do |section| %>
+	<section>
+		<h3><%= section[:title] %></h3>
+		<p><%= section[:content] %></p>
+	</section>
+	<% end %>
+</div>

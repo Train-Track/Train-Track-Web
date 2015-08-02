@@ -60,7 +60,6 @@ class StaticPagesController < ApplicationController
   end
 
 
-
   # GET /data-feeds
   # GET /data-feeds.json
   # GET /data-feeds.xml
@@ -75,7 +74,6 @@ class StaticPagesController < ApplicationController
   end
 
 
-
   # GET /download
   # GET /download.json
   # GET /download.xml
@@ -86,6 +84,24 @@ class StaticPagesController < ApplicationController
       format.html
       format.xml { render xml: @download }
       format.json { render json: @download, callback: params['callback'] }
+    end
+  end
+
+
+  # GET /style-guide
+  # GET /style-guide.json
+  # GET /style-guide.xml
+  def style_guide
+    @guide = [
+      { title: "Title", content: "Train Track" },
+      { title: "Slogan", content: "The app that lets you track your train journeys" },
+      { title: "Social Username", content: "traintrackapp" }
+    ]
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @guide }
+      format.json { render json: @guide, callback: params['callback'] }
     end
   end
 

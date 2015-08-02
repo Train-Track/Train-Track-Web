@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
   get '/data-feeds', to: 'static_pages#data_feeds'
   get '/download', to: 'static_pages#download'
+  get '/style-guide', to: 'static_pages#style_guide'
 
   get '/stations', to: 'stations#index'
   get '/stations/all', to: 'stations#all'
