@@ -18,19 +18,19 @@
 			<li>
 				<%= next_train[:eta] %>
 				<% if next_train[:destination] %>
-					<%= link_to next_train[:destination], next_train[:destination].url %>
+					<%= link_to next_train[:destination_name], next_train[:destination].url %>
 				<% else %>
 					<%= next_train[:destination_name] %>
 				<% end %>
 				(<%= next_train[:destination_code] %>)
 				(Set: <%= next_train[:set] %>)
 				(Trip: <%= next_train[:trip] %>)
-				<%= next_train[:location] %>				
+				<%= next_train[:location] %>
 			</li>
 		<% end %>
 		</ol>
-	<% end %>	
-<% end %>	
+	<% end %>
+<% end %>
 
 
 
