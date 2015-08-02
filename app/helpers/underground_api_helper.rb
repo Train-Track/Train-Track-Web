@@ -7,6 +7,8 @@ module UndergroundApiHelper
   PREDICTION_BASE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionSummary/"
   STATION_PREDICTION_BASE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionDetailed/"
 
+  # Get station board https://api.tfl.gov.uk/StopPoint/940GZZLUBST/arrivals
+  # Get sequence of routes from https://api.tfl.gov.uk/Line/victoria/Route/Sequence/outbound
 
   # Gets the next trains due at each platform at each station on a given line
   # @param code the underground line code

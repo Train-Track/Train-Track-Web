@@ -17,17 +17,17 @@
 
 			<h3>Facilities</h3>
 			<table class="table-striped">
-				<% @station.facilities.each do |facitity| %>
+				<% @station.facilities.each do |k,v | %>
 				<tr>
-					<td><%= facitity.to_hash.first[0] %></td>
-					<td><%= facitity.to_hash.first[1] %></td>
+					<td><%= k %></td>
+					<td><%= v %></td>
 				</tr>
 			<% end %>
 			</table>
 
 		</div>
 		<div class="col-md-4">
-  
+
 		</div>
 
 	<% if signed_in? %>
@@ -46,7 +46,7 @@
 					</div>
 				<% end %>
 			<% end %>
-		
+
 			<% if current_user.work_station == @station %>
 				<button class="btn btn-primary btn-lg btn-block disabled"><%= icon('briefcase') %> My Work Station</button>
 			<% else %>

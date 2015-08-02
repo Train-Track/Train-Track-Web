@@ -2,14 +2,19 @@ module ReferenceDataHelper
 
   # Updating the Reference Data
   #
-  # National Rail Train Operators and Train Stations:
+  # UK National Rail Stations:
+  #   Download http://www.dft.gov.uk/NaPTAN/snapshot/NaPTANcsv.zip and extract RailReferences.csv
+  #   ReferenceDataHelper.update_rail_naptan
+  # TfL Stations:
+  #   Download https://api.tfl.gov.uk/StopPoint/Mode/tube,tflrail,dlr,overground to naptan.json
+  #   ReferenceDataHelper.update_tube_naptan
+  # National Rail Train Operators and National Rail Station Operators:
   #   Download ftp://datafeeds.nationalrail.co.uk/ to national_rail_reference_data.xml
   #   ReferenceDataHelper.update_reference_data
   # Timing Points:
   #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
   #   ReferenceDataHelper.update_corpus
-  # Underground Stations:
-  #   ReferenceDataHelper.update_underground_station_facilities
+
 
   # Constants from Appendix 1 of CIF Specification
   # http://www.atoc.org/clientfiles/files/RSPS5004%20v27.pdf
@@ -305,11 +310,76 @@ module ReferenceDataHelper
   }
 
 
+  # This populates UK Train Stations from RailReferences.csv from Naptan
+  # RailReferences.csv in http://www.dft.gov.uk/NaPTAN/snapshot/NaPTANcsv.zip
+  def self.update_rail_naptan
+    File.readlines('reference/RailReferences.csv').each do |line|
+      next if line.start_with? '"AtcoCode"'
+      parts = line.split(",")
+      crs = parts[2].gsub('"', '')
+      name = parts[3].gsub('"', '').gsub(" Rail Station", "")
+      naptan = parts[0].gsub('"', '')
+      ll = [nil, nil]
+      ll = BlueGeo.easting_northing_to_lat_lon(parts[6].to_i, parts[7].to_i)
+      station_attributes = {
+        name: name,
+        crs: crs,
+        underground: false,
+        national_rail: true,
+        lat: ll[0],
+        lng: ll[1]
+      }
+      station = Station.where(rail_naptan: naptan).first_or_create
+      Station.update(station.id, station_attributes)
+    end
+    return
+  end
+
+
+  # This populates Tfl Stations from naptan.json from TfL API
+  # https://api.tfl.gov.uk/StopPoint/Mode/tube,tflrail,dlr,overground
+  def self.update_tube_naptan
+    json = JSON.parse(File.read('reference/naptan.json'))
+    json.each do |entry|
+      next if entry['stopType'] != "NaptanMetroStation"
+      name = entry['commonName'].gsub(' Underground Station', '')
+      naptan = entry['naptanId']
+      lat = entry['lat']
+      lng = entry['lon']
+      number = entry['icsCode']
+      zone = nil
+      address = nil
+      phone = nil
+      facilities = {}
+      entry['additionalProperties'].each do |property|
+        zone = property["value"] if property['key'] == "Zone"
+        address = property["value"] if property['key'] == "Address"
+        phone = property["value"] if property['key'] == "PhoneNo"
+        facilities[property['key']] = property["value"] if property["category"] == "Facility"
+      end
+      station_attributes = {
+        name: name,
+        address: address,
+        phone: phone,
+        underground: true,
+        national_rail: true,
+        underground_zones: zone,
+        facilities: facilities.to_json,
+        lat: lat,
+        lng: lng
+      }
+      station = Station.where(underground_naptan: naptan).first_or_create
+      Station.update(station.id, station_attributes)
+    end
+    return
+  end
+
+
   # This file is from Network Rail Data Feeds - it adds all timing points (tiplocs)
   # http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS
   def self.update_corpus
     timing_points = Array.new
-    json = JSON.parse(File.read('CORPUSExtract.json'))
+    json = JSON.parse(File.read('reference/CORPUSExtract.json'))
     json["TIPLOCDATA"].each do |entry|
       code = entry["TIPLOC"].strip
       if code.empty?
@@ -332,6 +402,46 @@ module ReferenceDataHelper
   end
 
 
+  # Create/Update Train Operators from National Rail Reference Data and link them to Stations
+  # ftp://datafeeds.nationalrail.co.uk
+  def self.update_reference_data
+    xml = Nokogiri::XML(File.open('reference/national_rail_reference_data.xml'))
+
+    xml.css('TocRef').each do |toc|
+      code = toc.attr('code')
+      name = toc.attr('tocname')
+
+      # Not interested in things that we don't know the name of
+      next if code.nil? or name.nil?
+
+      attr = { code: code, name: name }
+      operator = Operator.where(code: code).first
+      if operator.nil?
+        Operator.create(attr)
+      else
+        operator.update(attr)
+      end
+    end
+
+    xml.css('LocationRef').each do |location|
+      crs = location.attr('crs')
+      operator_code = location.attr('toc')
+
+      # Not interested if it's not a station with an operator defined
+      next if crs.nil? or operator_code.nil?
+
+      operator = Operator.where(code: operator_code).first
+      if operator
+        operator = Station.where(crs: crs).update_all(operator_id: operator.id)
+      end
+    end
+
+    # All the TfL stations can have London Underground as operator
+    operator = Operator.where(name: "London Underground").first
+    Station.where(underground: true).update_all(operator_id: operator.id) if operator
+  end
+
+
   # This file is from National Rail FTP site and updates the timetables
   # ftp://datafeeds.nationalrail.co.uk
   def self.update_schedule
@@ -340,7 +450,7 @@ module ReferenceDataHelper
 
     timetables = Array.new
 
-    xml = Nokogiri::XML(File.open('national_rail_schedule.xml'))
+    xml = Nokogiri::XML(File.open('reference/national_rail_schedule.xml'))
     xml.css('Journey').each do |journey|
       attr = Hash.new
 
@@ -410,132 +520,9 @@ module ReferenceDataHelper
   end
 
 
-  # This file is from National Rail FTP site and updates national rail stations and train operators
-  # ftp://datafeeds.nationalrail.co.uk
-  def self.update_reference_data
-    xml = Nokogiri::XML(File.open('national_rail_reference_data.xml'))
-    xml.css('TocRef').each do |toc|
-      ReferenceDataHelper.update_operator toc
-    end
-    xml.css('LocationRef').each do |location|
-      ReferenceDataHelper.update_location location
-    end
-  end
-
-
-  # Update Train Operators from National Rail Reference Data
-  # Called by ReferenceDataHelper.update_reference_data
-  def self.update_operator toc
-    attr = Hash.new
-
-    code = toc.attr('code')
-    if code.nil?
-      return
-    else
-      attr[:code] = code
-    end
-
-    name = toc.attr('tocname')
-    if name.nil?
-      return
-    else
-      attr[:name] = name
-    end
-
-    operator = Operator.where(code: code).first
-    if operator.nil?
-      Operator.create(attr)
-    else
-      operator.update(attr)
-    end
-  end
-
-  # Update Train Station Locations from National Rail Reference Data
-  # Called by ReferenceDataHelper.update_reference_data
-  def self.update_location location
-
-    attr = { national_rail: true }
-
-    name = location.attr('locname')
-    # Not interested in things that don't look like train stations
-    if name.nil? or name.include? '(Bus)' or name == location.attr('tpl')
-      return
-    else
-      attr[:name] = name
-    end
-
-    crs = location.attr('crs')
-    # no good to us without a crs code
-    if crs.nil?
-      return
-    else
-      attr[:crs] = crs
-    end
-
-    operator_code = location.attr('toc')
-    if operator_code
-      operator = Operator.where(code: operator_code).first
-      if operator
-        attr[:operator_id] = operator.id
-      end
-    end
-
-    station = Station.where(crs: crs, national_rail: true).first
-    if station.nil?
-      # Not going to create it yet because it prob is not a UK train station
-      # Station.create(attr)
-      Rails.logger.info "Station does not exist: " + attr.inspect
-    else
-      station.update(attr)
-    end
-  end
-
-
-  # Update Underground Stations directly from API call
-  def self.update_underground_station_facilities
-    begin
-      response = RestClient.get "http://data.tfl.gov.uk/tfl/syndication/feeds/stations-facilities.xml"
-      xml = Nokogiri::XML(response.body)
-    rescue => e
-      puts e.inspect
-      return
-    end
-    xml.css('station').each do |station|
-      number = station.attr('id').strip
-      name = station.css('name').first.text.strip
-      address = station.css('address').first.text.strip
-      phone = station.css('phone').first.text.strip
-      zones = station.css('zones').first.text.strip
-      facilities = []
-      station.css('facilities').first.children.each do |facility|
-        facilities << { facility.attr('name') => facility.text.strip } unless facility.attr('name').nil?
-      end
-      lines = []
-      station.css('servingLines').first.children.each do |line|
-        lines << line.text.strip unless line.text.strip.empty?
-      end
-      coords = station.css('coordinates').first.text.split(",")
-      lat = coords[1].to_f
-      lng = coords[0].to_f
-      station_attributes = {
-        name: name,
-        address: address,
-        phone: phone,
-        underground: true,
-        underground_zones: zones,
-        facilities: facilities.to_json,
-        lat: lat,
-        lng: lng
-      }
-      station = Station.where(number: number).first_or_create(uuid: SecureRandom.uuid)
-      Station.update(station.id, station_attributes)
-    end
-  end
-
-
   def self.update_train_station_distances
     problems = []
-    File.open("Tube Station Distances.csv", "r") do |f|
+    File.open("reference/Tube Station Distances.csv", "r") do |f|
       f.each_line do |line|
         parts = line.split(',')
 
