@@ -8,6 +8,9 @@ module UndergroundApiHelper
   STATION_PREDICTION_BASE_URL = "http://cloud.tfl.gov.uk/TrackerNet/PredictionDetailed/"
 
 
+  # Gets the next trains due at each platform at each station on a given line
+  # @param code the underground line code
+  # @return an array of stations each with an array of platforms each with an array of next trains
   def self.get_line_prediction code
    stations = []
     begin
@@ -16,6 +19,7 @@ module UndergroundApiHelper
         xml = Nokogiri::XML(body)
       else
         response = RestClient.get PREDICTION_BASE_URL + code
+        puts response.body
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
@@ -23,14 +27,20 @@ module UndergroundApiHelper
       return
     end
     xml.remove_namespaces!
+    # For each station on this line
     xml.css('S').each do |s|
       code = s.attr('Code').to_s
-      name = s.attr('N').to_s.gsub('.', '')
       station = Station.find_by(underground_code: code)
       if station.nil?
+        # clean up the name to comply with naming standards
+        name = s.attr('N').to_s
+        name = name.gsub('.', '')
+        name = name.gsub(' and ', ' & ')
+        Rails.logger.error "Underground station not found: #{name} (#{code})"
         station = Station.new(underground_code: code, name: name)
       end
       station.platforms = []
+      # For each platform add the next trains
       s.css('P').each do |p|
         platform_name = p.attr('N').strip
         platform = {
@@ -38,9 +48,16 @@ module UndergroundApiHelper
           next_trains: []
         }
         p.css('T').each do |t|
+          # Destination names may contain via information
+          destination_name = t.attr('DE').strip
+          if destination_name.include? ' via '
+            destination = Station.find_by(name:destination_name.slice(0..(destination_name.index(' via '))))
+          else
+            destination = Station.find_by(name: destination_name)
+          end
           next_train = {
-            destination_name: t.attr('DE').strip,
-            destination: Station.find_by(name: t.attr('DE').strip),
+            destination_name: destination_name,
+            destination: destination,
             destination_code: t.attr('D').strip,
             location: t.attr('L').strip,
             set: t.attr('S').strip,
@@ -57,6 +74,10 @@ module UndergroundApiHelper
   end
 
 
+  # Get service items at a station on a particular underground line
+  # @param line_code the code of the underground line
+  # @param station_code the code of the underground station
+  # @return an array of service items
   def self.get_service_items_for_line_at_station line_code, station_code
    service_items = []
     begin
@@ -65,6 +86,7 @@ module UndergroundApiHelper
         xml = Nokogiri::XML(body)
       else
         response = RestClient.get STATION_PREDICTION_BASE_URL + line_code + "/" + station_code
+        puts response.body
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
@@ -72,6 +94,7 @@ module UndergroundApiHelper
       return
     end
     xml.remove_namespaces!
+    # Get the time at the station to use to create the scheduled time of departure
     station = xml.css('S').first
     if station
       current_time = Time.parse(station.attr('CurTime').strip)
@@ -79,8 +102,10 @@ module UndergroundApiHelper
       current_time = Time.now
     end
     operator = Operator.where(name: "London Underground").first
+    # For each platform at this station on this line
     xml.css('P').each do |p|
       platform = p.attr('N').strip.gsub('Platform ', '')
+      # Create a Service Item for each train
       xml.css('T').each do |t|
         service_item = ServiceItem.new
         service_item.service_id = "TUBE-" + line_code + "-" + station_code + "-" + t.attr('LCID').strip
@@ -104,6 +129,8 @@ module UndergroundApiHelper
   end
 
 
+  # Get the current underground lines status
+  # @return an array of underground lines
   def self.get_status
     lines = []
     begin
@@ -131,6 +158,8 @@ module UndergroundApiHelper
   end
 
 
+  # Get the weekend underground lines status
+  # @return an array of underground lines
   def self.get_weekend
     lines = []
     begin
@@ -147,8 +176,8 @@ module UndergroundApiHelper
     end
     xml.remove_namespaces!
     xml.css('Line').each do |l|
+      # Clean line names
       name = l.css('Name').text.strip.gsub('H\'smith', 'Hammersmith').gsub('  ', ' and ')
-      puts name
       line = Tube::Line.where(name: name).first_or_create
       line.status = l.css('Status').css('Text').first.text.strip
       line.status_details = l.css('Status').css('Message').css('Text').text.strip
@@ -156,7 +185,6 @@ module UndergroundApiHelper
     end
     return lines
   end
-
 
 
 end
