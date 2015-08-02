@@ -1,9 +1,16 @@
 <% provide(:title, "Journeys") %>
-<% provide(:description, "All your journeys using Train Track.") %>
+<% provide(:description, "All your train journeys on Train Track.") %>
 
 <div class="container">
 	<h1>Journeys</h1>
-  
+
+	<% if @journeys.count == 0 %>
+	<div class="well">
+		<h3>None yet...</h3>
+		<p>Start tracking your train journeys to see interesting facts and statistics</p>
+	</div>
+	<% end %>
+
 	<div class="list-group">
 	<% @journeys.each do |journey| %>
 	    <a href="<%= journey_path(journey) %>" class="list-group-item">
