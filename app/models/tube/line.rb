@@ -1,6 +1,7 @@
 class Tube::Line < ActiveRecord::Base
   include UndergroundApiHelper
   self.table_name = "tube_lines"
+  default_scope { order('name ASC') }
   attr_accessor :status, :status_details, :platforms, :services
   validates :uuid, presence: true, uniqueness: true
   before_validation :add_uuid
