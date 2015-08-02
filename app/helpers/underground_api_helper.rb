@@ -24,7 +24,7 @@ module UndergroundApiHelper
       end
     rescue => e
       puts e.inspect
-      return
+      return stations
     end
     xml.remove_namespaces!
     # For each station on this line
@@ -91,7 +91,7 @@ module UndergroundApiHelper
       end
     rescue => e
       puts e.inspect
-      return
+      return service_items
     end
     xml.remove_namespaces!
     # Get the time at the station to use to create the scheduled time of departure
