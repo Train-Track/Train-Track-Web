@@ -361,8 +361,9 @@ module ReferenceDataHelper
         name: name,
         address: address,
         phone: phone,
+        number: number,
         underground: true,
-        national_rail: true,
+        national_rail: false,
         underground_zones: zone,
         facilities: facilities.to_json,
         lat: lat,
@@ -372,33 +373,6 @@ module ReferenceDataHelper
       Station.update(station.id, station_attributes)
     end
     return
-  end
-
-
-  # This file is from Network Rail Data Feeds - it adds all timing points (tiplocs)
-  # http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS
-  def self.update_corpus
-    timing_points = Array.new
-    json = JSON.parse(File.read('reference/CORPUSExtract.json'))
-    json["TIPLOCDATA"].each do |entry|
-      code = entry["TIPLOC"].strip
-      if code.empty?
-        next
-      end
-      crs = entry["3ALPHA"].strip
-      if crs.empty?
-        station_id = nil
-      else
-        station = Station.where(crs: crs).first
-        station_id = station.id if station
-      end
-      stanox = entry["STANOX"].strip
-      if stanox.empty?
-        stanox = nil
-      end
-      name = entry["NLCDESC"].strip
-      timing_points << TimingPoint.where(code: code).first_or_create(name: name, station_id: station_id, stanox: stanox)
-    end
   end
 
 
@@ -439,6 +413,32 @@ module ReferenceDataHelper
     # All the TfL stations can have London Underground as operator
     operator = Operator.where(name: "London Underground").first
     Station.where(underground: true).update_all(operator_id: operator.id) if operator
+    return
+  end
+
+
+  # This file is from Network Rail Data Feeds - it adds all timing points (tiplocs)
+  # http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS
+  def self.update_corpus
+    timing_points = Array.new
+    json = JSON.parse(File.read('reference/CORPUSExtract.json'))
+    json["TIPLOCDATA"].each do |entry|
+      code = entry["TIPLOC"].strip
+      name = entry["NLCDESC"].strip
+      stanox = entry["STANOX"].strip
+      crs = entry["3ALPHA"].strip
+
+      next if code.empty?
+      stanox = nil if stanox.empty?
+      if crs.empty?
+        station_id = nil
+      else
+        station = Station.where("rail_naptan LIKE ?", "9100" + code).first
+        station_id = station.id if station
+      end
+      timing_points << TimingPoint.where(code: code).first_or_create(name: name, station_id: station_id, stanox: stanox)
+    end
+    return
   end
 
 
