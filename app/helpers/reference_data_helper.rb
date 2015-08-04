@@ -14,6 +14,9 @@ module ReferenceDataHelper
   # Timing Points:
   #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
   #   ReferenceDataHelper.update_corpus
+  # Station and Operator Twitter:
+  #  Manually managed files national_rail_stations_twitter.csv and operators_twitter.csv
+  #  ReferenceDataHelper.update_twitter
 
 
   # Constants from Appendix 1 of CIF Specification
@@ -437,6 +440,27 @@ module ReferenceDataHelper
         station_id = station.id if station
       end
       timing_points << TimingPoint.where(code: code).first_or_create(name: name, station_id: station_id, stanox: stanox)
+    end
+    return
+  end
+
+
+  # This populates Train Station and Operators twitter accounts from static files
+  # comma delimited national_rail_stations_twitter.csv and operators_twitter.csv
+  def self.update_twitter
+    File.readlines('reference/national_rail_stations_twitter.csv').each do |line|
+      parts = line.split(",")
+      next if parts.length < 2
+      code = parts[0].strip
+      twitter = parts[1].strip
+      Station.where(crs: code).update_all(twitter: twitter)
+    end
+    File.readlines('reference/operators_twitter.csv').each do |line|
+      parts = line.split(",")
+      next if parts.length < 2
+      code = parts[0].strip
+      twitter = parts[1].strip
+      Operator.where(code: code).update_all(twitter: twitter)
     end
     return
   end

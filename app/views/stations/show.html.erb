@@ -9,13 +9,22 @@
 	<div class="row">
 		<div class="col-md-4">
 
-			<img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwBBACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="width:180px;height:180px">
+			<p><img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwBBACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="width:180px;height:180px"></p>
 
-			<h3>Details</h3>
+		<% if @station.address and !@station.address.empty? %>
 			<p><%= @station.address %></p>
-			<p><%= link_to @station.phone %></p>
+		<% end %>
 
-			<h3>Facilities</h3>
+		<% if @station.phone and !@station.phone.empty? %>
+			<p><%= link_to @station.phone, "tel:" + @station.phone.gsub(" ", "") %></p>
+		<% end %>
+
+		<% if @station.twitter and !@station.twitter.empty? %>
+			<p><%= link_to @station.twitter, "http://twitter.com/" + @station.twitter %></p>
+		<% end %>
+
+		<% if !@station.facilities.empty? %>
+			<h5>Facilities</h5>
 			<table class="table-striped">
 				<% @station.facilities.each do |k,v | %>
 				<tr>
@@ -24,6 +33,7 @@
 				</tr>
 			<% end %>
 			</table>
+		<% end %>
 
 		</div>
 		<div class="col-md-4">
