@@ -33,20 +33,17 @@ class Station < ActiveRecord::Base
 
   def get_tube_board
     if underground?
-      station_board = StationBoard.new
-      tube_lines.each do |line|
-        line.services = UndergroundApiHelper.get_service_items_for_line_at_station(line.code, underground_code)
-        station_board.tube_lines << line
-      end
-      return station_board
+      return UndergroundApiHelper.get_board underground_naptan
     end
   end
+
 
   def get_detailed_board
     if national_rail?
       return NationalRailApiHelper.get_detailed_board crs
     end
   end
+
 
   def favourite? user
     if user
