@@ -14,7 +14,7 @@
 
 	<div class="list-group">
 	<% @service.calling_points.each do |calling_point| %>
-		<a href="<%= calling_point.form_url @service if calling_point.at.empty? %>" class="list-group-item <%= calling_point.css(@service.station) %>">
+		<a href="<%= calling_point.form_url @service if calling_point.at.nil? %>" class="list-group-item <%= calling_point.css(@service.station) %>">
 			<h4 class="list-group-item-heading"><%= calling_point.st %> <%= calling_point %></h4>
 			<p class="list-group-item-text"><%= calling_point.time %></p>
 		</a>

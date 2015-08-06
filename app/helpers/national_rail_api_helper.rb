@@ -57,22 +57,34 @@ module NationalRailApiHelper
     service.station = Station.find_by crs: xml.css('crs').first.text
     service.operator = Operator.find_by code: xml.css('operatorCode').text
     service.platform = xml.css('platfom').text
-    service.sta = xml.css('sta').text
-    service.eta = xml.css('eta').text
-    service.ata = xml.css('ata').text
-    service.std = xml.css('std').text
-    service.etd = xml.css('etd').text
-    service.atd = xml.css('atd').text
+    service.sta = convert_time_string_to_datetime xml.css('sta').text
+    service.eta = convert_time_string_to_datetime xml.css('eta').text
+    service.ata = convert_time_string_to_datetime xml.css('ata').text
+    service.std = convert_time_string_to_datetime xml.css('std').text
+    service.etd = convert_time_string_to_datetime xml.css('etd').text
+    service.atd = convert_time_string_to_datetime xml.css('atd').text
     service.previous_calling_points = []
     service.subsequent_calling_points = []
     if xml.css('previousCallingPoints').children.size > 0
       xml.css('previousCallingPoints').css('callingPoint').each do |calling_point_xml|
-        service.previous_calling_points << CallingPoint.new(calling_point_xml)
+        calling_point = CallingPoint.new
+        calling_point.station = Station.find_by crs: calling_point_xml.css('crs').text
+        calling_point.st = convert_time_string_to_datetime calling_point_xml.css('st').text
+        calling_point.et = convert_time_string_to_datetime calling_point_xml.css('et').text
+        calling_point.at = convert_time_string_to_datetime calling_point_xml.css('at').text
+        calling_point.cancelled = calling_point_xml.css('et').text == "Cancelled"
+        service.previous_calling_points << calling_point
       end
     end
     if xml.css('subsequentCallingPoints').children.size > 0
       xml.css('subsequentCallingPoints').css('callingPoint').each do |calling_point_xml|
-        service.subsequent_calling_points << CallingPoint.new(calling_point_xml)
+        calling_point = CallingPoint.new
+        calling_point.station = Station.find_by crs: calling_point_xml.css('crs').text
+        calling_point.st = convert_time_string_to_datetime calling_point_xml.css('st').text
+        calling_point.et = convert_time_string_to_datetime calling_point_xml.css('et').text
+        calling_point.at = convert_time_string_to_datetime calling_point_xml.css('at').text
+        calling_point.cancelled = calling_point_xml.css('et').text == "Cancelled"
+        service.subsequent_calling_points << calling_point
       end
     end
     return service

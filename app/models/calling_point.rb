@@ -1,5 +1,5 @@
 class CallingPoint
-  attr_accessor :station, :st, :et, :at
+  attr_accessor :station, :st, :et, :at, :cancelled
 
 
   def to_s
@@ -8,19 +8,19 @@ class CallingPoint
 
 
   def is_cancelled?
-    self.et == "Cancelled"
+    cancelled
   end
 
 
   def time
-    return at if !at.empty?
-    return et if !et.empty?
+    return at if at
+    return et if et
   end
 
 
   def css station
     return "list-group-item-info" if self.station == station
-    return "disabled" if !at.empty?
+    return "disabled" if at
     return "list-group-item-danger" if is_cancelled?
   end
 

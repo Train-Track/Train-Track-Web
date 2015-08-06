@@ -3,8 +3,8 @@ class Service
   attr_accessor :previous_calling_points, :subsequent_calling_points, :is_cancelled, :disruption_reason, :overdue_message
 
 
-  def initialize service_id
-    self.id = service_id
+  def initialize
+
   end
 
 
@@ -24,20 +24,18 @@ class Service
 
 
   def calling_points
-    here = CallingPoint.new nil
+    here = CallingPoint.new
     here.station = self.station
-    if self.std.empty?
-      here.st = self.sta
-      here.et = self.eta
-      here.at = self.ata
-    else
+    if self.std
       here.st = self.std
       here.et = self.etd
       here.at = self.atd
+    else
+      here.st = self.sta
+      here.et = self.eta
+      here.at = self.ata
     end
-    if is_cancelled?
-      here.et = "Cancelled"
-    end
+    here.cancelled = is_cancelled?
     return [previous_calling_points, [here], subsequent_calling_points].flatten
   end
 
