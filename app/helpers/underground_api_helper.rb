@@ -39,7 +39,14 @@ module UndergroundApiHelper
       service_item.platform = entry['platformName']
       service_item.line = Tube::Line.find_by name: entry['lineName']
       service_item.operator = operator
-      #service_item.service_id = 'TUBE-' + '-' + entry['naptanId'] + entry['lineId'] + '-' + entry['direction']
+      service_item.service_id = 'TUBE-'
+      service_item.service_id += entry['naptanId'] if entry['naptanId']
+      service_item.service_id += '-'
+      service_item.service_id += entry['destinationNaptanId'] if entry['destinationNaptanId']
+      service_item.service_id += '-'
+      service_item.service_id += entry['lineId'] if entry['lineId']
+      service_item.service_id += '-'
+      service_item.service_id += entry['direction'] if entry['direction']
       service_item.previous_calling_points = []
       service_item.subsequent_calling_points = []
       board.train_services << service_item

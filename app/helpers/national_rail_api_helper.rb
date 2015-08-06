@@ -18,17 +18,17 @@ module NationalRailApiHelper
 
 
   def self.get_departure_board crs
-    return NationalRailApiHelper.get_board DEPARTURE_BOARD, crs
+    return get_board DEPARTURE_BOARD, crs
   end
 
 
   def self.get_arrival_board crs
-    return NationalRailApiHelper.get_board ARRIVAL_BOARD, crs
+    return get_board ARRIVAL_BOARD, crs
   end
 
 
   def self.get_detailed_board crs
-    return NationalRailApiHelper.get_board DETAILED_BOARD, crs
+    return get_board DETAILED_BOARD, crs
   end
 
 
@@ -48,11 +48,38 @@ module NationalRailApiHelper
       return
     end
     xml.remove_namespaces!
-    service = Service.new service_id
-    service.parse(xml)
+    service = Service.new
+    service.id = service_id
+    service.service_type = xml.css('serviceType').text
+    service.is_cancelled = !xml.css('isCancelled').empty?
+    service.disruption_reason = ActionView::Base.full_sanitizer.sanitize(xml.css('disruptionReason').text)
+    service.overdue_message = ActionView::Base.full_sanitizer.sanitize(xml.css('overdueMessage').text)
+    service.station = Station.find_by crs: xml.css('crs').first.text
+    service.operator = Operator.find_by code: xml.css('operatorCode').text
+    service.platform = xml.css('platfom').text
+    service.sta = xml.css('sta').text
+    service.eta = xml.css('eta').text
+    service.ata = xml.css('ata').text
+    service.std = xml.css('std').text
+    service.etd = xml.css('etd').text
+    service.atd = xml.css('atd').text
+    service.previous_calling_points = []
+    service.subsequent_calling_points = []
+    if xml.css('previousCallingPoints').children.size > 0
+      xml.css('previousCallingPoints').css('callingPoint').each do |calling_point_xml|
+        service.previous_calling_points << CallingPoint.new(calling_point_xml)
+      end
+    end
+    if xml.css('subsequentCallingPoints').children.size > 0
+      xml.css('subsequentCallingPoints').css('callingPoint').each do |calling_point_xml|
+        service.subsequent_calling_points << CallingPoint.new(calling_point_xml)
+      end
+    end
     return service
   end
 
+
+  protected
 
   def self.get_board type, crs
     # If we are getting full details then do not use offset as you loose the details
@@ -76,8 +103,81 @@ module NationalRailApiHelper
     end
     xml.remove_namespaces!
     station_board = StationBoard.new
-    station_board.parse(xml)
+    xml.css('nrccMessages').children.each do |message|
+      station_board.nrcc_messages << ActionView::Base.full_sanitizer.sanitize(message.text)
+    end
+    xml.css('trainServices').children.each do |train_service_xml|
+      service_item = ServiceItem.new
+      service_item.origin = Station.find_by crs: train_service_xml.css('origin crs').text
+      service_item.destination = Station.find_by crs: train_service_xml.css('destination crs').text
+
+      service_item.sta = convert_time_string_to_datetime train_service_xml.css('sta').text
+      estimate = train_service_xml.css('eta').text
+      if estimate == "On time"
+        service_item.eta = service_item.sta
+      elsif estimate.include? ':'
+        service_item.eta = convert_time_string_to_datetime estimate
+      else
+        service_item.eta = nil
+      end
+
+      service_item.std = convert_time_string_to_datetime train_service_xml.css('std').text
+      estimate = train_service_xml.css('etd').text
+      if estimate == "On time"
+        service_item.etd = service_item.std
+      elsif estimate.include? ':'
+        service_item.etd = convert_time_string_to_datetime estimate
+      else
+        service_item.etd = nil
+      end
+
+      service_item.platform = train_service_xml.css('platform').text
+      service_item.operator = Operator.find_by code: train_service_xml.css('operatorCode').text
+      service_item.service_id = train_service_xml.css('serviceID').text
+
+      service_item.previous_calling_points = []
+      service_item.subsequent_calling_points = []
+      if train_service_xml.css('previousCallingPoints').children.size > 0
+        train_service_xml.css('previousCallingPoints').css('callingPoint').each do |calling_point_xml|
+          calling_point = CallingPoint.new
+          calling_point.station = Station.find_by crs: calling_point_xml.css('crs').text
+          calling_point.st = calling_point_xml.css('st').text
+          calling_point.et = calling_point_xml.css('et').text
+          calling_point.at = calling_point_xml.css('at').text
+          service_item.previous_calling_points << calling_point
+        end
+      end
+      if train_service_xml.css('subsequentCallingPoints').children.size > 0
+        train_service_xml.css('subsequentCallingPoints').css('callingPoint').each do |calling_point_xml|
+          calling_point = CallingPoint.new
+          calling_point.station = Station.find_by crs: calling_point_xml.css('crs').text
+          calling_point.st = calling_point_xml.css('st').text
+          calling_point.et = calling_point_xml.css('et').text
+          calling_point.at = calling_point_xml.css('at').text
+          service_item.subsequent_calling_points << calling_point
+        end
+      end
+
+      station_board.train_services << service_item
+    end
     return station_board
+  end
+
+
+  def self.convert_time_string_to_datetime string
+    if string.nil? or string.empty?
+      return
+    elsif string.include? ':'
+      now = DateTime.now
+      time = string.split(':')
+      # TODO Fix midnight rollovers, if time is in past, add 1 day
+      begin
+        return DateTime.new(now.year, now.month, now.day, time[0].to_i, time[1].to_i)
+      rescue => e
+        puts e.inspect
+        return
+      end
+    end 
   end
 
 

@@ -1,33 +1,29 @@
 class CallingPoint
   attr_accessor :station, :st, :et, :at
 
-  def initialize xml
-    return if xml.nil?
-    self.station = Station.find_by crs: xml.css('crs').text
-    Rails.logger.error "Cannot find station with CRS: " + xml.css('crs').text if self.station.nil?
-    self.st = xml.css('st').text
-    self.et = xml.css('et').text
-    self.at = xml.css('at').text
-  end
 
   def to_s
     station.to_s
   end
 
+
   def is_cancelled?
     self.et == "Cancelled"
   end
+
 
   def time
     return at if !at.empty?
     return et if !et.empty?
   end
 
+
   def css station
     return "list-group-item-info" if self.station == station
     return "disabled" if !at.empty?
     return "list-group-item-danger" if is_cancelled?
   end
+
 
   def form_url service
     "/journeys/new?journey_leg[departure_station_id]=#{service.station.id}&" +
@@ -40,5 +36,6 @@ class CallingPoint
     "journey_leg[actual_arrival]=#{et}&" +
     "journey_leg[operator_id]=#{service.operator.id}&"
   end
+
 
 end
