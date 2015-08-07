@@ -12,10 +12,17 @@
 	</div>
 <% end %>
 
+<% if !@service.overdue_message.empty? %>
+	<div class="alert alert-info" role="alert">
+		<%= icon('exclamation-sign') %>
+		<%= @service.overdue_message %>
+	</div>
+<% end %>
+
 	<div class="list-group">
 	<% @service.calling_points.each do |calling_point| %>
 		<a href="<%= calling_point.form_url @service if calling_point.at.nil? %>" class="list-group-item <%= calling_point.css(@service.station) %>">
-			<h4 class="list-group-item-heading"><%= calling_point.st %> <%= calling_point %></h4>
+			<h4 class="list-group-item-heading"><%= calling_point.st.strftime('%H:%M') %> <%= calling_point %></h4>
 			<p class="list-group-item-text"><%= calling_point.time %></p>
 		</a>
 	<% end %>

@@ -1,5 +1,5 @@
 class CallingPoint
-  attr_accessor :station, :st, :et, :at, :cancelled
+  attr_accessor :station, :st, :et, :at, :cancelled, :delayed
 
 
   def to_s
@@ -12,9 +12,16 @@ class CallingPoint
   end
 
 
+  def is_delayed?
+    delayed
+  end
+
+
   def time
     return at if at
     return et if et
+    return "Delayed" if is_delayed?
+    return "Cancelled" if is_cancelled?
   end
 
 

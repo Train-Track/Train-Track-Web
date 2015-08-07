@@ -20,8 +20,12 @@
 	    <a href="<%= service_item.url %>" class="list-group-item">
 	    	<div class="row">
 	    		<div class="col-xs-10">
-					<h4 class="list-group-item-heading"><%= service_item.std %> <%= service_item.destination %></h4>
-					<p class="list-group-item-text text-<%= service_item.css %>"><%= service_item.etd %></p>					
+					<h4 class="list-group-item-heading"><%= service_item %></h4>
+					<p class="list-group-item-text text-<%= service_item.css %>">
+						<%= service_item.etd.strftime('%H:%M') if service_item.etd %>
+						<%= "Delayed" if service_item.etd.nil? and service_item.is_delayed? %>
+						<%= "Cancelled" if service_item.is_cancelled? %>
+					</p>
 					<p class="list-group-item-text">From <%= service_item.origin %> - <%= service_item.operator %></p>
 				</div>
 				<div class="col-xs-2 text-right">

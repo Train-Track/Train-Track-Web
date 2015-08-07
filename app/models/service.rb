@@ -14,7 +14,7 @@ class Service
 
 
   def to_s
-    "#{origin.st} #{origin.to_s} to #{destination.to_s}"
+    "#{origin.st.strftime('%H:%M')} #{origin.to_s} to #{destination.to_s}"
   end
 
 
