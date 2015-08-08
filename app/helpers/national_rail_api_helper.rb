@@ -70,11 +70,22 @@ module NationalRailApiHelper
         calling_point = CallingPoint.new
         calling_point.station = Station.find_by crs: calling_point_xml.css('crs').text
         calling_point.st = convert_time_string_to_datetime calling_point_xml.css('st').text
-        calling_point.et = convert_time_string_to_datetime calling_point_xml.css('et').text
         calling_point.at = convert_time_string_to_datetime calling_point_xml.css('at').text
-        calling_point.cancelled = calling_point_xml.css('et').text == "Cancelled"
-        calling_point.delayed = calling_point_xml.css('et').text == "Delayed"
-        calling_point.delayed = true if calling_point.et != calling_point.st
+        estimate = calling_point_xml.css('et').text
+        if estimate.include? ':'
+          calling_point.et = convert_time_string_to_datetime estimate
+          calling_point.cancelled = false
+          calling_point.delayed = calling_point.et != calling_point.st
+        elsif estimate == 'Cancelled'
+          calling_point.cancelled = true
+          calling_point.delayed = false
+        elsif estimate == 'Delayed'
+          calling_point.cancelled = false
+          calling_point.delayed = true
+        else
+          calling_point.cancelled = false
+          calling_point.delayed = false
+        end
         service.previous_calling_points << calling_point
       end
     end
@@ -83,11 +94,25 @@ module NationalRailApiHelper
         calling_point = CallingPoint.new
         calling_point.station = Station.find_by crs: calling_point_xml.css('crs').text
         calling_point.st = convert_time_string_to_datetime calling_point_xml.css('st').text
-        calling_point.et = convert_time_string_to_datetime calling_point_xml.css('et').text
         calling_point.at = convert_time_string_to_datetime calling_point_xml.css('at').text
-        calling_point.cancelled = calling_point_xml.css('et').text == "Cancelled"
-        calling_point.delayed = calling_point_xml.css('et').text == "Delayed"
-        calling_point.delayed = true if calling_point.et != calling_point.st
+        estimate = calling_point_xml.css('et').text
+        if estimate.include? ':'
+          calling_point.et = convert_time_string_to_datetime estimate
+          calling_point.cancelled = false
+          calling_point.delayed = calling_point.et != calling_point.st
+        elsif estimate == 'Cancelled'
+          calling_point.et = nil
+          calling_point.cancelled = true
+          calling_point.delayed = false
+        elsif estimate == 'Delayed'
+          calling_point.et = nil
+          calling_point.cancelled = false
+          calling_point.delayed = true
+        else
+          calling_point.et = nil
+          calling_point.cancelled = false
+          calling_point.delayed = false
+        end
         service.subsequent_calling_points << calling_point
       end
     end
@@ -129,23 +154,19 @@ module NationalRailApiHelper
 
       service_item.sta = convert_time_string_to_datetime train_service_xml.css('sta').text
       estimate = train_service_xml.css('eta').text
-      if estimate == "On time"
+      if estimate == 'On time'
         service_item.eta = service_item.sta
         service_item.delayed = false
         service_item.cancelled = false
       elsif estimate.include? ':'
         service_item.eta = convert_time_string_to_datetime estimate
-        if service_item.eta != service_item.sta
-          service_item.delayed = true
-        else
-          stdervice_item.delayed = false
-        end
+        service_item.delayed = service_item.eta != service_item.sta
         service_item.cancelled = false
-      elsif estimate == "Delayed"
+      elsif estimate == 'Delayed'
         service_item.eta = nil
         service_item.delayed = true
         service_item.cancelled = false
-      elsif estimate == "Cancelled"
+      elsif estimate == 'Cancelled'
         service_item.eta = nil
         service_item.delayed = false
         service_item.cancelled = true
@@ -153,23 +174,19 @@ module NationalRailApiHelper
 
       service_item.std = convert_time_string_to_datetime train_service_xml.css('std').text
       estimate = train_service_xml.css('etd').text
-      if estimate == "On time"
+      if estimate == 'On time'
         service_item.etd = service_item.std
         service_item.delayed = false
         service_item.cancelled = false
       elsif estimate.include? ':'
         service_item.etd = convert_time_string_to_datetime estimate
-        if service_item.etd != service_item.std
-          service_item.delayed = true
-        else
-          stdervice_item.delayed = false
-        end
+        service_item.delayed service_item.etd != service_item.std
         service_item.cancelled = false
-      elsif estimate == "Delayed"
+      elsif estimate == 'Delayed'
         service_item.etd = nil
         service_item.delayed = true
         service_item.cancelled = false
-      elsif estimate == "Cancelled"
+      elsif estimate == 'Cancelled'
         service_item.etd = nil
         service_item.delayed = false
         service_item.cancelled = true
