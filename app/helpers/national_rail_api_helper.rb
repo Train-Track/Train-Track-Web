@@ -180,7 +180,7 @@ module NationalRailApiHelper
         service_item.cancelled = false
       elsif estimate.include? ':'
         service_item.etd = convert_time_string_to_datetime estimate
-        service_item.delayed service_item.etd != service_item.std
+        service_item.delayed = service_item.etd != service_item.std
         service_item.cancelled = false
       elsif estimate == 'Delayed'
         service_item.etd = nil
