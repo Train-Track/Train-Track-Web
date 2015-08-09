@@ -1,5 +1,6 @@
 <% provide(:title, @service) %>
 <% provide(:description, "Details of the #{@service} service.") %>
+<% provide(:attribution, "Powered by TfL Open Data") if @service.id.starts_with? 'TUBE' %>
 
 <div class="container">
 	<h1><%= @service %></h1>
@@ -29,7 +30,5 @@
 		</a>
 	<% end %>
 	</div>
-
-	<%= data_feeds_link %>
 
 </div>

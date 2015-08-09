@@ -73,10 +73,6 @@ module UndergroundApiHelper
       service.eta = time
       service.std = time
       service.etd = time
-      # Add the destination of the service to calling points
-      calling_point = CallingPoint.new
-      calling_point.station = Station.find_by(underground_naptan: parts[2])
-      service.subsequent_calling_points << calling_point
       begin
         if DEBUG
           json = JSON.parse(TEST_DATA[:service])
@@ -88,6 +84,20 @@ module UndergroundApiHelper
       rescue => e
         puts e.inspect
         return service
+      end
+      previous_calling_point = true
+      json['orderedLineRoutes'][0]['naptanIds'].each do |naptan|
+        calling_point = CallingPoint.new
+        calling_point.station = Station.find_by underground_naptan: naptan
+        if calling_point.station == service.station
+          previous_calling_point = false
+          next
+        end
+        if previous_calling_point
+          service.previous_calling_points << calling_point
+        else
+          service.subsequent_calling_points << calling_point
+        end
       end
       return service
   end
