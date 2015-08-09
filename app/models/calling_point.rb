@@ -33,15 +33,17 @@ class CallingPoint
 
 
   def form_url service
-    "/journeys/new?journey_leg[departure_station_id]=#{service.station.id}&" +
-    "journey_leg[arrival_station_id]=#{station.id}&" +
-    "journey_leg[departure_platform]=#{service.platform}&" +
-    "journey_leg[arrival_platform]=&" +
-    "journey_leg[scheduled_departure]=#{service.std}&" +
-    "journey_leg[actual_departure]=#{service.etd}&" +
-    "journey_leg[scheduled_arrival]=#{st}&" +
-    "journey_leg[actual_arrival]=#{et}&" +
-    "journey_leg[operator_id]=#{service.operator.id}&"
+    if service.station
+      return "/journeys/new?journey_leg[departure_station_id]=#{service.station.id}&" +
+      "journey_leg[arrival_station_id]=#{station.id}&" +
+      "journey_leg[departure_platform]=#{service.platform}&" +
+      "journey_leg[arrival_platform]=&" +
+      "journey_leg[scheduled_departure]=#{service.std}&" +
+      "journey_leg[actual_departure]=#{service.etd}&" +
+      "journey_leg[scheduled_arrival]=#{st}&" +
+      "journey_leg[actual_arrival]=#{et}&" +
+      "journey_leg[operator_id]=#{service.operator.id}&"
+    end
   end
 
 

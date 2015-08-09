@@ -63,8 +63,6 @@ module NationalRailApiHelper
     service.std = convert_time_string_to_datetime xml.css('std').text
     service.etd = convert_time_string_to_datetime xml.css('etd').text
     service.atd = convert_time_string_to_datetime xml.css('atd').text
-    service.previous_calling_points = []
-    service.subsequent_calling_points = []
     if xml.css('previousCallingPoints').children.size > 0
       xml.css('previousCallingPoints').css('callingPoint').each do |calling_point_xml|
         calling_point = CallingPoint.new

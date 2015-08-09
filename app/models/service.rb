@@ -4,17 +4,19 @@ class Service
 
 
   def initialize
-
-  end
-
-
-  def uuid
-    "#{operator.code}#{origin.st}#{origin.station.crs}"
+    @previous_calling_points = []
+    @subsequent_calling_points = []
+    @disruption_reason = []
+    @overdue_message = []
   end
 
 
   def to_s
-    "#{origin.st.strftime('%H:%M')} #{origin.to_s} to #{destination.to_s}"
+    string = "#{origin.to_s} to #{destination.to_s}"
+    if origin.st
+      string = "#{origin.st.strftime('%H:%M')} #{string}"
+    end
+    return string
   end
 
 
@@ -51,7 +53,11 @@ class Service
 
 
   def self.get_service service_id
-    NationalRailApiHelper.get_service service_id
+    if service_id.start_with? 'TUBE'
+      return UndergroundApiHelper.get_service service_id
+    else
+      return NationalRailApiHelper.get_service service_id
+    end
   end
 
 
