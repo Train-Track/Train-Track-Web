@@ -20,8 +20,12 @@
 		<a href="<%= service_item.url %>" class="list-group-item">
 			<div class="row">
 	    		<div class="col-xs-10">
-					<h4 class="list-group-item-heading"><%= service_item.std %> <%= service_item.destination %></h4>
-					<p class="list-group-item-text text-<%= service_item.css %>"><%= service_item.etd %></p>					
+					<h4 class="list-group-item-heading">
+						<%= service_item.std.strftime('%H:%M') if service_item.std %> <%= service_item.destination %>
+					</h4>
+					<p class="list-group-item-text text-<%= service_item.css %>">
+						<%= service_item.etd.strftime('%H:%M') if service_item.etd %>
+					</p>
 					<p class="list-group-item-text">
 						<span class="label" style="<%= service_item.line.style %>"><%= service_item.line %></span>
 						<%= service_item.operator %>
