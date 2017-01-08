@@ -50,7 +50,7 @@ module UndergroundApiHelper
       service_item.service_id += '-'
       service_item.service_id += entry['direction'] if entry['direction']
       service_item.service_id += '-'
-      service_item.service_id += time.to_i.to_s if time     
+      service_item.service_id += time.to_i.to_s if time
       service_item.previous_calling_points = []
       service_item.subsequent_calling_points = []
       board.train_services << service_item
@@ -225,6 +225,7 @@ module UndergroundApiHelper
 
 
   # Get the current underground lines status
+  # Add the lines to the database at the same time
   # @return an array of underground lines
   def self.get_status
     lines = []
