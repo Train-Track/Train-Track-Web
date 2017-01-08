@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150802181632) do
+ActiveRecord::Schema.define(version: 20170108144432) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -65,6 +65,9 @@ ActiveRecord::Schema.define(version: 20150802181632) do
     t.datetime "updated_at",                  null: false
     t.string   "numeric_code",    limit: 255
     t.string   "uuid",            limit: 255
+    t.string   "phone",           limit: 255
+    t.string   "website",         limit: 255
+    t.string   "email",           limit: 255
   end
 
   add_index "operators", ["uuid"], name: "index_operators_on_uuid", unique: true, using: :btree

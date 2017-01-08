@@ -16,17 +16,32 @@
 				<tr><td>Very Late/Cancelled</td><td><%= @operator.ppm.cancel_very_late %></td></tr>
 				<tr><td><strong>Total</strong></td><td><strong><%= @operator.ppm.total %></strong></td></tr>
 			</table>
-			<p>Last updated: <%= @operator.ppm.created_at %></p>	
+			<p>Last updated: <%= @operator.ppm.created_at %></p>
 		</div>
 	<% end %>
 
 		<div class="col-md-6">
-			<h3>Contact the Operator</h3>
-			<p><img src="/twitter.png" height="30"> <%= link_to "@" + @operator.twitter, @operator.tweet_url, target: "_blank" %></p>
-			
+		<% if @operator.twitter %>
+			<p>Twitter: <%= link_to "@" + @operator.twitter, @operator.tweet_url, target: "_blank" %></p>
+		<% end %>
+
+		<% if @operator.website %>
+			<p>Website: <%= link_to @operator.website, @operator.website_url, target: "_blank" %></p>
+		<% end %>
+
+		<% if @operator.phone %>
+			<p>Phone: <%= link_to @operator.phone, @operator.phone_url, target: "_blank" %></p>
+		<% end %>
+
+		<% if @operator.email %>
+			<p>Email: <%= link_to @operator.email, @operator.email_url, target: "_blank" %></p>
+		<% end %>
+
+		<% if @operator.delay_repay_url %>
 			<h3>Delayed Train?</h3>
 			<p>Was your train cancelled or delayed? You may be eligable for compensation. Take a look at details here:</p>
 			<%= link_to "Delay Repay", @operator.delay_repay_url, class: "btn btn-default" %>
+		<% end %>
 		</div>
 
 	</div>

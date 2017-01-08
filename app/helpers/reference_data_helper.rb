@@ -14,9 +14,12 @@ module ReferenceDataHelper
   # Timing Points:
   #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
   #   ReferenceDataHelper.update_corpus
-  # Station and Operator Twitter:
-  #  Manually managed files national_rail_stations_twitter.csv and operators_twitter.csv
-  #  ReferenceDataHelper.update_twitter
+  # Station Twitter:
+  #  Manually managed file: national_rail_stations_twitter.csv
+  #  ReferenceDataHelper.update_station_twitter
+  # Operators Contact Information:
+  #  Manually managed file: operators.csv
+  #  ReferenceDataHelper.update_operators_contact
 
 
   # Constants from Appendix 1 of CIF Specification
@@ -343,7 +346,7 @@ module ReferenceDataHelper
   # https://api.tfl.gov.uk/StopPoint/Mode/tube,tflrail,dlr,overground
   def self.update_tube_naptan
     json = JSON.parse(File.read('reference/naptan.json'))
-    json.each do |entry|
+    json['stopPoints'].each do |entry|
       next if entry['stopType'] != "NaptanMetroStation"
       name = entry['commonName'].gsub(' Underground Station', '')
       naptan = entry['naptanId']
@@ -385,7 +388,7 @@ module ReferenceDataHelper
     xml = Nokogiri::XML(File.open('reference/national_rail_reference_data.xml'))
 
     xml.css('TocRef').each do |toc|
-      code = toc.attr('code')
+      code = toc.attr('toc')
       name = toc.attr('tocname')
 
       # Not interested in things that we don't know the name of
@@ -445,9 +448,9 @@ module ReferenceDataHelper
   end
 
 
-  # This populates Train Station and Operators twitter accounts from static files
-  # comma delimited national_rail_stations_twitter.csv and operators_twitter.csv
-  def self.update_twitter
+  # This populates Train Station twitter accounts from a static file
+  # comma delimited national_rail_stations_twitter.csv
+  def self.update_station_twitter
     File.readlines('reference/national_rail_stations_twitter.csv').each do |line|
       parts = line.split(",")
       next if parts.length < 2
@@ -455,12 +458,28 @@ module ReferenceDataHelper
       twitter = parts[1].strip
       Station.where(crs: code).update_all(twitter: twitter)
     end
-    File.readlines('reference/operators_twitter.csv').each do |line|
+    return
+  end
+
+  # This populates Operators contact details from static file
+  # comma delimited operators.csv
+  def self.update_operators_contact
+    File.readlines('reference/operators.csv').each do |line|
       parts = line.split(",")
-      next if parts.length < 2
-      code = parts[0].strip
-      twitter = parts[1].strip
-      Operator.where(code: code).update_all(twitter: twitter)
+      next if parts.length < 5
+      code = parts[0].strip unless parts[0].strip.empty?
+      twitter = parts[1].strip unless parts[1].strip.empty?
+      website = parts[2].strip unless parts[2].strip.empty?
+      phone = parts[3].strip unless parts[3].strip.empty?
+      email = parts[4].strip unless parts[4].strip.empty?
+      delay_repay_url = parts[5].strip unless parts[5].nil? or parts[5].strip.empty?
+
+      Operator.where(code: code).update_all(
+        twitter: twitter,
+        website: website,
+        phone: phone,
+        email: email,
+        delay_repay_url: delay_repay_url)
     end
     return
   end

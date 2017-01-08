@@ -20,8 +20,20 @@ class Operator < ActiveRecord::Base
     "https://twitter.com/intent/tweet?via=traintrackapp&related=traintrackapp&text=@" + twitter
   end
 
+  def website_url
+    "http://" + website
+  end
+
+  def phone_url
+    "tel:" + phone.gsub(' ', '')
+  end
+
+  def email_url
+    "mailto:" + email
+  end
+
   protected
-  
+
   def add_uuid
     self.uuid = SecureRandom.uuid if uuid.nil?
   end
