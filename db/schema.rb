@@ -14,222 +14,227 @@
 ActiveRecord::Schema.define(version: 20150802181632) do
 
   create_table "badges", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "image_url"
-    t.integer  "points"
-    t.datetime "created_at",            null: false
-    t.datetime "updated_at",            null: false
-    t.string   "google_achievement_id"
-    t.string   "uuid"
+    t.string   "name",                  limit: 255
+    t.string   "description",           limit: 255
+    t.string   "image_url",             limit: 255
+    t.integer  "points",                limit: 4
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+    t.string   "google_achievement_id", limit: 255
+    t.string   "uuid",                  limit: 255
   end
 
-  add_index "badges", ["uuid"], name: "index_badges_on_uuid", unique: true
+  add_index "badges", ["uuid"], name: "index_badges_on_uuid", unique: true, using: :btree
 
   create_table "journey_legs", force: :cascade do |t|
-    t.integer  "journey_id"
-    t.integer  "departure_station_id", null: false
-    t.integer  "arrival_station_id",   null: false
+    t.integer  "journey_id",           limit: 4
+    t.integer  "departure_station_id", limit: 4,   null: false
+    t.integer  "arrival_station_id",   limit: 4,   null: false
     t.datetime "scheduled_departure"
     t.datetime "scheduled_arrival"
     t.datetime "actual_departure"
     t.datetime "actual_arrival"
-    t.string   "departure_platform"
-    t.string   "arrival_platform"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.integer  "operator_id"
-    t.string   "uuid"
+    t.string   "departure_platform",   limit: 255
+    t.string   "arrival_platform",     limit: 255
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "operator_id",          limit: 4
+    t.string   "uuid",                 limit: 255
   end
 
-  add_index "journey_legs", ["journey_id"], name: "index_journey_legs_on_journey_id"
-  add_index "journey_legs", ["uuid"], name: "index_journey_legs_on_uuid", unique: true
+  add_index "journey_legs", ["journey_id"], name: "index_journey_legs_on_journey_id", using: :btree
+  add_index "journey_legs", ["operator_id"], name: "fk_rails_fd1edbb84a", using: :btree
+  add_index "journey_legs", ["uuid"], name: "index_journey_legs_on_uuid", unique: true, using: :btree
 
   create_table "journeys", force: :cascade do |t|
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "uuid"
-  end
-
-  add_index "journeys", ["user_id"], name: "index_journeys_on_user_id"
-  add_index "journeys", ["uuid"], name: "index_journeys_on_uuid", unique: true
-
-  create_table "operators", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.string   "twitter"
-    t.string   "delay_repay_url"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "numeric_code"
-    t.string   "uuid"
-  end
-
-  add_index "operators", ["uuid"], name: "index_operators_on_uuid", unique: true
-
-  create_table "ppms", force: :cascade do |t|
-    t.integer  "operator_id"
-    t.integer  "ppm"
-    t.integer  "on_time"
-    t.integer  "late"
-    t.integer  "cancel_very_late"
-    t.integer  "total"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "name"
-  end
-
-  add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id"
-
-  create_table "station_tube_lines", id: false, force: :cascade do |t|
-    t.integer "tube_line_id"
-    t.integer "id"
-    t.integer "running_time"
-    t.integer "distance"
-    t.integer "from_id"
-    t.integer "to_id"
-    t.string  "direction"
-  end
-
-  add_index "station_tube_lines", ["id"], name: "index_station_tube_lines_on_id"
-  add_index "station_tube_lines", ["tube_line_id"], name: "index_station_tube_lines_on_tube_station_id_and_tube_line_id"
-
-  create_table "stations", force: :cascade do |t|
-    t.string   "name"
-    t.string   "crs"
-    t.decimal  "lat",                precision: 10, scale: 7
-    t.decimal  "lng",                precision: 10, scale: 7
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-    t.string   "number"
-    t.text     "facilities"
-    t.string   "phone"
-    t.string   "address"
-    t.string   "underground_zones"
-    t.boolean  "underground"
-    t.string   "underground_code"
-    t.string   "uuid"
-    t.boolean  "national_rail"
-    t.string   "twitter"
-    t.integer  "operator_id"
-    t.string   "rail_naptan"
-    t.string   "underground_naptan"
-  end
-
-  add_index "stations", ["number"], name: "index_stations_on_number"
-  add_index "stations", ["rail_naptan"], name: "index_stations_on_rail_naptan"
-  add_index "stations", ["underground_naptan"], name: "index_stations_on_underground_naptan"
-  add_index "stations", ["uuid"], name: "index_stations_on_uuid", unique: true
-
-  create_table "timetable_calling_points", force: :cascade do |t|
-    t.integer  "timetable_id"
-    t.string   "calling_point_type"
-    t.boolean  "cancelled"
-    t.string   "tiploc_code"
-    t.integer  "timing_point_id"
-    t.integer  "station_id"
-    t.string   "public_time_arrival"
-    t.string   "public_time_departure"
-    t.string   "working_time_arrival"
-    t.string   "working_time_departure"
-    t.string   "working_time_passing"
-    t.string   "platform"
-    t.text     "activities"
-    t.text     "planned_activities"
+    t.integer  "user_id",    limit: 4
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.string   "uuid",       limit: 255
   end
 
-  add_index "timetable_calling_points", ["station_id"], name: "index_timetable_calling_points_on_station_id"
-  add_index "timetable_calling_points", ["timetable_id"], name: "index_timetable_calling_points_on_timetable_id"
-  add_index "timetable_calling_points", ["timing_point_id"], name: "index_timetable_calling_points_on_timing_point_id"
+  add_index "journeys", ["user_id"], name: "index_journeys_on_user_id", using: :btree
+  add_index "journeys", ["uuid"], name: "index_journeys_on_uuid", unique: true, using: :btree
+
+  create_table "operators", force: :cascade do |t|
+    t.string   "name",            limit: 255
+    t.string   "code",            limit: 255
+    t.string   "twitter",         limit: 255
+    t.string   "delay_repay_url", limit: 255
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.string   "numeric_code",    limit: 255
+    t.string   "uuid",            limit: 255
+  end
+
+  add_index "operators", ["uuid"], name: "index_operators_on_uuid", unique: true, using: :btree
+
+  create_table "ppms", force: :cascade do |t|
+    t.integer  "operator_id",      limit: 4
+    t.integer  "ppm",              limit: 4
+    t.integer  "on_time",          limit: 4
+    t.integer  "late",             limit: 4
+    t.integer  "cancel_very_late", limit: 4
+    t.integer  "total",            limit: 4
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "name",             limit: 255
+  end
+
+  add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id", using: :btree
+
+  create_table "station_tube_lines", id: false, force: :cascade do |t|
+    t.integer "tube_line_id", limit: 4
+    t.integer "id",           limit: 4
+    t.integer "running_time", limit: 4
+    t.integer "distance",     limit: 4
+    t.integer "from_id",      limit: 4
+    t.integer "to_id",        limit: 4
+    t.string  "direction",    limit: 255
+  end
+
+  add_index "station_tube_lines", ["id"], name: "index_station_tube_lines_on_id", using: :btree
+  add_index "station_tube_lines", ["tube_line_id"], name: "index_station_tube_lines_on_tube_station_id_and_tube_line_id", using: :btree
+
+  create_table "stations", force: :cascade do |t|
+    t.string   "name",               limit: 255
+    t.string   "crs",                limit: 255
+    t.decimal  "lat",                              precision: 10, scale: 7
+    t.decimal  "lng",                              precision: 10, scale: 7
+    t.datetime "created_at",                                                null: false
+    t.datetime "updated_at",                                                null: false
+    t.string   "number",             limit: 255
+    t.text     "facilities",         limit: 65535
+    t.string   "phone",              limit: 255
+    t.string   "address",            limit: 255
+    t.string   "underground_zones",  limit: 255
+    t.boolean  "underground",        limit: 1
+    t.string   "underground_code",   limit: 255
+    t.string   "uuid",               limit: 255
+    t.boolean  "national_rail",      limit: 1
+    t.string   "twitter",            limit: 255
+    t.integer  "operator_id",        limit: 4
+    t.string   "rail_naptan",        limit: 255
+    t.string   "underground_naptan", limit: 255
+  end
+
+  add_index "stations", ["number"], name: "index_stations_on_number", using: :btree
+  add_index "stations", ["rail_naptan"], name: "index_stations_on_rail_naptan", using: :btree
+  add_index "stations", ["underground_naptan"], name: "index_stations_on_underground_naptan", using: :btree
+  add_index "stations", ["uuid"], name: "index_stations_on_uuid", unique: true, using: :btree
+
+  create_table "timetable_calling_points", force: :cascade do |t|
+    t.integer  "timetable_id",           limit: 4
+    t.string   "calling_point_type",     limit: 255
+    t.boolean  "cancelled",              limit: 1
+    t.string   "tiploc_code",            limit: 255
+    t.integer  "timing_point_id",        limit: 4
+    t.integer  "station_id",             limit: 4
+    t.string   "public_time_arrival",    limit: 255
+    t.string   "public_time_departure",  limit: 255
+    t.string   "working_time_arrival",   limit: 255
+    t.string   "working_time_departure", limit: 255
+    t.string   "working_time_passing",   limit: 255
+    t.string   "platform",               limit: 255
+    t.text     "activities",             limit: 65535
+    t.text     "planned_activities",     limit: 65535
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "timetable_calling_points", ["station_id"], name: "index_timetable_calling_points_on_station_id", using: :btree
+  add_index "timetable_calling_points", ["timetable_id"], name: "index_timetable_calling_points_on_timetable_id", using: :btree
+  add_index "timetable_calling_points", ["timing_point_id"], name: "index_timetable_calling_points_on_timing_point_id", using: :btree
 
   create_table "timetables", force: :cascade do |t|
-    t.string   "rtti_id"
-    t.string   "uuid"
-    t.integer  "operator_id"
-    t.string   "train_id"
-    t.string   "schedule_id"
+    t.string   "rtti_id",             limit: 255
+    t.string   "uuid",                limit: 255
+    t.integer  "operator_id",         limit: 4
+    t.string   "train_id",            limit: 255
+    t.string   "schedule_id",         limit: 255
     t.date     "start_date"
-    t.string   "train_type"
-    t.string   "train_category"
-    t.text     "late_running_reason"
-    t.text     "cancellation_reason"
-    t.datetime "created_at",          null: false
-    t.datetime "updated_at",          null: false
+    t.string   "train_type",          limit: 255
+    t.string   "train_category",      limit: 255
+    t.text     "late_running_reason", limit: 65535
+    t.text     "cancellation_reason", limit: 65535
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
   end
 
-  add_index "timetables", ["uuid"], name: "index_timetables_on_uuid"
+  add_index "timetables", ["uuid"], name: "index_timetables_on_uuid", using: :btree
 
   create_table "timing_points", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.string   "uuid"
-    t.integer  "station_id"
-    t.decimal  "lat",        precision: 10, scale: 7
-    t.decimal  "lng",        precision: 10, scale: 7
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "stanox"
+    t.string   "name",       limit: 255
+    t.string   "code",       limit: 255
+    t.string   "uuid",       limit: 255
+    t.integer  "station_id", limit: 4
+    t.decimal  "lat",                    precision: 10, scale: 7
+    t.decimal  "lng",                    precision: 10, scale: 7
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
+    t.string   "stanox",     limit: 255
   end
 
-  add_index "timing_points", ["code", "uuid", "station_id"], name: "index_timing_points_on_code_and_uuid_and_station_id"
-  add_index "timing_points", ["stanox"], name: "index_timing_points_on_stanox"
+  add_index "timing_points", ["code", "uuid", "station_id"], name: "index_timing_points_on_code_and_uuid_and_station_id", using: :btree
+  add_index "timing_points", ["stanox"], name: "index_timing_points_on_stanox", using: :btree
 
   create_table "tube_lines", force: :cascade do |t|
-    t.string   "name"
-    t.string   "code"
-    t.string   "number"
-    t.string   "background_colour"
-    t.string   "text_colour"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
-    t.string   "uuid"
+    t.string   "name",              limit: 255
+    t.string   "code",              limit: 255
+    t.string   "number",            limit: 255
+    t.string   "background_colour", limit: 255
+    t.string   "text_colour",       limit: 255
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "uuid",              limit: 255
   end
 
-  add_index "tube_lines", ["code", "number"], name: "index_tube_lines_on_code_and_number"
-  add_index "tube_lines", ["uuid"], name: "index_tube_lines_on_uuid", unique: true
+  add_index "tube_lines", ["code", "number"], name: "index_tube_lines_on_code_and_number", using: :btree
+  add_index "tube_lines", ["uuid"], name: "index_tube_lines_on_uuid", unique: true, using: :btree
 
   create_table "user_badges", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "badge_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",    limit: 4
+    t.integer  "badge_id",   limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "user_favourite_stations", id: false, force: :cascade do |t|
-    t.integer "user_id",    null: false
-    t.integer "station_id", null: false
+    t.integer "user_id",    limit: 4, null: false
+    t.integer "station_id", limit: 4, null: false
   end
 
-  add_index "user_favourite_stations", ["station_id", "user_id"], name: "index_user_favourite_stations_on_station_id_and_user_id"
-  add_index "user_favourite_stations", ["user_id", "station_id"], name: "index_user_favourite_stations_on_user_id_and_station_id"
+  add_index "user_favourite_stations", ["station_id", "user_id"], name: "index_user_favourite_stations_on_station_id_and_user_id", using: :btree
+  add_index "user_favourite_stations", ["user_id", "station_id"], name: "index_user_favourite_stations_on_user_id_and_station_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                   default: "", null: false
-    t.string   "username",               default: "", null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
+    t.string   "name",                   limit: 255, default: "", null: false
+    t.string   "username",               limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
+    t.string   "current_sign_in_ip",     limit: 255
+    t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "home_station_id"
-    t.integer  "work_station_id"
-    t.string   "uuid"
+    t.integer  "home_station_id",        limit: 4
+    t.integer  "work_station_id",        limit: 4
+    t.string   "uuid",                   limit: 255
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["home_station_id"], name: "index_users_on_home_station_id"
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["uuid"], name: "index_users_on_uuid", unique: true
-  add_index "users", ["work_station_id"], name: "index_users_on_work_station_id"
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["home_station_id"], name: "index_users_on_home_station_id", using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["uuid"], name: "index_users_on_uuid", unique: true, using: :btree
+  add_index "users", ["work_station_id"], name: "index_users_on_work_station_id", using: :btree
 
+  add_foreign_key "journey_legs", "journeys"
+  add_foreign_key "journey_legs", "operators"
+  add_foreign_key "journeys", "users"
+  add_foreign_key "ppms", "operators"
 end
