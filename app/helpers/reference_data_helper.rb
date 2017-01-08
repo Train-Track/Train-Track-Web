@@ -20,7 +20,9 @@ module ReferenceDataHelper
   # Operators Contact Information:
   #  Manually managed file: operators.csv
   #  ReferenceDataHelper.update_operators_contact
-
+  # Underground Line Distances:
+  #  Manually managed file: Tube Station Distances.csv
+  #  ReferenceDataHelper.update_train_station_distances
 
   # Constants from Appendix 1 of CIF Specification
   # http://www.atoc.org/clientfiles/files/RSPS5004%20v27.pdf
@@ -323,8 +325,8 @@ module ReferenceDataHelper
       next if line.start_with? '"AtcoCode"'
       parts = line.split(",")
       crs = parts[2].gsub('"', '')
-      name = parts[3].gsub('"', '').gsub(" Rail Station", "")
-      naptan = parts[0].gsub('"', '')
+      name = parts[3].gsub('"', '').gsub(" Rail Station", "").strip
+      naptan = parts[0].gsub('"', '').strip
       ll = [nil, nil]
       ll = BlueGeo.easting_northing_to_lat_lon(parts[6].to_i, parts[7].to_i)
       station_attributes = {
@@ -348,20 +350,20 @@ module ReferenceDataHelper
     json = JSON.parse(File.read('reference/naptan.json'))
     json['stopPoints'].each do |entry|
       next if entry['stopType'] != "NaptanMetroStation"
-      name = entry['commonName'].gsub(' Underground Station', '')
-      naptan = entry['naptanId']
+      name = entry['commonName'].gsub(' Underground Station', '').strip
+      naptan = entry['naptanId'].strip
       lat = entry['lat']
       lng = entry['lon']
-      number = entry['icsCode']
+      number = entry['icsCode'].strip
       zone = nil
       address = nil
       phone = nil
       facilities = {}
       entry['additionalProperties'].each do |property|
-        zone = property["value"] if property['key'] == "Zone"
-        address = property["value"] if property['key'] == "Address"
-        phone = property["value"] if property['key'] == "PhoneNo"
-        facilities[property['key']] = property["value"] if property["category"] == "Facility"
+        zone = property["value"].strip if property['key'] == "Zone"
+        address = property["value"].strip if property['key'] == "Address"
+        phone = property["value"].strip if property['key'] == "PhoneNo"
+        facilities[property['key']] = property["value"].strip if property["category"] == "Facility"
       end
       station_attributes = {
         name: name,
@@ -563,49 +565,55 @@ module ReferenceDataHelper
   end
 
 
+  # Uses static file to populate distances/timings between underground stations
   def self.update_train_station_distances
     problems = []
     File.open("reference/Tube Station Distances.csv", "r") do |f|
       f.each_line do |line|
+        next if line.starts_with? 'Line,'
         parts = line.split(',')
+        parts[0].gsub!('H & C', 'Hammersmith and City')
+        parts[0].gsub!('&', 'and')
 
-        line = Tube::Line.where("name LIKE ?", parts[0].gsub('&', 'and')).first
+        line = Tube::Line.where("name LIKE ?", parts[0]).first
         if line.nil?
           problems << "Cannot find line: #{parts[0]}"
           next
         end
 
         [2,3].each do |i|
-
-          parts[i].gsub!("SHEPHERDS BUSH", "Shepherd's Bush")
-          parts[i].gsub!("QUEENS PARK", "Queen's Park")
-          parts[i].gsub!("KINGS CROSS", "King's Cross St. Pancras")
-          parts[i].gsub!("REGENTS PARK", "Regent's Park")
-          parts[i].gsub!("ST PAULS", "St. Paul's")
-          parts[i].gsub!("ST JOHNS WOOD", "St. John's Wood")
-          parts[i].gsub!("HEATHROW TERMINAL FOUR", "Heathrow Terminal 4")
-          parts[i].gsub!("HEATHROW 123", "Heathrow Terminals 1, 2, 3")
-          parts[i].gsub!("EARLS COURT", "Earl's Court")
-          parts[i].gsub!("King's Cross St. Pancras ST PANCRAS", "King's Cross St. Pancras")
           parts[i].gsub!("BAKER STREET (METROPOLITAN)", "Baker Street")
           parts[i].gsub!("BAKER STREET (MET)", "Baker Street")
           parts[i].gsub!("BAKER STREET (CIRCLE)", "Baker Street")
-          parts[i].gsub!("KENNINGTON (CITY)", "Kennington")
-          parts[i].gsub!("KENNINGTON (CX)", "Kennington")
+          parts[i].gsub!("BROMLEY BY BOW", "Bromley-By-Bow")
+          parts[i].gsub!("EARLS COURT", "Earl's Court")
+          parts[i].gsub!("EDGWARE", "Edgware")
+          parts[i].gsub!("Edgware ROAD", "Edgware Road (Bakerloo)")
+          parts[i].gsub!("EDGWARE ROAD BAKERLOO", "Edgware Road (Bakerloo)")
+          parts[i].gsub!("EDGWARE ROAD HAMMERSMITH AND CITY", "Edgware Road")
           parts[i].gsub!("EUSTON (CITY)", "Euston")
           parts[i].gsub!("EUSTON (CX)", "Euston")
+          parts[i].gsub!("FINCHLEY CENTRAL (HB)", "Finchley Central")
+          parts[i].gsub!("HAMMERSMITH (DISTRICT)", "Hammersmith (Dist&Picc Line)")
+          parts[i].gsub!("HAMMERSMITH (H&C)", "Hammersmith (H&C Line)")
+          parts[i].gsub!("HAMMERSMITH", "Hammersmith (H&C Line)")
+          parts[i].gsub!("HEATHROW TERMINAL FOUR", "Heathrow Terminal 4")
+          parts[i].gsub!("HEATHROW 123", "Heathrow Terminals 1-2-3")
           parts[i].gsub!("HIGHBURY", "Highbury & Islington")
+          parts[i].gsub!("KENNINGTON (CITY)", "Kennington")
+          parts[i].gsub!("KENNINGTON (CX)", "Kennington")
+          parts[i].gsub!("KINGS CROSS", "King's Cross St. Pancras")
+          parts[i].gsub!("King's Cross St. Pancras ST PANCRAS", "King's Cross St. Pancras")
           parts[i].gsub!("PADDINGTON (CIRCLE)", "Paddington")
           parts[i].gsub!("PADDINGTON (Dis)", "Paddington")
-          parts[i].gsub!("BROMLEY BY BOW", "Bromley-By-Bow")
+          parts[i].gsub!("PADDINGTON (H&C)", "Paddington (H&C Line)-Underground")
+          parts[i].gsub!("QUEENS PARK", "Queen's Park")
+          parts[i].gsub!("REGENTS PARK", "Regent's Park")
+          parts[i].gsub!("SHEPHERDS BUSH", "Shepherd's Bush (Central)")
+          parts[i].gsub!("ST PAULS", "St. Paul's")
+          parts[i].gsub!("ST JOHNS WOOD", "St. John's Wood")
+          parts[i].gsub!("ST JAMES PARK", "St. James's Park")
           parts[i].gsub!("WALTHAMSTOW", "Walthamstow Central")
-          parts[i].gsub!("HAMMERSMITH (DISTRICT)", "Hammersmith")
-          parts[i].gsub!("FINCHLEY CENTRAL (HB)", "Finchley Central")
-
-          if parts[i].upcase == "EDGWARE ROAD"
-            parts[i] = "EDGWARE ROAD " + parts[0].upcase
-          end
-
         end
 
         from = Station.where("name LIKE ?", parts[2]).first
@@ -631,7 +639,7 @@ module ReferenceDataHelper
         Tube::StationTubeLine.where(station_tube_line).first_or_create
       end
     end
-    return problems
+    return problems.uniq
   end
 
 end
