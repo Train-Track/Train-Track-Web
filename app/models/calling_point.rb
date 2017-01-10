@@ -1,50 +1,66 @@
+require 'action_view'
+include ActionView::Helpers::DateHelper
+
 class CallingPoint
-  attr_accessor :station, :st, :et, :at, :cancelled, :delayed
+  attr_accessor :station, :tiploc, :sta, :eta, :ata, :std, :etd, :atd
+  attr_accessor :cancelled, :delayed, :no_report, :pass, :platform, :activities
 
-
-  def to_s
-    station.to_s
+  def initialize
+    @activities = []
   end
 
+  def to_s
+    return station.to_s if station
+    return tiploc.to_s if tiploc
+    return "Unknown"
+  end
+
+  def description
+    if is_cancelled?
+      return "Cancelled"
+    elsif atd and (atd == std)
+      return "Departed On Time"
+    elsif atd and (atd < std)
+      return "Departed " + distance_of_time_in_words(std, atd, include_seconds: true) + " early"
+    elsif atd and (atd > std)
+      return "Departed " + distance_of_time_in_words(std, atd, include_seconds: true) + " late"
+    elsif ata and ata == sta
+      return "Arrived On Time"
+    elsif ata and (ata < sta)
+      return "Arrived " + distance_of_time_in_words(sta, ata, include_seconds: true) + " early"
+    elsif ata and (ata > sta)
+      return "Arrived " + distance_of_time_in_words(sta, ata, include_seconds: true) + " late"
+    elsif etd == std
+      return "On Time"
+    elsif etd
+      return "Estmated Departure: " + etd.strftime('%H:%M')
+    elsif eta == sta
+      return "On Time"
+    elsif eta
+      return "Estimated Arrival: " + eta.strftime('%H:%M')
+    elsif no_report
+      return "No Report"
+    else
+      return "&nbsp;"
+    end
+  end
 
   def is_cancelled?
     cancelled
   end
 
-
   def is_delayed?
     delayed
   end
 
-
-  def time
-    return at if at
-    return et if et
-    return "Delayed" if is_delayed?
-    return "Cancelled" if is_cancelled?
-  end
-
-
-  def css station
-    return "list-group-item-info" if self.station == station
-    return "disabled" if at
-    return "list-group-item-danger" if is_cancelled?
-  end
-
-
-  def form_url service
-    if service.station
-      return "/journeys/new?journey_leg[departure_station_id]=#{service.station.id}&" +
-      "journey_leg[arrival_station_id]=#{station.id}&" +
-      "journey_leg[departure_platform]=#{service.platform}&" +
-      "journey_leg[arrival_platform]=&" +
-      "journey_leg[scheduled_departure]=#{service.std}&" +
-      "journey_leg[actual_departure]=#{service.etd}&" +
-      "journey_leg[scheduled_arrival]=#{st}&" +
-      "journey_leg[actual_arrival]=#{et}&" +
-      "journey_leg[operator_id]=#{service.operator.id}&"
+  def is_future?
+    if ata or atd
+      return false
+    elsif no_report
+      return false
+    else
+      return true
     end
   end
-
 
 end

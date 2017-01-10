@@ -5,31 +5,30 @@
 	<h1><%= @station %></h1>
 
 <%= render 'navigation' %>
-	
+
 	<h3>Departure Board</h3>
-	
+
 <% @departure_board.nrcc_messages.each do |message| %>
 	<div class="alert alert-warning" role="alert">
 		<%= icon('info-sign') %>
-		<%= message %>
+		<%= message.text %>
 	</div>
 <% end %>
 
 	<div class="list-group">
-	<% @departure_board.train_services.each do |service_item| %>
-	    <a href="<%= service_item.url %>" class="list-group-item">
+	<% @departure_board.train_services.each do |service| %>
+		<a href="<%= service.url %>#station:<%= @station.id %>" class="list-group-item">
 	    	<div class="row">
 	    		<div class="col-xs-10">
-					<h4 class="list-group-item-heading"><%= service_item %></h4>
-					<p class="list-group-item-text text-<%= service_item.css %>">
-						<%= service_item.etd.strftime('%H:%M') if service_item.etd %>
-						<%= "Delayed" if service_item.etd.nil? and service_item.is_delayed? %>
-						<%= "Cancelled" if service_item.is_cancelled? %>
-					</p>
-					<p class="list-group-item-text">From <%= service_item.origin %> - <%= service_item.operator %></p>
+					<h4 class="list-group-item-heading">
+						<%= service.std.strftime('%H:%M') if service.std %>
+						<%= service.destination %>
+					</h4>
+					<p class="list-group-item-text"><%= service.description %></p>
+					<p class="list-group-item-text">From <%= service.origin %> - <%= service.operator %></p>
 				</div>
 				<div class="col-xs-2 text-right">
-					<h3><%= service_item.platform %></h3>	
+					<h1 class="list-group-item-heading"><%= service.platform %></h1>
 				</div>
 			</div>
 		</a>

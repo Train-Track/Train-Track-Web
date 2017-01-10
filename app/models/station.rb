@@ -6,16 +6,13 @@ class Station < ActiveRecord::Base
   before_validation :add_uuid
   belongs_to :operator
 
-
   def to_s
     name
   end
 
-
   def url
     "/stations/" + uuid
   end
-
 
   def get_departure_board
     if national_rail?
@@ -23,13 +20,11 @@ class Station < ActiveRecord::Base
     end
   end
 
-
   def get_arrival_board
     if national_rail?
       return NationalRailApiHelper.get_arrival_board crs
     end
   end
-
 
   def get_tube_board
     if underground?
@@ -37,13 +32,11 @@ class Station < ActiveRecord::Base
     end
   end
 
-
   def get_detailed_board
     if national_rail?
       return NationalRailApiHelper.get_detailed_board crs
     end
   end
-
 
   def favourite? user
     if user
@@ -53,28 +46,23 @@ class Station < ActiveRecord::Base
     end
   end
 
-
   def facilities
     json = read_attribute(:facilities)
     return [] if json.nil?
     return JSON.parse(json)
   end
 
-
   def underground?
     underground
   end
-
 
   def national_rail?
     national_rail
   end
 
-
   def self.underground
     where(underground: true)
   end
-
 
   def tube_lines
     tube_lines = []
@@ -84,7 +72,6 @@ class Station < ActiveRecord::Base
     end
     return tube_lines.uniq
   end
-
 
   protected
 

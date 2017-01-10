@@ -3,31 +3,53 @@
 <% provide(:attribution, "Powered by TfL Open Data") if @service.id.starts_with? 'TUBE' %>
 
 <div class="container">
-	<h1><%= @service %></h1>
+	<h1>
+		<%= @service.calling_points.first.std.strftime('%H:%M') %>
+		<%= link_to @service.origin, @service.origin.url %>
+		to
+		<%= link_to @service.destination, @service.destination.url %>
+	</h1>
+
 	<h4><%= link_to @service.operator, @service.operator.url if @service.operator %></h4>
 
-<% if !@service.disruption_reason.empty? %>
+<% if @service.cancelled_reason %>
 	<div class="alert alert-danger" role="alert">
 		<%= icon('exclamation-sign') %>
-		<%= @service.disruption_reason %>
+		<%= @service.cancelled_reason %>
 	</div>
 <% end %>
 
-<% if !@service.overdue_message.empty? %>
+<% if @service.delayed_reason %>
 	<div class="alert alert-info" role="alert">
 		<%= icon('exclamation-sign') %>
-		<%= @service.overdue_message %>
+		<%= @service.delayed_reason %>
 	</div>
 <% end %>
 
 	<div class="list-group">
 	<% @service.calling_points.each do |calling_point| %>
-		<a href="<%= calling_point.form_url @service if calling_point.at.nil? %>" class="list-group-item <%= calling_point.css(@service.station) %>">
-			<h4 class="list-group-item-heading">
-				<%= calling_point.st.strftime('%H:%M') if calling_point.st %> <%= calling_point %>
-			</h4>
-			<p class="list-group-item-text"><%= calling_point.time %></p>
-		</a>
+		<div id="station:<%= calling_point.station.id if calling_point.station %>" class="list-group-item">
+			<div class="row">
+				<div class="col-xs-10">
+					<h4 class="list-group-item-heading">
+					<% if calling_point.std %>
+						<%= calling_point.std.strftime('%H:%M') %>
+					<% elsif calling_point.sta %>
+						<%= calling_point.sta.strftime('%H:%M') %>
+					<% end %>
+					<% if calling_point.station %>
+						<%= link_to calling_point, calling_point.station.url %>
+					<% else %>
+						<%= calling_point %>
+					<% end %>
+					</h4>
+					<p class="list-group-item-text"><%= calling_point.description %></p>
+				</div>
+				<div class="col-xs-2 text-right">
+					<h1 class="list-group-item-heading"><%= calling_point.platform %></h1>
+				</div>
+			</div>
+		</div>
 	<% end %>
 	</div>
 
