@@ -47,6 +47,7 @@ module NationalRailApiHelper
     service.uid = result.xpath('uid').text
     service.train_id = result.xpath('trainid').text
     service.rsid = result.xpath('rsid').text
+    service.sdd = result.xpath('sdd').text
     service.operator = Operator.find_by code: result.xpath('operatorCode').text
     service.service_type = result.xpath('serviceType').text
     service.category = result.xpath('category').text
@@ -118,6 +119,7 @@ module NationalRailApiHelper
       service.id = service.rid
       service.uid = train_service.xpath('uid').text
       service.train_id = train_service.xpath('trainid').text
+      service.sdd = train_service.xpath('sdd').text
 
       if train_service.xpath('previousLocations').children.size > 0
         train_service.xpath('previousLocations').xpath('location').each do |calling_point_xml|
