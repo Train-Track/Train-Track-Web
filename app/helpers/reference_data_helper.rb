@@ -23,6 +23,9 @@ module ReferenceDataHelper
   # Underground Line Distances:
   #  Manually managed file: Tube Station Distances.csv
   #  ReferenceDataHelper.update_train_station_distances
+  # Train Planning Data:
+  #  Download http://nrodwiki.rockshore.net/index.php/Reference_Data#Train_Planning_Data to ReferenceData
+  #  ReferenceDataHelper.update_from_train_planning_data
 
   # Constants from Appendix 1 of CIF Specification
   # http://www.atoc.org/clientfiles/files/RSPS5004%20v27.pdf
@@ -640,6 +643,26 @@ module ReferenceDataHelper
       end
     end
     return problems.uniq
+  end
+
+  # Use a static file to update the tiplocs with location and better names
+  # From http://nrodwiki.rockshore.net/index.php/Reference_Data
+  # http://nrodwiki.rockshore.net/index.php/Train_Planning_Data_Structure
+  def self.update_from_train_planning_data
+    File.open("reference/ReferenceData", "r") do |f|
+      f.each_line do |line|
+        next unless line.starts_with? "LOC\t"
+        data = line.split("\t")
+        if data[6].to_i != 999999 and data[6].to_i != 0 and data[7].to_i != 999999 and data[7].to_i != 0
+          ll = BlueGeo.easting_northing_to_lat_lon(data[6].to_i, data[7].to_i)
+        else
+          ll = [nil, nil]
+        end
+        location = { name: data[3].strip, tiploc: data[2].strip, lat: ll[0], lng: ll[1] }
+        update = TimingPoint.where(code: location[:tiploc]).first_or_create
+        update.update_attributes(lat: location[:lat], lng: location[:lng], name: location[:name]) if update
+      end
+    end
   end
 
 end
