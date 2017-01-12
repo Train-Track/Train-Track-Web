@@ -5,9 +5,17 @@
 <div class="container">
 	<h1>
 		<%= @service.calling_points.first.std.strftime('%H:%M') %>
+	<% if @service.origin.is_a? Station %>
 		<%= link_to @service.origin, @service.origin.url %>
+	<% else %>
+		<%= @service.origin %>
+	<% end %>
 		to
+	<% if @service.destination.is_a? Station %>
 		<%= link_to @service.destination, @service.destination.url %>
+	<% else %>
+		<%= @service.destination %>
+	<% end %>
 	</h1>
 
 	<h4><%= link_to @service.operator, @service.operator.url if @service.operator %></h4>
@@ -47,7 +55,12 @@
 								<%= calling_point %>
 							<% end %>
 							</h4>
-							<p class="list-group-item-text"><%= calling_point.description %></p>
+							<p class="list-group-item-text">
+								<%= calling_point.description %>
+							<% calling_point.activities.each do |activity| %>
+								<span class="label label-default"><%= activity %></span>
+							<% end %>
+							</p>
 						</div>
 						<div class="col-xs-2 text-right">
 							<h1 class="list-group-item-heading"><%= calling_point.platform %></h1>
@@ -65,7 +78,7 @@
 			<table class="table">
 				<tr><td>RTTI ID</td><td><%= @service.rid %></td></tr>
 				<tr><td>ITPS Train UID</td><td><%= @service.uid %></td></tr>
-				<tr><td>Train ID (Headcode)</td><td><%= @service.uid %></td></tr>
+				<tr><td>Train ID (Headcode)</td><td><%= @service.train_id %></td></tr>
 				<tr><td>Retail Service ID</td><td><%= @service.rsid %></td></tr>
 				<tr><td>Scheduled Departure Date</td><td><%= @service.sdd %></td></tr>
 				<tr><td>Service Type</td><td><%= @service.service_type %></td></tr>

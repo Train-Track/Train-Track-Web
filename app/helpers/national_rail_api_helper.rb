@@ -62,8 +62,8 @@ module NationalRailApiHelper
       end
     end
 
-    service.origin = service.calling_points.first.station
-    service.destination = service.calling_points.last.station
+    service.origin = service.calling_points.first.station || service.calling_points.first.tiploc
+    service.destination = service.calling_points.last.station || service.calling_points.last.tiploc
 
     return service
   end
@@ -103,8 +103,22 @@ module NationalRailApiHelper
     result.xpath('trainServices').children.each do |train_service|
       service = Service.new
       service.station = station
-      service.origin = Station.find_by crs: train_service.xpath('origin/location/crs').text
-      service.destination = Station.find_by crs: train_service.xpath('destination/location/crs').text
+
+      crs = train_service.xpath('origin/location[1]/crs').text
+      tiploc = train_service.xpath('origin/location[1]/tiploc').text
+      if crs
+        service.origin = Station.find_by crs: crs
+      elsif tiploc
+        service.origin = TimingPoint.find_by tiploc: tiploc
+      end
+      crs = train_service.xpath('destination/location[1]/crs').text
+      tiploc = train_service.xpath('destination/location[1]/tiploc').text
+      if crs
+        service.destination = Station.find_by crs: crs
+      elsif tiploc
+        service.destination = TimingPoint.find_by tiploc: tiploc
+      end
+
       service.sta = get_time train_service.xpath('sta').text
       service.eta = get_time train_service.xpath('eta').text
       service.ata = get_time train_service.xpath('ata').text

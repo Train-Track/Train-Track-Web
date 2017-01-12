@@ -1,0 +1,40 @@
+<% provide(:title, "Admin Stuff") %>
+<% provide(:description, "A guide to developing the site and the apps.") %>
+
+<div class="container">
+	<h1>Admin Stuff</h1>
+	<div class="row">
+		<section class="col-md-6">
+			<h3>Constants</h3>
+			<dl>
+				<dt>Title</dt>
+				<dd>Train Track<dd>
+				<dt>Slogan</dt>
+				<dd>The app that lets you track your train journeys</dd>
+				<dt>Social Username</dt>
+				<dd>traintrackapp</dd>
+				<dt>Colours</dt>
+				<dd>
+					<span class="label label-default" style="background-color:#03A9F4">#03A9F4</span>
+					<span class="label label-default" style="background-color:#000">#000000</span>
+					<span class="label label-default" style="background-color:#fff;color:#000">#ffffff</span>
+				</dd>
+			</dl>
+		</section>
+		<section class="col-md-6">
+			<h3>Statistics</h3>
+			<dl>
+				<dt>Number of Stations</dt>
+				<dd><%= Station.count %><dd>
+				<dt>Number of Operators</dt>
+				<dd><%= Operator.count %><dd>
+				<dt>Number of Users</dt>
+				<dd><%= User.count %><dd>
+				<dt>Number of Journeys</dt>
+				<dd><%= Journey.count %><dd>
+				<dt>Number of Timing Points</dt>
+				<dd><%= TimingPoint.count %><dd>
+			</dl>
+		</section>
+	</div>
+</div>

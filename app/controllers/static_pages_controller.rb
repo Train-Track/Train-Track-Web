@@ -88,20 +88,11 @@ class StaticPagesController < ApplicationController
   end
 
 
-  # GET /style-guide
-  # GET /style-guide.json
-  # GET /style-guide.xml
-  def style_guide
-    @guide = [
-      { title: "Title", content: "Train Track" },
-      { title: "Slogan", content: "The app that lets you track your train journeys" },
-      { title: "Social Username", content: "traintrackapp" }
-    ]
+  # GET /admin
+  def admin
 
     respond_to do |format|
       format.html
-      format.xml { render xml: @guide }
-      format.json { render json: @guide, callback: params['callback'] }
     end
   end
 

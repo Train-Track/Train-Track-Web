@@ -30,18 +30,18 @@ class Service
       return "Arrived " + distance_of_time_in_words(sta, ata, include_seconds: true) + " early"
     elsif ata and (ata > sta)
       return "Arrived " + distance_of_time_in_words(sta, ata, include_seconds: true) + " late"
-    elsif etd == std
+    elsif etd and etd == std
       return "On Time"
     elsif etd
       return "Estmated Departure: " + etd.strftime('%H:%M')
-    elsif eta == sta
+    elsif eta and eta == sta
       return "On Time"
     elsif eta
       return "Estimated Arrival: " + eta.strftime('%H:%M')
     elsif no_report
       return "No Report"
     else
-      return "&nbsp;"
+      return "&nbsp;".html_safe
     end
   end
 
