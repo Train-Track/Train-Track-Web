@@ -51,10 +51,10 @@ module NationalRailApiHelper
     service.operator = Operator.find_by code: result.xpath('operatorCode').text
     service.service_type = result.xpath('serviceType').text
     service.category = result.xpath('category').text
-    service.cancelled_reason_code = result.xpath('cancelReason').text
-    service.cancelled_reason = ReferenceDataHelper::CANCELLATION_CODES[service.cancelled_reason_code]
-    service.delayed_reason_code = result.xpath('delayReason').text
-    service.delayed_reason = ReferenceDataHelper::LATE_RUNNING_CODES[service.cancelled_reason_code]
+    reason = Reason.find_by code: result.xpath('cancelReason').text
+    service.cancelled_reason = reason.cancellation_reason if reason
+    reason = Reason.find_by code: result.xpath('delayReason').text
+    service.delayed_reason = reason.late_running_reason if reason
 
     if result.xpath('locations').children.size > 0
       result.xpath('locations').xpath('location').each do |calling_point_xml|

@@ -2,8 +2,9 @@ require 'action_view'
 include ActionView::Helpers::DateHelper
 
 class Service
-  attr_accessor :id, :rid, :uid, :train_id, :rsid, :sdd, :category, :activities, :service_type, :operator, :station, :platform, :sta, :eta, :ata, :std, :etd, :atd
-  attr_accessor :origin, :destination, :calling_points, :cancelled, :cancelled_reason_code, :cancelled_reason, :delayed, :delayed_reason, :delayed_reason_code, :overdue_message
+  attr_accessor :id, :rid, :uid, :train_id, :rsid, :sdd, :category, :activities, :service_type, :operator
+  attr_accessor :sta, :eta, :ata, :std, :etd, :atd, :no_report, :origin, :destination, :station, :platform, :calling_points
+  attr_accessor :cancelled, :cancelled_reason_code, :cancelled_reason, :delayed, :delayed_reason, :delayed_reason_code, :overdue_message
 
   def initialize
     @calling_points = []
