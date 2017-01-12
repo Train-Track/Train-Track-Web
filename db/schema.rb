@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170108144432) do
+ActiveRecord::Schema.define(version: 20170112205513) do
 
   create_table "badges", force: :cascade do |t|
     t.string   "name",                  limit: 255
@@ -85,6 +85,17 @@ ActiveRecord::Schema.define(version: 20170108144432) do
   end
 
   add_index "ppms", ["operator_id"], name: "index_ppms_on_operator_id", using: :btree
+
+  create_table "reasons", force: :cascade do |t|
+    t.string   "code",                limit: 255
+    t.string   "uuid",                limit: 255
+    t.text     "late_running_reason", limit: 65535
+    t.text     "cancellation_reason", limit: 65535
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
+  end
+
+  add_index "reasons", ["uuid", "code"], name: "index_reasons_on_uuid_and_code", using: :btree
 
   create_table "station_tube_lines", id: false, force: :cascade do |t|
     t.integer "tube_line_id", limit: 4

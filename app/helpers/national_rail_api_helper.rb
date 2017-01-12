@@ -68,6 +68,41 @@ module NationalRailApiHelper
     return service
   end
 
+  # Call API to update reason codes
+  def self.update_reson_codes
+    soap_body = '<soap:Body><ldb:GetReasonCodeListRequest/></soap:Body></soap:Envelope>'
+    begin
+      if DEBUG
+        xml = Nokogiri::XML(TEST_DATA[:service])
+      else
+        response = RestClient.post URL, SOAP_HEADERS + soap_body, content_type: 'text/xml'
+        xml = Nokogiri::XML(response.body)
+        print "*****************\n"
+        print response.body
+        print "\n*****************\n"
+      end
+    rescue => e
+      puts e.inspect
+      return
+    end
+    xml.remove_namespaces!
+    result = xml.xpath('/Envelope/Body/GetReasonCodeListResponse/GetReasonCodeListResult/reason')
+    result.each do |reason_xml|
+      reason = {
+        code: reason_xml.xpath('code').text.strip,
+        late_running_reason: reason_xml.xpath('lateReason').text.strip,
+        cancellation_reason: reason_xml.xpath('cancReason').text.strip
+      }
+      print reason
+      update = Reason.where(code: reason[:code]).first_or_create
+      print update
+      update.update_attributes(late_running_reason: reason[:late_running_reason], cancellation_reason: reason[:cancellation_reason]) if update
+    end
+
+    return
+  end
+
+
   protected
 
   def self.get_board type, crs
