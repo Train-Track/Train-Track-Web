@@ -141,17 +141,24 @@ module NationalRailApiHelper
 
       crs = train_service.xpath('origin/location[1]/crs').text
       tiploc = train_service.xpath('origin/location[1]/tiploc').text
-      if crs
+      # Use the tiploc to find the origin and set the station, if it is one
+      if tiploc
+        service.origin = TimingPoint.find_by code: tiploc
+        service.origin = service.origin.station if service.origin and service.origin.station
+      elsif crs
+        # Otherwise try and use the crs
         service.origin = Station.find_by crs: crs
-      elsif tiploc
-        service.origin = TimingPoint.find_by tiploc: tiploc
       end
+
       crs = train_service.xpath('destination/location[1]/crs').text
       tiploc = train_service.xpath('destination/location[1]/tiploc').text
-      if crs
+      # Use the tiploc to find the destination and set the station, if it is one
+      if tiploc
+        service.destination = TimingPoint.find_by code: tiploc
+        service.destination = service.destination.station if service.destination and service.destination.station
+      elsif crs
+        # Otherwise try and use the crs
         service.destination = Station.find_by crs: crs
-      elsif tiploc
-        service.destination = TimingPoint.find_by tiploc: tiploc
       end
 
       service.sta = get_time train_service.xpath('sta').text
@@ -205,6 +212,8 @@ module NationalRailApiHelper
     calling_point.station = Station.find_by crs: xml.xpath('crs').text
     calling_point.tiploc = TimingPoint.find_by code: xml.xpath('tiploc').text
     calling_point.platform = xml.xpath('platform').text
+    length = xml.xpath('length').text
+    calling_point.length = length.to_i unless length.nil? or length.empty?
     is_pass = xml.xpath('isPass').text
     is_pass and is_pass == "true" ? calling_point.pass = true : calling_point.pass = false
     departure_type = xml.xpath('departureType').text

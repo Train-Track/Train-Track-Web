@@ -60,6 +60,9 @@
 							<% calling_point.activities.each do |activity| %>
 								<span class="label label-default"><%= activity %></span>
 							<% end %>
+							<% if calling_point.length %>
+								<span class="label label-info"><%= calling_point.length %> Coaches</span>
+							<% end %>
 							</p>
 						</div>
 						<div class="col-xs-2 text-right">

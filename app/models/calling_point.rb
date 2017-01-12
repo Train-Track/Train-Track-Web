@@ -2,7 +2,7 @@ require 'action_view'
 include ActionView::Helpers::DateHelper
 
 class CallingPoint
-  attr_accessor :station, :tiploc, :sta, :eta, :ata, :std, :etd, :atd
+  attr_accessor :station, :tiploc, :sta, :eta, :ata, :std, :etd, :atd, :length
   attr_accessor :cancelled, :delayed, :no_report, :pass, :platform, :activities
 
   def initialize
