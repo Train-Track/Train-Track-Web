@@ -50,7 +50,7 @@ module NationalRailApiHelper
     service.sdd = result.xpath('sdd').text
     service.operator = Operator.find_by code: result.xpath('operatorCode').text
     service.service_type = result.xpath('serviceType').text
-    service.category = result.xpath('category').text
+    service.category = ReferenceDataHelper::CATEGORY_CODES[result.xpath('category').text]
     reason = Reason.find_by code: result.xpath('cancelReason').text
     service.cancelled_reason = reason.cancellation_reason if reason
     reason = Reason.find_by code: result.xpath('delayReason').text
@@ -169,6 +169,7 @@ module NationalRailApiHelper
       service.atd = get_time train_service.xpath('atd').text
       service.platform = train_service.xpath('platform').text
       service.operator = Operator.find_by code: train_service.xpath('operatorCode').text
+      service.category = ReferenceDataHelper::CATEGORY_CODES[train_service.xpath('category').text]
       is_cancelled = train_service.xpath('isCancelled').text
       is_cancelled and is_cancelled == "true" ? service.cancelled = true : service.cancelled = false
       service.rid = train_service.xpath('rid').text
