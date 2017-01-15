@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get '/stations/:uuid/departures', to: 'stations#departures'
   get '/stations/:uuid/arrivals', to: 'stations#arrivals'
   get '/stations/:uuid/tube', to: 'stations#tube'
-  get '/stations/:uuid/detailed', to: 'stations#detailed'
 
   get '/services/:service_id', to: 'services#show'
 
