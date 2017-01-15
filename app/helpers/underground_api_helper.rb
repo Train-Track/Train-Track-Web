@@ -180,12 +180,12 @@ module UndergroundApiHelper
   end
 
 
-  # Get service items at a station on a particular underground line
+  # Get services at a station on a particular underground line
   # @param line_code the code of the underground line
   # @param station_code the code of the underground station
   # @return an array of service items
-  def self.get_service_items_for_line_at_station line_code, station_code
-   service_items = []
+  def self.get_services_for_line_at_station line_code, station_code
+   services = []
     begin
       if TEST
         body = "<?xml version=\"1.0\" encoding=\"utf-8\"?><ROOT xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"http://trackernet.lul.co.uk\"><Disclaimer>This system is an INFORMATION ONLY system, relying entirely on information received from the relevant Operational Railway Control System(s). It is NOT considered a safety related system in the Railway Engineering sense. However, the information reported may trigger user intervention by staff regarding possible incidents on the railway, and confirmation of the situation observed should be obtained prior to any corrective action being taken.</Disclaimer><WhenCreated>1 Apr 2015 19:13:07</WhenCreated><Line>C</Line><LineName>Central Line</LineName><S Code=\"BNK\" Mess=\"\" N=\"Bank.\" CurTime=\"19:13:07\"><P N=\"Westbound - Platform 5\" Num=\"5\" TrackCode=\"TC4710\" NextTrain=\"false\"><T LCID=\"3449621\" SetNo=\"123\" TripNo=\"3\" SecondsTo=\"58\" TimeTo=\"1:00\" Location=\"Between Liverpool Street and Bank\" Destination=\"West Ruislip\" DestCode=\"547\" Order=\"0\" DepartTime=\"18:13:05\" DepartInterval=\"58\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5026\" LN=\"C\" /><T LCID=\"3445311\" SetNo=\"143\" TripNo=\"8\" SecondsTo=\"149\" TimeTo=\"2:30\" Location=\"Approaching Liverpool Street\" Destination=\"Ealing Broadway\" DestCode=\"548\" Order=\"0\" DepartTime=\"18:13:05\" DepartInterval=\"149\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5014_2\" LN=\"C\" /><T LCID=\"3413651\" SetNo=\"033\" TripNo=\"11\" SecondsTo=\"249\" TimeTo=\"4:30\" Location=\"Between Bethnal Green and Liverpool Street\" Destination=\"Ruislip Gardens\" DestCode=\"562\" Order=\"0\" DepartTime=\"18:13:06\" DepartInterval=\"249\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5222\" LN=\"C\" /><T LCID=\"3343001\" SetNo=\"001\" TripNo=\"10\" SecondsTo=\"375\" TimeTo=\"6:00\" Location=\"Between Mile End and Bethnal Green\" Destination=\"White City\" DestCode=\"550\" Order=\"0\" DepartTime=\"18:13:06\" DepartInterval=\"375\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5200\" LN=\"C\" /><T LCID=\"3377471\" SetNo=\"061\" TripNo=\"13\" SecondsTo=\"499\" TimeTo=\"8:00\" Location=\"At Mile End\" Destination=\"West Ruislip\" DestCode=\"547\" Order=\"0\" DepartTime=\"18:13:04\" DepartInterval=\"499\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5428\" LN=\"C\" /><T LCID=\"3416161\" SetNo=\"111\" TripNo=\"11\" SecondsTo=\"756\" TimeTo=\"13:00\" Location=\"Left Stratford\" Destination=\"Ealing Broadway\" DestCode=\"548\" Order=\"0\" DepartTime=\"18:13:06\" DepartInterval=\"756\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5522\" LN=\"C\" /><T LCID=\"3418221\" SetNo=\"034\" TripNo=\"9\" SecondsTo=\"879\" TimeTo=\"15:00\" Location=\"Between Leyton and Stratford\" Destination=\"West Ruislip\" DestCode=\"547\" Order=\"0\" DepartTime=\"18:13:00\" DepartInterval=\"879\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5500\" LN=\"C\" /><T LCID=\"3414151\" SetNo=\"007\" TripNo=\"11\" SecondsTo=\"1066\" TimeTo=\"18:00\" Location=\"Between Leytonstone and Leyton\" Destination=\"Ealing Broadway\" DestCode=\"548\" Order=\"0\" DepartTime=\"18:13:03\" DepartInterval=\"1066\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC5600\" LN=\"C\" /><T LCID=\"3450871\" SetNo=\"124\" TripNo=\"4\" SecondsTo=\"1436\" TimeTo=\"24:00\" Location=\"At Snaresbrook\" Destination=\"North Acton\" DestCode=\"549\" Order=\"0\" DepartTime=\"18:13:00\" DepartInterval=\"1436\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC7008\" LN=\"C\" /><T LCID=\"3420421\" SetNo=\"045\" TripNo=\"17\" SecondsTo=\"1457\" TimeTo=\"24:00\" Location=\"At Redbridge\" Destination=\"West Ruislip\" DestCode=\"547\" Order=\"0\" DepartTime=\"18:13:03\" DepartInterval=\"1457\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC6108\" LN=\"C\" /><T LCID=\"3423981\" SetNo=\"112\" TripNo=\"10\" SecondsTo=\"1782\" TimeTo=\"30:00\" Location=\"Left Buckhurst Hill\" Destination=\"Ruislip Gardens\" DestCode=\"562\" Order=\"0\" DepartTime=\"18:12:56\" DepartInterval=\"1782\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC7508\" LN=\"C\" /></P><P N=\"Eastbound - Platform 6\" Num=\"6\" TrackCode=\"TC4711\" NextTrain=\"false\"><T LCID=\"3435571\" SetNo=\"013\" TripNo=\"10\" SecondsTo=\"119\" TimeTo=\"2:00\" Location=\"At St. Paul's\" Destination=\"Woodford Via Hainault\" DestCode=\"531\" Order=\"0\" DepartTime=\"18:13:00\" DepartInterval=\"119\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC4611\" LN=\"C\" /><T LCID=\"3416831\" SetNo=\"017\" TripNo=\"10\" SecondsTo=\"322\" TimeTo=\"5:00\" Location=\"At Holborn\" Destination=\"Hainault via Newbury Park\" DestCode=\"532\" Order=\"0\" DepartTime=\"18:12:57\" DepartInterval=\"322\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC4315\" LN=\"C\" /><T LCID=\"3420291\" SetNo=\"021\" TripNo=\"9\" SecondsTo=\"513\" TimeTo=\"9:00\" Location=\"Left Oxford Circus\" Destination=\"Loughton\" DestCode=\"529\" Order=\"0\" DepartTime=\"18:13:06\" DepartInterval=\"513\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC4009\" LN=\"C\" /><T LCID=\"3418961\" SetNo=\"025\" TripNo=\"9\" SecondsTo=\"644\" TimeTo=\"11:00\" Location=\"At Bond Street\" Destination=\"Hainault via Newbury Park\" DestCode=\"532\" Order=\"0\" DepartTime=\"18:13:03\" DepartInterval=\"644\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC3803\" LN=\"C\" /><T LCID=\"3424561\" SetNo=\"016\" TripNo=\"8\" SecondsTo=\"780\" TimeTo=\"13:00\" Location=\"Between Lancaster Gate and Marble Arch\" Destination=\"Epping\" DestCode=\"530\" Order=\"0\" DepartTime=\"18:13:05\" DepartInterval=\"780\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC3603\" LN=\"C\" /><T LCID=\"3443651\" SetNo=\"141\" TripNo=\"9\" SecondsTo=\"866\" TimeTo=\"14:00\" Location=\"At Lancaster Gate\" Destination=\"Epping\" DestCode=\"530\" Order=\"0\" DepartTime=\"18:12:59\" DepartInterval=\"866\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC3507\" LN=\"C\" /><T LCID=\"3421511\" SetNo=\"114\" TripNo=\"9\" SecondsTo=\"943\" TimeTo=\"16:00\" Location=\"At Queensway\" Destination=\"Hainault via Newbury Park\" DestCode=\"532\" Order=\"0\" DepartTime=\"18:12:46\" DepartInterval=\"943\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC3207\" LN=\"C\" /><T LCID=\"3416051\" SetNo=\"064\" TripNo=\"14\" SecondsTo=\"1045\" TimeTo=\"17:00\" Location=\"At Notting Hill Gate\" Destination=\"Loughton\" DestCode=\"529\" Order=\"0\" DepartTime=\"18:12:59\" DepartInterval=\"1045\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC3007\" LN=\"C\" /><T LCID=\"3431581\" SetNo=\"120\" TripNo=\"6\" SecondsTo=\"1147\" TimeTo=\"19:00\" Location=\"Between Shepherd's Bush and Holland Park\" Destination=\"Woodford Via Hainault\" DestCode=\"531\" Order=\"0\" DepartTime=\"18:13:02\" DepartInterval=\"1147\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC2825\" LN=\"C\" /><T LCID=\"3403221\" SetNo=\"022\" TripNo=\"11\" SecondsTo=\"1290\" TimeTo=\"21:00\" Location=\"Between White City and Shepherd's Bush\" Destination=\"Epping\" DestCode=\"530\" Order=\"0\" DepartTime=\"18:13:06\" DepartInterval=\"1290\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC2803\" LN=\"C\" /><T LCID=\"3420931\" SetNo=\"117\" TripNo=\"10\" SecondsTo=\"1428\" TimeTo=\"24:00\" Location=\"At White City\" Destination=\"Hainault via Newbury Park\" DestCode=\"532\" Order=\"0\" DepartTime=\"18:06:56\" DepartInterval=\"1428\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC2739\" LN=\"C\" /><T LCID=\"3419801\" SetNo=\"116\" TripNo=\"10\" SecondsTo=\"1674\" TimeTo=\"28:00\" Location=\"At East Acton\" Destination=\"Epping\" DestCode=\"530\" Order=\"0\" DepartTime=\"18:12:58\" DepartInterval=\"1674\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC2511\" LN=\"C\" /><T LCID=\"3413461\" SetNo=\"051\" TripNo=\"18\" SecondsTo=\"1761\" TimeTo=\"29:00\" Location=\"At North Acton\" Destination=\"Hainault via Newbury Park\" DestCode=\"532\" Order=\"0\" DepartTime=\"18:13:06\" DepartInterval=\"1761\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC2323\" LN=\"C\" /><T LCID=\"3419151\" SetNo=\"024\" TripNo=\"10\" SecondsTo=\"1778\" TimeTo=\"30:00\" Location=\"At North Acton\" Destination=\"Loughton\" DestCode=\"529\" Order=\"0\" DepartTime=\"18:07:07\" DepartInterval=\"1778\" Departed=\"0\" Direction=\"0\" IsStalled=\"0\" TrackCode=\"TC2345\" LN=\"C\" /></P></S></ROOT>"
@@ -215,27 +215,27 @@ module UndergroundApiHelper
     # For each platform at this station on this line
     xml.css('P').each do |p|
       platform = p.attr('N').strip.gsub('Platform ', '')
-      # Create a Service Item for each train
+      # Create a Service for each train
       xml.css('T').each do |t|
-        service_item = ServiceItem.new
-        service_item.service_id = "TUBE-" + line_code + "-" + station_code + "-" + t.attr('LCID').strip
-        service_item.operator = operator
-        service_item.platform = platform
-        service_item.origin = nil
-        service_item.destination = Station.where(name: t.attr('Destination').strip).first
-        if service_item.destination && service_item.destination.underground_code == station_code
+        service = Service.new
+        service.id = "TUBE-" + line_code + "-" + station_code + "-" + t.attr('LCID').strip
+        service.operator = operator
+        service.platform = platform
+        service.origin = nil
+        service.destination = Station.where(name: t.attr('Destination').strip).first
+        if service.destination && service.destination.underground_code == station_code
           next
         else
-          service_item.std = (current_time + t.attr('SecondsTo').to_i + 30).strftime("%H:%M")
-          service_item.etd = "On time"
+          service.std = current_time + t.attr('SecondsTo').to_i + 30
+          service.etd = service.std
         end
-        service_item.sta = (current_time + t.attr('SecondsTo').to_i).strftime("%H:%M")
-        service_item.eta = "On time"
-        service_items << service_item
+        service.sta = current_time + t.attr('SecondsTo').to_i
+        service.eta = service.sta
+        services << service
       end
 
     end
-    return service_items
+    return services
   end
 
 
