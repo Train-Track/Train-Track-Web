@@ -23,7 +23,7 @@ class JourneyLegsController < ApplicationController
   # GET /journeys/1/legs/new.json
   # GET /journeys/1/legs/new.xml
   def new
-    
+
     if params[:journey_id]
       @journey = Journey.find(params[:journey_id])
       render_403 and return if @journey.user_id != current_user.id
@@ -35,10 +35,12 @@ class JourneyLegsController < ApplicationController
       @url = "/journeys"
     else
       @journey_leg = JourneyLeg.new
-      @url = "/journeys" 
+      @url = "/journeys"
     end
 
     @method = :POST
+
+    @stations = Station.order(:name)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -54,7 +56,7 @@ class JourneyLegsController < ApplicationController
     render_403 and return if @journey.user_id != current_user.id
 
     @journey_leg = JourneyLeg.find_by id: params[:id], journey_id:  @journey.id
-    
+
     @url = "/journeys/#{@journey.id}/legs/#{@journey_leg.id}"
     @method = :PUT
   end
@@ -67,14 +69,14 @@ class JourneyLegsController < ApplicationController
   # POST /journeys.json
   # POST /journeys.xml
   def create
-    
+
     if params[:journey_id]
       @journey = Journey.find(params[:journey_id])
       render_403 and return if @journey.user_id != current_user.id
     else
       @journey = Journey.create(user_id: current_user.id)
     end
-    
+
     @url = "/journeys/#{@journey.id}/legs"
     @method = :POST
     @journey_leg = JourneyLeg.new(journey_leg_params.merge(journey_id: @journey.id))

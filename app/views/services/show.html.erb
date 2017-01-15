@@ -40,7 +40,11 @@
 			<h3>Calling Points</h3>
 			<div class="list-group">
 			<% @service.calling_points.each do |calling_point| %>
-				<div id="station:<%= calling_point.station.id if calling_point.station %>" class="list-group-item">
+				<div id="calling-point:<%= calling_point.station.id if calling_point.station %>"
+					data-platform="<%= calling_point.platform %>"
+					data-scheduled="<%= calling_point.sta.strftime('%H:%M:%S') if calling_point.sta %>"
+					data-actual="<%= calling_point.ata.strftime('%H:%M:%S') if calling_point.ata %>"
+					class="list-group-item">
 					<div class="row">
 						<div class="col-xs-10">
 							<h4 class="list-group-item-heading">
@@ -96,6 +100,17 @@
 	<div class="well">
 		<%= render :partial => 'journey_legs/form' %>
 	</div>
+
+	<script>
+		$(document).ready(function() {
+			$('#journey_leg_arrival_station_id').change(function() {
+				var callingPoint = document.getElementById('calling-point:' + $(this).val());
+				document.getElementById('journey_leg_arrival_platform').value = callingPoint.getAttribute('data-platform');
+				document.getElementById('journey_leg_scheduled_arrival').value = callingPoint.getAttribute('data-scheduled');
+				document.getElementById('journey_leg_actual_arrival').value = callingPoint.getAttribute('data-actual');
+			});
+		});
+	</script>
 <% end %>
 
 </div>

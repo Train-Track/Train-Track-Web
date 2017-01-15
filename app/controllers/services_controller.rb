@@ -24,6 +24,11 @@ class ServicesController < ApplicationController
 
     @method = :POST
 
+    @stations = []
+    @service.calling_points.each do |calling_point|
+      @stations << calling_point.station if calling_point.station
+    end
+
     respond_to do |format|
       format.html
       format.xml { render xml: @service }

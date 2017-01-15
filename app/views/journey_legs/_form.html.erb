@@ -5,7 +5,7 @@
 		<article class="col-md-3">
 			<div class="form-group">
 				<%= f.label :departure_station_id, "Station", class: "control-label" %>
-				<%= f.collection_select :departure_station_id, Station.order(:name), :id, :name, {}, class: "form-control" %>
+				<%= f.collection_select :departure_station_id, @stations, :id, :name, {}, class: "form-control" %>
 			</div>
 		</article>
 		<article class="col-md-1">
@@ -17,13 +17,13 @@
 		<article class="col-md-2">
 			<div class="form-group">
 				<%= f.label :scheduled_departure, "Scheduled Time", class: "control-label" %>
-				<%= f.time_field :scheduled_departure, class: "form-control", required: true %>
+				<%= f.time_field :scheduled_departure, class: "form-control", required: true, step:1 %>
 			</div>
 		</article>
 		<article class="col-md-2">
 			<div class="form-group">
 				<%= f.label :actual_departure, "Actual Time", class: "control-label" %>
-				<%= f.time_field :actual_departure, class: "form-control", required: true %>
+				<%= f.time_field :actual_departure, class: "form-control", required: true, step:1 %>
 			</div>
 		</article>
 	</section>
@@ -33,7 +33,7 @@
 		<article class="col-md-3">
 			<div class="form-group">
 				<%= f.label :arrival_station_id, "Station", class: "control-label" %>
-				<%= f.collection_select :arrival_station_id, Station.order(:name), :id, :name, {}, class: "form-control" %>
+				<%= f.collection_select :arrival_station_id, @stations, :id, :name, {}, class: "form-control" %>
 			</div>
 		</article>
 		<article class="col-md-1">
@@ -45,13 +45,13 @@
 		<article class="col-md-2">
 			<div class="form-group>">
 				<%= f.label :scheduled_arrival, "Scheduled Time", class: "control-label" %>
-				<%= f.time_field :scheduled_arrival, class: "form-control", required: true %>
+				<%= f.time_field :scheduled_arrival, class: "form-control", required: true, step:1 %>
 			</div>
 		</article>
 		<article class="col-md-2">
 			<div class="form-group>">
 				<%= f.label :actual_arrival, "Actual Time", class: "control-label" %>
-				<%= f.time_field :actual_arrival, class: "form-control", required: true %>
+				<%= f.time_field :actual_arrival, class: "form-control", required: true, step:1 %>
 			</div>
 		</article>
 	</section>
