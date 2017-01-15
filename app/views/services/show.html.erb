@@ -4,7 +4,7 @@
 
 <div class="container">
 	<h1>
-		<%= @service.calling_points.first.std.strftime('%H:%M') %>
+		<%= @service.calling_points.first.std.strftime('%H:%M') if @service.calling_points.first.std %>
 	<% if @service.origin.is_a? Station %>
 		<%= link_to @service.origin, @service.origin.url %>
 	<% else %>

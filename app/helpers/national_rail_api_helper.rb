@@ -1,6 +1,7 @@
 require 'rest_client'
 module NationalRailApiHelper
 
+  TEST = false
   DEBUG = false
   DATE_TIME_FORMAT = "%Y-%m-%dT%H:%M:%S"
   ARRIVAL_BOARD = "ArrBoard"
@@ -25,14 +26,16 @@ module NationalRailApiHelper
   def self.get_service id
     soap_body = '<soap:Body><ldb:GetServiceDetailsByRIDRequest><ldb:rid>' + id + '</ldb:rid></ldb:GetServiceDetailsByRIDRequest></soap:Body></soap:Envelope>'
     begin
-      if DEBUG
+      if TEST
         xml = Nokogiri::XML(TEST_DATA[:service])
       else
         response = RestClient.post URL, SOAP_HEADERS + soap_body, content_type: 'text/xml'
+        if DEBUG
+          print "*****************\n"
+          print response.body
+          print "\n*****************\n"
+        end
         xml = Nokogiri::XML(response.body)
-        print "*****************\n"
-        print response.body
-        print "\n*****************\n"
       end
     rescue => e
       puts e.inspect
@@ -72,14 +75,16 @@ module NationalRailApiHelper
   def self.update_reson_codes
     soap_body = '<soap:Body><ldb:GetReasonCodeListRequest/></soap:Body></soap:Envelope>'
     begin
-      if DEBUG
+      if TEST
         xml = Nokogiri::XML(TEST_DATA[:service])
       else
         response = RestClient.post URL, SOAP_HEADERS + soap_body, content_type: 'text/xml'
+        if DEBUG
+          print "*****************\n"
+          print response.body
+          print "\n*****************\n"
+        end
         xml = Nokogiri::XML(response.body)
-        print "*****************\n"
-        print response.body
-        print "\n*****************\n"
       end
     rescue => e
       puts e.inspect
@@ -110,14 +115,16 @@ module NationalRailApiHelper
     limit = '10'
     soap_body = '<soap:Body><ldb:Get' + type + 'WithDetailsRequest><ldb:crs>' + crs + '</ldb:crs><ldb:numRows>' + limit + '</ldb:numRows><ldb:time>' + time + '</ldb:time><ldb:timeWindow>200</ldb:timeWindow><ldb:filtercrs></ldb:filtercrs><ldb:filterType>to</ldb:filterType><ldb:filterTOC></ldb:filterTOC><ldb:services>PBS</ldb:services><ldb:getNonPassengerServices>false</ldb:getNonPassengerServices></ldb:Get' + type + 'WithDetailsRequest></soap:Body></soap:Envelope>'
     begin
-      if DEBUG
+      if TEST
         xml = Nokogiri::XML(TEST_DATA[type])
       else
         response = RestClient.post URL, SOAP_HEADERS + soap_body, content_type: 'text/xml'
+        if DEBUG
+          print "*****************\n"
+          print response.body
+          print "\n*****************\n"
+        end
         xml = Nokogiri::XML(response.body)
-        print "*****************\n"
-        print response.body
-        print "\n*****************\n"
       end
     rescue => e
       puts e.inspect

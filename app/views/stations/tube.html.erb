@@ -6,8 +6,9 @@
 	<h1><%= @station %></h1>
 
 <%= render 'navigation' %>
+
 	<h3>Underground Departure Board</h3>
-	
+
 <% @tube_board.nrcc_messages.each do |message| %>
 	<div class="alert alert-warning" role="alert">
 		<%= icon('info-sign') %>
@@ -16,23 +17,22 @@
 <% end %>
 
 	<div class="list-group">
-	<% @tube_board.train_services.each do |service_item| %>
-		<a href="<%= service_item.url %>" class="list-group-item">
+	<% @tube_board.train_services.each do |service| %>
+		<a href="<%= service.departure_url %>" class="list-group-item">
 			<div class="row">
 	    		<div class="col-xs-10">
 					<h4 class="list-group-item-heading">
-						<%= service_item.std.strftime('%H:%M') if service_item.std %> <%= service_item.destination %>
+						<%= service.std.strftime('%H:%M') if service.std %>
+						<%= service.destination %>
 					</h4>
-					<p class="list-group-item-text text-<%= service_item.css %>">
-						<%= service_item.etd.strftime('%H:%M') if service_item.etd %>
-					</p>
+					<p class="list-group-item-text"><%= service.description %></p>
 					<p class="list-group-item-text">
-						<span class="label" style="<%= service_item.line.style %>"><%= service_item.line %></span>
-						<%= service_item.operator %>
+						<%= service.operator %>
+						<span class="label" style="<%= service.line.style if service.line %>"><%= service.line %></span>
 					</p>
 				</div>
 				<div class="col-xs-2 text-right">
-					<h3><%= service_item.platform %></h3>	
+					<h4><%= service.platform %></h4>
 				</div>
 			</div>
 		</a>
