@@ -306,6 +306,9 @@ module UndergroundApiHelper
       line = Tube::Line.find_by name: name
       line.status = l.css('Status').css('Text').first.text.strip
       line.status_details = l.css('Status').css('Message').css('Text').text.strip
+      text_colour = l.css('Status').css('Colour').text
+      background_colour = l.css('Status').css('BgColour').text
+      print "#{name},#{text_colour},#{background_colour}"
       lines << line
     end
     return lines

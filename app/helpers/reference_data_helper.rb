@@ -15,7 +15,7 @@ module ReferenceDataHelper
   #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
   #   ReferenceDataHelper.update_corpus
   # Station Twitter:
-  #  Manually managed file: national_rail_stations_twitter.csv
+  #  Manually managed file: stations_twitter.csv
   #  ReferenceDataHelper.update_station_twitter
   # Operators Contact Information:
   #  Manually managed file: operators.csv
@@ -29,6 +29,9 @@ module ReferenceDataHelper
   # Delayed/Late Running Codes
   #  Use National Rail API to populate data
   #  NationalRailApiHelper.update_reson_codes
+  # Underground Line Colours:
+  #  Manually managed file: tube_colours.csv
+  #  ReferenceDataHelper.update_tube_colours
 
   # Constants from Appendix 1 of CIF Specification
   # http://www.atoc.org/clientfiles/files/RSPS5004%20v27.pdf
@@ -277,9 +280,9 @@ module ReferenceDataHelper
 
 
   # This populates Train Station twitter accounts from a static file
-  # comma delimited national_rail_stations_twitter.csv
+  # comma delimited stations_twitter.csv
   def self.update_station_twitter
-    File.readlines('reference/national_rail_stations_twitter.csv').each do |line|
+    File.readlines('reference/stations_twitter.csv').each do |line|
       parts = line.split(",")
       next if parts.length < 2
       code = parts[0].strip
@@ -312,6 +315,20 @@ module ReferenceDataHelper
     return
   end
 
+  # This populates Tube lines colours from a static file
+  # comma delimited tube_colours.csv
+  def self.update_tube_colours
+    File.readlines('reference/tube_colours.csv').each do |line|
+      parts = line.split(",")
+      next if parts.length < 2
+      name = parts[0].strip
+      background_colour = parts[1].strip
+      text_colour = parts[2].strip
+      line = Tube::Line.where(name: name).first_or_create
+      line.update_attributes(background_colour: background_colour, text_colour: text_colour)
+    end
+    return
+  end
 
   # This file is from National Rail FTP site and updates the timetables
   # ftp://datafeeds.nationalrail.co.uk
