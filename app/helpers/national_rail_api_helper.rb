@@ -29,7 +29,9 @@ module NationalRailApiHelper
       if TEST
         xml = Nokogiri::XML(TEST_DATA[:service])
       else
+        start_time = Time.now
         response = RestClient.post URL, SOAP_HEADERS + soap_body, content_type: 'text/xml'
+        ApiCall.add "GetService", URL, response, (Time.now - start_time) * 1000
         if DEBUG
           print "*****************\n"
           print response.body
@@ -38,7 +40,7 @@ module NationalRailApiHelper
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
-      puts e.inspect
+      ApiCall.add "GetService", URL, e.response, (Time.now - start_time) * 1000
       return
     end
     xml.remove_namespaces!
@@ -118,7 +120,9 @@ module NationalRailApiHelper
       if TEST
         xml = Nokogiri::XML(TEST_DATA[type])
       else
+        start_time = Time.now
         response = RestClient.post URL, SOAP_HEADERS + soap_body, content_type: 'text/xml'
+        ApiCall.add type, URL, response, (Time.now - start_time) * 1000
         if DEBUG
           print "*****************\n"
           print response.body
@@ -127,7 +131,7 @@ module NationalRailApiHelper
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
-      puts e.inspect
+      ApiCall.add type, URL, e.response, (Time.now - start_time) * 1000
       return
     end
     xml.remove_namespaces!
