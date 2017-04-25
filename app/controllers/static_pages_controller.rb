@@ -1,4 +1,5 @@
 class StaticPagesController < ApplicationController
+  before_action :authenticate_user!, only: [:admin]
 
 
   # GET /
@@ -90,9 +91,15 @@ class StaticPagesController < ApplicationController
 
   # GET /admin
   def admin
+    unless current_user.admin?
+      flash[:error] = 'Access denied'
+        redirect_to root_url
+    else
 
-    respond_to do |format|
-      format.html
+      respond_to do |format|
+        format.html
+      end
+
     end
   end
 
