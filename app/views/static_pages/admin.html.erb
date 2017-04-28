@@ -36,6 +36,8 @@
 				<dd><%= TimingPoint.count %><dd>
 				<dt>Number of API Calls</dt>
 				<dd><%= ApiCall.count %><dd>
+				<dt>Number of API Call Errors</dt>
+				<dd><%= ApiCall.where.not(response_code: 200).count %><dd>
 			</dl>
 		</section>
 		<section class="col-md-4">
