@@ -3,15 +3,26 @@
 
 <div class="container">
 	<h1><%= @journey %></h1>
-  
-<% if @journey.journey_legs.count > 1 %>
-	<div class="list-group">
-	<% @journey.journey_legs.each do |leg| %>
-		<a href="<%= leg.url %>" class="list-group-item">
-			<h4 class="list-group-item-heading"><%= leg %></h4>
-			<p class="list-group-item-text">Some information</p>
-		</a>
-	<% end %>
+
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+	<% @journey.journey_legs.each_with_index do |leg, i| %>
+	  <div class="panel panel-default">
+	    <div class="panel-heading" role="tab" id="heading<%= i %>">
+	      <h4 class="panel-title">
+	        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#leg:<%= i %>" aria-expanded="true" aria-controls="leg:<%= i %>">
+	          <%= leg %>
+	        </a>
+	      </h4>
+	    </div>
+	    <div id="leg:<%= i %>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%= i %>">
+	      <div class="panel-body">
+	        <%= leg.inspect %>
+	      </div>
+	    </div>
+	  </div>
+		<% end %>
 	</div>
-<% end %>
+
+	<%= link_to "Add Journey Leg", @journey.new_journey_leg, class: "btn btn-default"  %>
+
 </div>

@@ -50,12 +50,16 @@ class Service
     return "/services/" + Rack::Utils.escape(id)
   end
 
-  def departure_url
-    return "#{url}?journey_leg[departure_station_id]=#{station.id}&" +
+  def departure_url(journey_id)
+    departure_url = "#{url}?journey_leg[departure_station_id]=#{station.id}&" +
     "journey_leg[departure_platform]=#{platform}&" +
     "journey_leg[scheduled_departure]=#{std}&" +
     "journey_leg[actual_departure]=#{atd}&" +
     "journey_leg[operator_id]=#{operator.id}&"
+    if journey_id
+      departure_url += "journey_id=#{journey_id}"
+    end
+    return departure_url
   end
 
   def is_delayed?

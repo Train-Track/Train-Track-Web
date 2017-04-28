@@ -53,6 +53,16 @@ class Journey < ActiveRecord::Base
     return self.departure_time.strftime("%d/%m/%Y - %H:%M")
   end
 
+  def new_journey_leg
+    return "/stations" if self.journey_legs.count == 0
+    station = self.journey_legs.last.destination
+    if station.national_rail
+      return "/stations/" + station.uuid + "/departures?journey_id=" + self.id.to_s
+    elsif station.underground
+      return "/stations/" + station.uuid + "/tube?journey_id=" + self.id.to_s
+    end
+  end
+
 
   def as_json(options={})
     super(include: [:origin, :destination, :user, { journey_legs: { include: [:origin, :destination, :operator] } }])

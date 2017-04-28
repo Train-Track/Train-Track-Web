@@ -1,5 +1,7 @@
 <%= form_for(@journey_leg, url: @url, method: @method) do |f| %>
 
+	<%= hidden_field_tag :journey_id, value: params[:journey_id] if params[:journey_id] %>
+
 	<h4>From</h4>
 	<section class="row">
 		<article class="col-md-3">
