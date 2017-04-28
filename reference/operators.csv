@@ -19,15 +19,15 @@ LO,LDNOverground,lorol.co.uk,0845 601 4867,overgroundinfo@tfl.gov.uk,https://tfl
 LT,tube,www.tfl.gov.uk,0343 222 1234,contactus@tfl.gov.uk,https://tfl.gov.uk/fares-and-payments/replacements-and-refunds/refunds-for-delay4s
 ME,merseyrail,merseyrail.org,0151 702 2071,comment@merseyrail.org,https://www.merseyrail.org/tickets-passes/refunds/refund-compensation-form.aspx
 NT,northernrailorg,northernrailway.co.uk,0800 200 6060,enquiries@northernrailway.co.uk,https://www.northernrailway.co.uk/corporate/compensation-information/delay-repay-application
-SE,Se_Railway,southeasternrailway.co.uk,,,
+SE,Se_Railway,southeasternrailway.co.uk,0345 322 7021,,https://delayrepay.southeasternrailway.co.uk/customer-details
 SN,SouthernRailUK,southernrailway.com,0845 127 2920,comments@southernrailway.com,
-SR,ScotRail,scotrail.co.uk,0344 811 0141, customer.relations@scotrail.co.uk,
-SW,SW_Trains,southwesttrains.co.uk,,,
+SR,ScotRail,scotrail.co.uk,0344 811 0141,customer.relations@scotrail.co.uk,
+SW,SW_Trains,southwesttrains.co.uk,03456000650,customerrelations@swtrains.co.uk,https://www.southwesttrains.co.uk/tickets-explained/compensation/refunds/
 SX,Stansted_Exp,stanstedexpress.com,0845 850 0150,nxea.customerrelations@nationalexpress.com,
 TL,TLRailUK,thameslinkrailway.com,0345 026 4700,customerservices@thameslinkrailway.com,
-TP,TPExpressTrains,tpexpress.co.uk,,,
+TP,TPExpressTrains,tpexpress.co.uk,03456001671,tpecustomer.relations@firstgroup.com,
 TW,my_metro,www.nexus.org.uk/metro,0191 203 3199,contactus@twmetro.co.uk,
-VT,VirginTrains,virgintrains.co.uk,,,
+VT,VirginTrains,virgintrains.co.uk,03445 56 56 50,customer.relations@virgintrains.co.uk,https://www.virgintrains.co.uk/delayrepay
 WR,westcoastrail,www.westcoastrailways.co.uk,0844 850 4685,enquiries@westcoastrailways.net,
 XC,crosscountryuk,crosscountrytrains.co.uk,0844 736 9123,customer.relations@crosscountrytrains.co.uk,
 RT,networkrail,www.networkrail.co.uk/,03457 11 41 41,,
