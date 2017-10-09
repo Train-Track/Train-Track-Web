@@ -1,12 +1,11 @@
 
 development:
-  adapter: mysql2
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
   database: trains
   pool: 5
   username: <%= Rails.application.secrets.database_user %>
   password: <%= Rails.application.secrets.database_password %>
-  host: localhost
 
 test:
   adapter: sqlite3

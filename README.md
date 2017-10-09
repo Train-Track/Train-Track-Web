@@ -17,12 +17,13 @@ To Deploy:
     git clone git@github.com:Train-Track/Train-Track-Web.git /home/rails
     cd /home/rails
     bundle install
-    
+
 - Create the database user:
 
-    mysql
-    CREATE USER ''@'localhost' IDENTIFIED BY '';
-    GRANT ALL PRIVILEGES ON *.* TO ''@'localhost' WITH GRANT OPTION;
+    su - postgres
+    psql
+    create role trains with createdb login password 'password';
+    \q
     exit
 
 - Set the secrets in config/secrets.yml.example and rename:
