@@ -13,10 +13,13 @@ To Deploy:
 
 - Add the public key generated to your Github Profile
 
-    rm -rf /home/rails
-    git clone git@github.com:Train-Track/Train-Track-Web.git /home/rails
-    cd /home/rails
+    git clone git@github.com:Train-Track/Train-Track-Web.git /home/rails/trains
+    su - rails
+    cd /home/rails/trains
+    chown -R rails .
+    chgrp -R www-data .
     bundle install
+    exit
 
 - Create the database user:
 
@@ -28,22 +31,39 @@ To Deploy:
 
 - Set the secrets in config/secrets.yml.example and rename:
 
+    su - rails
+    cd trains/
+    cp config/secrets.yml.example config/secrets.yml
     vi config/secrets.yml.example
-    mv config/secrets.yml.example config/secrets.yml
 
-- Set up the database and asset pipeline and restart
+- Set up the database and asset pipeline
 
     rake db:create RAILS_ENV=production
     rake db:migrate RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
-    cd ..
-    chown -R rails rails/
-    chgrp -R www-data rails/
+    exit
+
+- Configure and restart unicorn:
+
+    vi /etc/unicorn.conf
+    working_directory "/home/rails/trains"
+    cp /home/rails/rails_project/.unicorn.sh /home/rails/trains/
+    chmod 755 /home/rails/trains/.unicorn.sh
+    vi /home/rails/trains/.unicorn.sh
+    Update rails_project to trains
+    vi /etc/systemd/system/unicorn.service
+    Update rails_project to trains
+    systemctl daemon-reload
     service unicorn restart
 
+- Configure and reload nginx:
+
+    vi /etc/nginx/sites-enabled/rails
+    root /home/rails/trains/public;
+    service nginx reload
 
 To Update:
-    cd /home/rails
+    cd /home/rails/trains
     git pull
     rake db:migrate RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
