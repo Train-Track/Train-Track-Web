@@ -65,6 +65,11 @@ To Deploy:
 To Update:
     cd /home/rails/trains
     git pull
+    chown -R rails .
+    chgrp -R www-data .
+    su - rails
+    cd /home/rails/trains
+    bundle install
     rake db:migrate RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
     service unicorn restart
