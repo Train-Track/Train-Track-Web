@@ -74,8 +74,11 @@ class Service
     return nil if self.calling_points.count == 0
     src = "https://maps.googleapis.com/maps/api/staticmap?path=color:0xff0000%7Cweight:7"
     self.calling_points.each do |calling_point|
-      src << "%7C#{calling_point.station.lat},#{calling_point.station.lng}" if calling_point.station and calling_point.station.lat
-      src << "%7C#{calling_point.tiploc.lat},#{calling_point.tiploc.lng}" if calling_point.tiploc and calling_point.tiploc.lat
+      if calling_point.station and calling_point.station.lat
+        src << "%7C#{calling_point.station.lat},#{calling_point.station.lng}"
+      elsif calling_point.tiploc and calling_point.tiploc.lat
+        src << "%7C#{calling_point.tiploc.lat},#{calling_point.tiploc.lng}"
+      end
     end
     return src << "&size=320x320&sensor=false&key=#{Rails.application.secrets.google_maps_api_key}".html_safe
   end
