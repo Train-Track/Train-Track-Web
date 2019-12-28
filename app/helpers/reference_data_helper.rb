@@ -14,6 +14,9 @@ module ReferenceDataHelper
   # Train Operators:
   #   Download https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/tocs
   #   ReferenceDataHelper.update_tocs
+  # Train Stations:
+  #   Download https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/stations
+  #   ReferenceDataHelper.update_stations
   # Timing Points:
   #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
   #   ReferenceDataHelper.update_corpus
