@@ -18,7 +18,7 @@ class StationsController < ApplicationController
       lng = params['lng'].to_f
       @stations = Station.unscoped.select("stations.*, #{distance_sql(lat,lng)} AS distance").where("lat IS NOT NULL AND lng IS NOT NULL" + tube).order("distance ASC").limit(1)
     elsif @q && !@q.empty?
-      @stations = Station.where("crs LIKE ? OR name LIKE ?" + tube, @q, "#{@q}%").page(params[:page])
+      @stations = Station.where("(upper(crs) LIKE ? OR upper(name) LIKE ?)" + tube, @q.upcase, "%#{@q.upcase}%").page(params[:page])
     else
       @stations = Station.page(params[:page])
     end
