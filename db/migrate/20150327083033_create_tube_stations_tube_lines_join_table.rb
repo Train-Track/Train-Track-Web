@@ -1,4 +1,4 @@
-class CreateTubeStationsTubeLinesJoinTable < ActiveRecord::Migration
+class CreateTubeStationsTubeLinesJoinTable < ActiveRecord::Migration[4.2]
   def change
     create_table :tube_station_lines, :id => false do |t|
       t.integer :tube_station_id

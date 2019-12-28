@@ -1,6 +1,6 @@
 require 'will_paginate/array'
 class JourneysController < ApplicationController
-  before_filter :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show]
 
 
   # GET /journeys

@@ -11,6 +11,10 @@
 
 			<p><img class="img-thumbnail" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwBBACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" style="width:180px;height:180px"></p>
 
+		<% if @station.operator %>
+			<p>Operated by <%= link_to @station.operator.name, @station.operator.url %></p>
+		<% end %>
+
 		<% if @station.address and !@station.address.empty? %>
 			<p><%= @station.address %></p>
 		<% end %>

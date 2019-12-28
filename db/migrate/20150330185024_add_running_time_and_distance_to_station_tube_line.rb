@@ -1,4 +1,4 @@
-class AddRunningTimeAndDistanceToStationTubeLine < ActiveRecord::Migration
+class AddRunningTimeAndDistanceToStationTubeLine < ActiveRecord::Migration[4.2]
   def change
     add_column :station_tube_lines, :running_time, :integer
     add_column :station_tube_lines, :distance, :integer

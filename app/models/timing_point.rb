@@ -1,5 +1,5 @@
 class TimingPoint < ActiveRecord::Base
-  belongs_to :station
+  belongs_to :station, optional: true
   default_scope { order('name ASC') }
   validates :uuid, presence: true, uniqueness: true
   before_validation :add_uuid

@@ -284,9 +284,11 @@ module UndergroundApiHelper
       number = line_status.attr('ID').to_s
       name = line_status.css('Line').attr('Name').text
       line = Tube::Line.find_by number: number
-      line.status = line_status.css('Status').attr('Description').text
-      line.status_details = line_status.attr('StatusDetails').to_s
-      lines << line
+      if line
+        line.status = line_status.css('Status').attr('Description').text
+        line.status_details = line_status.attr('StatusDetails').to_s
+        lines << line
+      end
     end
     return lines
   end
@@ -303,11 +305,12 @@ module UndergroundApiHelper
       begin
         start_time = Time.now
         response = RestClient.get WEEKEND_URL
-        ApiCall.add "GetUndergroundWeekendStatus", WEEKEND_URL, response, (Time.now - start_time) * 1000
       rescue => e
-        ApiCall.add "GetUndergroundWeekendStatus", WEEKEND_URL, e.response, (Time.now - start_time) * 1000
-        return
+        ApiCall.add "GetUndergroundWeekendStatus", WEEKEND_URL, e.to_s, (Time.now - start_time) * 1000
+        return lines
       end
+
+      ApiCall.add "GetUndergroundWeekendStatus", WEEKEND_URL, response, (Time.now - start_time) * 1000
 
       if DEBUG
         print "*****************\n"

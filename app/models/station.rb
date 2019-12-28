@@ -4,7 +4,7 @@ class Station < ActiveRecord::Base
   default_scope { order('name ASC') }
   validates :uuid, presence: true, uniqueness: true
   before_validation :add_uuid
-  belongs_to :operator
+  belongs_to :operator, optional: true
 
   def to_s
     name

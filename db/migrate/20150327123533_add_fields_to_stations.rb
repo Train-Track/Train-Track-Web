@@ -1,4 +1,4 @@
-class AddFieldsToStations < ActiveRecord::Migration
+class AddFieldsToStations < ActiveRecord::Migration[4.2]
   def change
     add_column :stations, :number, :string
     add_column :stations, :facilities, :string

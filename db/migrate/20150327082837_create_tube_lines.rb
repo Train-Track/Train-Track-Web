@@ -1,4 +1,4 @@
-class CreateTubeLines < ActiveRecord::Migration
+class CreateTubeLines < ActiveRecord::Migration[4.2]
   def change
     create_table :tube_lines do |t|
       t.string :name

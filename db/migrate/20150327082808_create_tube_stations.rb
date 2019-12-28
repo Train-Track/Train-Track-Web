@@ -1,4 +1,4 @@
-class CreateTubeStations < ActiveRecord::Migration
+class CreateTubeStations < ActiveRecord::Migration[4.2]
   def change
     create_table :tube_stations do |t|
       t.string :name

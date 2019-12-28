@@ -1,6 +1,6 @@
 require 'will_paginate/array'
 class JourneyLegsController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
 
 
   # GET /journeys/1/legs/1

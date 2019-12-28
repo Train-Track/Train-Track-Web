@@ -1,4 +1,4 @@
-class CreateOperators < ActiveRecord::Migration
+class CreateOperators < ActiveRecord::Migration[4.2]
   def change
     create_table :operators do |t|
       t.string :name

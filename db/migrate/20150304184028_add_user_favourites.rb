@@ -1,4 +1,4 @@
-class AddUserFavourites < ActiveRecord::Migration
+class AddUserFavourites < ActiveRecord::Migration[4.2]
   def change
     create_join_table :users, :stations, table_name: :user_favourite_stations do |t|
       t.index [:user_id, :station_id]
