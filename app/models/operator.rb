@@ -20,10 +20,6 @@ class Operator < ActiveRecord::Base
     "https://twitter.com/intent/tweet?via=traintrackapp&related=traintrackapp&text=@" + twitter
   end
 
-  def website_url
-    "http://" + website
-  end
-
   def phone_url
     "tel:" + phone.gsub(' ', '')
   end
