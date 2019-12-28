@@ -43,7 +43,7 @@
 		<section class="col-md-4">
 			<h3>API Counts</h3>
 			<dl>
-			<% ApiCall.group(:source).count.each do |source, count| %>
+			<% ApiCall.unscoped.group(:source).count.each do |source, count| %>
 				<dt><%= source %></dt>
 				<dd><%= count %><dd>
 			<% end %>
