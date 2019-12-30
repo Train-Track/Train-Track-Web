@@ -8,12 +8,16 @@
 		<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for an operator", autofocus: true, value: @q) %>
 	<% end %>
 
-	<div class="list-group mb-3">
-	<% @operators.each do |operator| %>
-		<%= link_to operator, operator.url, class: "list-group-item" %>
-	<% end %>
+	<div class="row">
+		<div class="col-md-8">
+			<h5><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h5>
+			<div class="list-group mb-3">
+			<% @operators.each do |operator| %>
+				<%= link_to operator, operator.url, class: "list-group-item" %>
+			<% end %>
+			</div>
+			<%= paginate @operators %>
+		</div>
 	</div>
-
-	<%= paginate @operators %>
 
 </div>

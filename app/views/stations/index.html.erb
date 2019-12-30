@@ -19,7 +19,7 @@
 
 	<% if signed_in? %>
 		<div class="col-md-4">
-			<h3>Favourites</h3>
+			<h5>Favourites</h5>
 			<div class="list-group">
 				<%= link_to icon('home') + " " + current_user.home_station, current_user.home_station.url, class: "list-group-item" if current_user.home_station %>
 				<%= link_to icon('briefcase') + " " + current_user.work_station, current_user.work_station.url, class: "list-group-item" if current_user.work_station %>
@@ -31,7 +31,7 @@
 	<% end %>
 
 		<div class="col-md-8">
-			<h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
+			<h5><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h5>
 			<div class="list-group mb-3">
 			<% @stations.each do |station| %>
 		 		<%= link_to station, station.url, class: "list-group-item" %>
