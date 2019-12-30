@@ -1,4 +1,4 @@
-class CreateJourneyLegs < ActiveRecord::Migration
+class CreateJourneyLegs < ActiveRecord::Migration[4.2]
   def change
     create_table :journey_legs do |t|
       t.references :journey, index: true

@@ -90,6 +90,7 @@ module NationalRailApiHelper
       end
     rescue => e
       puts e.inspect
+      puts e.response
       return
     end
     xml.remove_namespaces!
@@ -221,8 +222,8 @@ module NationalRailApiHelper
 
   def self.create_calling_point xml
     calling_point = CallingPoint.new
-    calling_point.station = Station.find_by crs: xml.xpath('crs').text
-    calling_point.tiploc = TimingPoint.find_by code: xml.xpath('tiploc').text
+    calling_point.station = Station.find_by crs: xml.xpath('crs').text.strip
+    calling_point.tiploc = TimingPoint.find_by code: xml.xpath('tiploc').text.strip
     calling_point.platform = xml.xpath('platform').text
     length = xml.xpath('length').text
     calling_point.length = length.to_i unless length.nil? or length.empty?

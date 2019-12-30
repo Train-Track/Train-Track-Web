@@ -1,4 +1,4 @@
-class CreatePpms < ActiveRecord::Migration
+class CreatePpms < ActiveRecord::Migration[4.2]
   def change
     create_table :ppms do |t|
       t.references :operator, index: true

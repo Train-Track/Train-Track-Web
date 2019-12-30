@@ -8,9 +8,15 @@ module ReferenceDataHelper
   # TfL Stations:
   #   Download https://api.tfl.gov.uk/StopPoint/Mode/tube,tflrail,dlr,overground to naptan.json
   #   ReferenceDataHelper.update_tube_naptan
-  # National Rail Train Operators and National Rail Station Operators:
+  # Deprecated: National Rail Train Operators and National Rail Station Operators:
   #   Download ftp://datafeeds.nationalrail.co.uk/ to national_rail_reference_data.xml
   #   ReferenceDataHelper.update_reference_data
+  # Train Operators:
+  #   Download https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/tocs
+  #   ReferenceDataHelper.update_tocs
+  # Train Stations:
+  #   Download https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/stations
+  #   ReferenceDataHelper.update_stations
   # Timing Points:
   #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
   #   ReferenceDataHelper.update_corpus
@@ -166,7 +172,7 @@ module ReferenceDataHelper
         lat: ll[0],
         lng: ll[1]
       }
-      station = Station.where(rail_naptan: naptan).first_or_create
+      station = Station.where(rail_naptan: naptan).first_or_create!
       Station.update(station.id, station_attributes)
     end
     return
@@ -213,6 +219,78 @@ module ReferenceDataHelper
   end
 
 
+  # Create/Update Train Operators from National Rail Knowledgebase API
+  # https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/tocs
+  def self.update_tocs
+    xml = Nokogiri::XML(File.open('reference/tocs.xml'))
+    xml.remove_namespaces!
+
+    xml.css('TrainOperatingCompany').each do |toc|
+      code = toc.css('AtocCode').first.text
+      name = toc.css('Name').first.text
+
+      # Not interested in things that we don't know the name or code of
+      next if code.nil? or name.nil?
+
+      attr = { code: code, name: name }
+      cs = toc.css('CustomerService')
+      phone = cs.css('PrimaryTelephoneNumber').first
+      if phone
+        attr[:phone] = phone.css('TelNationalNumber').first.text
+      end
+      website = cs.css('Url').first
+      if website
+        attr[:website] = website.text
+      end
+
+      email = cs.css('EmailAddress').first
+      if email
+        attr[:email] = email.text
+      end
+
+      operator = Operator.where(code: code).first
+      if operator.nil?
+        Operator.create(attr)
+      else
+        operator.update(attr)
+      end
+    end
+    return
+  end
+
+
+  # Create/Update Train Stations from National Rail Knowledgebase API
+  # https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/stations
+  def self.update_stations
+    xml = Nokogiri::XML(File.open('reference/stations.xml'))
+    xml.remove_namespaces!
+
+    xml.css('Station').each do |s|
+      crs = s.css('CrsCode').first.text
+      name = s.css('Name').first.text
+
+      # Not interested in things that we don't know the name or crs of
+      next if crs.nil? or name.nil?
+
+      attr = { crs: crs, name: name }
+      operator_code = s.css('StationOperator').first
+      if operator_code
+        operator = Operator.where(code: operator_code.text).first
+        attr[:operator] = operator
+      end
+
+      station = Station.where(crs: crs).first
+      if station.nil?
+        Station.create(attr)
+      else
+        station.update(attr)
+      end
+    end
+    return
+  end
+
+
+  # DEPRECATED
   # Create/Update Train Operators from National Rail Reference Data and link them to Stations
   # ftp://datafeeds.nationalrail.co.uk
   def self.update_reference_data
@@ -273,7 +351,7 @@ module ReferenceDataHelper
         station = Station.where("rail_naptan LIKE ?", "9100" + code).first
         station_id = station.id if station
       end
-      timing_points << TimingPoint.where(code: code).first_or_create(name: name, station_id: station_id, stanox: stanox)
+      timing_points << TimingPoint.where(code: code).first_or_create!(name: name, station_id: station_id, stanox: stanox)
     end
     return
   end

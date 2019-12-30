@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :badges, join_table: "user_badges"
   has_and_belongs_to_many :stations, join_table: "user_favourite_stations"
   has_many :journeys
-  belongs_to :home_station, class_name: "Station"
-  belongs_to :work_station, class_name: "Station"
+  belongs_to :home_station, class_name: "Station", optional: true
+  belongs_to :work_station, class_name: "Station", optional: true
   before_validation :add_uuid
 
   def image_url(size = 30)

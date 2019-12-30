@@ -1,4 +1,4 @@
-class CreateReasons < ActiveRecord::Migration
+class CreateReasons < ActiveRecord::Migration[4.2]
   def change
     create_table :reasons do |t|
       t.string :code

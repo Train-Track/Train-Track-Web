@@ -1,4 +1,4 @@
-class AddNaptansToStations < ActiveRecord::Migration
+class AddNaptansToStations < ActiveRecord::Migration[4.2]
   def change
     add_column :stations, :rail_naptan, :string
     add_column :stations, :underground_naptan, :string

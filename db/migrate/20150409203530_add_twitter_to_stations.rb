@@ -1,4 +1,4 @@
-class AddTwitterToStations < ActiveRecord::Migration
+class AddTwitterToStations < ActiveRecord::Migration[4.2]
   def change
     add_column :stations, :twitter, :string
   end

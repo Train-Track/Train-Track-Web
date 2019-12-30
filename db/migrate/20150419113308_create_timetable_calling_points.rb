@@ -1,4 +1,4 @@
-class CreateTimetableCallingPoints < ActiveRecord::Migration
+class CreateTimetableCallingPoints < ActiveRecord::Migration[4.2]
   def change
     create_table :timetable_calling_points do |t|
       t.integer :timetable_id

@@ -1,4 +1,4 @@
-class CreateTimingPoints < ActiveRecord::Migration
+class CreateTimingPoints < ActiveRecord::Migration[4.2]
   def change
     create_table :timing_points do |t|
       t.string :name

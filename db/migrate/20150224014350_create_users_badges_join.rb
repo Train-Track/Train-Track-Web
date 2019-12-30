@@ -1,4 +1,4 @@
-class CreateUsersBadgesJoin < ActiveRecord::Migration
+class CreateUsersBadgesJoin < ActiveRecord::Migration[4.2]
   def change
     create_table :users_badges_joins do |t|
       t.integer :user_id

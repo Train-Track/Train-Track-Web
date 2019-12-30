@@ -1,4 +1,4 @@
-class CreateApiCalls < ActiveRecord::Migration
+class CreateApiCalls < ActiveRecord::Migration[4.2]
   def change
     create_table :api_calls do |t|
       t.string :type
