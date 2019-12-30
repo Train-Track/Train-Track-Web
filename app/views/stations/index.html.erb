@@ -32,7 +32,7 @@
 
 		<div class="col-md-8">
 			<h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
-			<div class="list-group">
+			<div class="list-group mb-3">
 			<% @stations.each do |station| %>
 		 		<%= link_to station, station.url, class: "list-group-item" %>
 			<% end %>

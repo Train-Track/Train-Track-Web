@@ -8,7 +8,7 @@
 		<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for an operator", autofocus: true, value: @q) %>
 	<% end %>
 
-	<div class="list-group">
+	<div class="list-group mb-3">
 	<% @operators.each do |operator| %>
 		<%= link_to operator, operator.url, class: "list-group-item" %>
 	<% end %>
