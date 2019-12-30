@@ -18,23 +18,16 @@
 
 	<div class="list-group">
 	<% @tube_board.train_services.each do |service| %>
-		<a href="<%= service.departure_url(params[:journey_id]) %>" class="list-group-item">
-			<div class="row">
-	    		<div class="col-xs-10">
-					<h4 class="list-group-item-heading">
-						<%= service.std.strftime('%H:%M') if service.std %>
-						<%= service.destination %>
-					</h4>
-					<p class="list-group-item-text"><%= service.description %></p>
-					<p class="list-group-item-text">
-						<%= service.operator %>
-						<span class="label" style="<%= service.line.style if service.line %>"><%= service.line %></span>
-					</p>
-				</div>
-				<div class="col-xs-2 text-right">
-					<h4><%= service.platform %></h4>
-				</div>
+		<a href="<%= service.departure_url(params[:journey_id]) %>" class="list-group-item list-group-item-action flex-column align-items-start">
+			<div class="d-flex w-100 justify-content-between">
+				<h4>
+					<%= service.std.strftime('%H:%M') if service.std %>
+					<%= service.destination %>
+				</h4>
+				<h3 class="mb-0"><%= service.platform %></h3>
 			</div>
+			<p class="mb-0"><%= service.description %></p>
+			<small class="text-muted"><%= service.operator %> <span class="badge" style="<%= service.line.style if service.line %>"><%= service.line %></span></small>
 		</a>
 	<% end %>
 	</div>

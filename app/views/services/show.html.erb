@@ -18,7 +18,7 @@
 	<% end %>
 	</h1>
 
-	<h4><%= link_to @service.operator, @service.operator.url if @service.operator %></h4>
+	<h5>Operated by <%= link_to @service.operator, @service.operator.url if @service.operator %></h5>
 
 <% if @service.cancelled_reason %>
 	<div class="alert alert-danger" role="alert">
@@ -37,60 +37,61 @@
 	<div class="row">
 
 		<div class="col-xs-12 col-md-7 col-lg-8">
-			<h3>Calling Points</h3>
 			<div class="list-group">
 			<% @service.calling_points.each do |calling_point| %>
 				<div id="calling-point:<%= calling_point.station.id if calling_point.station %>"
 					data-platform="<%= calling_point.platform %>"
 					data-scheduled="<%= calling_point.sta.strftime('%H:%M:%S') if calling_point.sta %>"
 					data-actual="<%= calling_point.ata.strftime('%H:%M:%S') if calling_point.ata %>"
-					class="list-group-item">
-					<div class="row">
-						<div class="col-xs-10">
-							<h4 class="list-group-item-heading">
-							<% if calling_point.std %>
-								<%= calling_point.std.strftime('%H:%M') %>
-							<% elsif calling_point.sta %>
-								<%= calling_point.sta.strftime('%H:%M') %>
-							<% end %>
-							<% if calling_point.station %>
-								<%= link_to calling_point, calling_point.station.url %>
-							<% else %>
-								<%= calling_point %>
-							<% end %>
-							</h4>
-							<p class="list-group-item-text">
-								<%= calling_point.description %>
-							<% calling_point.activities.each do |activity| %>
-								<span class="label label-default"><%= activity %></span>
-							<% end %>
-							<% if calling_point.length %>
-								<span class="label label-info"><%= calling_point.length %> Coaches</span>
-							<% end %>
-							</p>
-						</div>
-						<div class="col-xs-2 text-right">
-							<h1 class="list-group-item-heading"><%= calling_point.platform %></h1>
-						</div>
+					class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h4>
+						<% if calling_point.std %>
+							<%= calling_point.std.strftime('%H:%M') %>
+						<% elsif calling_point.sta %>
+							<%= calling_point.sta.strftime('%H:%M') %>
+						<% end %>
+						<% if calling_point.station %>
+							<%= link_to calling_point, calling_point.station.url %>
+						<% else %>
+							<%= calling_point %>
+						<% end %>
+						</h4>
+						<h3 class="mb-0"><%= calling_point.platform %></h3>
 					</div>
+					<small class="text-muted">
+							<%= calling_point.description %>
+						<% calling_point.activities.each do |activity| %>
+							<span class="badge badge-light"><%= activity %></span>
+						<% end %>
+						<% if calling_point.length %>
+							<span class="badge badge-info"><%= calling_point.length %> Coaches</span>
+						<% end %>
+					</small>
 				</div>
 			<% end %>
 			</div>
 		</div>
 
 		<div class="col-xs-12 col-md-5 col-lg-4">
-			<h3>Map</h3>
-			<p><img src="<%= @service.google_map_image %>"></p>
-			<h3>Technical Details</h3>
-			<table class="table">
-				<tr><td>RTTI ID</td><td><%= @service.rid %></td></tr>
-				<tr><td>ITPS Train UID</td><td><%= @service.uid %></td></tr>
-				<tr><td>Train ID (Headcode)</td><td><%= @service.train_id %></td></tr>
-				<tr><td>Retail Service ID</td><td><%= @service.rsid %></td></tr>
-				<tr><td>Scheduled Departure Date</td><td><%= @service.sdd %></td></tr>
-				<tr><td>Service Type</td><td><%= @service.service_type %></td></tr>
-				<tr><td>Category</td><td><%= @service.category %></td></tr>
-			</table>
+			<div class="card mb-3">
+				<h3 class="card-header">Map</h3>
+				<img src="<%= @service.google_map_image %>">
+			</div>
+			<div class="card mb-3">
+				<h3 class="card-header">Technical Details</h3>
+				<div class="card-body">
+					<table class="table table-sm">
+						<tr><td>RTTI ID</td><td><%= @service.rid %></td></tr>
+						<tr><td>ITPS Train UID</td><td><%= @service.uid %></td></tr>
+						<tr><td>Train ID (Headcode)</td><td><%= @service.train_id %></td></tr>
+						<tr><td>Retail Service ID</td><td><%= @service.rsid %></td></tr>
+						<tr><td>Scheduled Departure Date</td><td><%= @service.sdd %></td></tr>
+						<tr><td>Service Type</td><td><%= @service.service_type %></td></tr>
+						<tr><td>Category</td><td><%= @service.category %></td></tr>
+					</table>
+				</div>
+			</div>
 		</div>
 
 	</div>
