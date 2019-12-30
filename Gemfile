@@ -39,7 +39,7 @@ gem 'listen',        group: :development
 
 gem 'pg'
 gem 'will_paginate'
-gem 'will_paginate-bootstrap'
+gem 'will_paginate-bootstrap4'
 gem 'devise'
 gem 'rest-client'
 gem 'nokogiri'

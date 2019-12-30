@@ -26,6 +26,9 @@ module ReferenceDataHelper
   # Operators Contact Information:
   #  Manually managed file: operators.csv
   #  ReferenceDataHelper.update_operators_contact
+  # Underground Line Colours:
+  #  Manually managed file: tube_colours.csv
+  #  ReferenceDataHelper.update_tube_colours
   # Underground Line Distances:
   #  Manually managed file: Tube Station Distances.csv
   #  ReferenceDataHelper.update_train_station_distances
@@ -35,9 +38,6 @@ module ReferenceDataHelper
   # Delayed/Late Running Codes
   #  Use National Rail API to populate data
   #  NationalRailApiHelper.update_reson_codes
-  # Underground Line Colours:
-  #  Manually managed file: tube_colours.csv
-  #  ReferenceDataHelper.update_tube_colours
 
   # Constants from Appendix 1 of CIF Specification
   # http://www.atoc.org/clientfiles/files/RSPS5004%20v27.pdf

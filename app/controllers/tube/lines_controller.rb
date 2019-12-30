@@ -8,9 +8,9 @@ class Tube::LinesController < ApplicationController
     @q = params['q']
 
     if @q && !@q.empty?
-      @lines = Tube::Line.where("name LIKE ? OR name LIKE ?", @q, "#{@q}%")
+      @lines = Tube::Line.where("name LIKE ? OR name LIKE ?", @q, "#{@q}%").page(params[:page])
     else
-      @lines = Tube::Line.all
+      @lines = Tube::Line.page(params[:page])
     end
 
     respond_to do |format|

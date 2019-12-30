@@ -5,10 +5,10 @@ class OperatorsController < ApplicationController
   # GET /operators
   # GET /operators.json
   # GET /operators.xml
-  def index 
-    @q = params[:q]   
+  def index
+    @q = params[:q]
     if @q && !@q.empty?
-      @operators = Operator.where("code LIKE ? OR name LIKE ?", @q, "#{@q}%").page(params[:page])
+      @operators = Operator.where("upper(code) LIKE ? OR upper(name) LIKE ?", @q.upcase, "%#{@q.upcase}%").page(params[:page])
     else
       @operators = Operator.page(params[:page])
     end
@@ -24,7 +24,7 @@ class OperatorsController < ApplicationController
   # GET /operators/all
   # GET /operators/all.json
   # GET /operators/all.xml
-  def all 
+  def all
     @operators = Operator.all
 
     respond_to do |format|

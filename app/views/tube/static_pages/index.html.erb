@@ -4,26 +4,24 @@
 
 <div class="container">
 	<h1>Tube</h1>
-	
-	<%= form_tag(tube_root_path, method: :get) do %>
-	<div class="input-append well">
+
+	<%= form_tag(tube_root_path, method: :get, class: "mb-3") do %>
 		<div class="input-group">
 			<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for a tube station", autofocus: true, value: @q) %>
-			<span class="input-group-btn">
+			<div class="input-group-append">
 				<a class="btn btn-success geo" data-field="q" data-url="<%= stations_path %>?underground=1" title="Locate Me"><%= icon("map-marker") %></a>
-      		</span>
+			</div>
 		</div>
-	</div>
 	<% end %>
 
 	<div class="row">
-		<div class="col-md-4">
+		<div class="col-md-4 mb-3">
 
-			<h3><%= link_to "Lines", tube_lines_path %></h3>
+			<h5><%= link_to "Lines", tube_lines_path %></h5>
 			<div role="tabpanel">
-				<ul class="nav nav-tabs" role="tablist" style="padding-bottom:15px">
-					<li role="presentation" class="active"><a href="#now" aria-controls="now" role="tab" data-toggle="tab"><%= icon('time') %> Now</a></a></li>
-					<li role="presentation"><a href="#weekend" aria-controls="weekend" role="tab" data-toggle="tab"><%= icon('calendar') %> This Weekend</a></li>
+				<ul class="nav nav-tabs" role="tablist">
+					<li class="nav-item"><a class="nav-link active" href="#now" aria-controls="now" role="tab" data-toggle="tab"><%= icon('time') %> Now</a></a></li>
+					<li><a class="nav-link" href="#weekend" aria-controls="weekend" role="tab" data-toggle="tab"><%= icon('calendar') %> This Weekend</a></li>
 				</ul>
 				<div class="tab-content">
  					<div role="tabpanel" class="tab-pane active" id="now">
@@ -53,8 +51,8 @@
 		</div>
 		<div class="col-md-8">
 
-			<h3><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h3>
-			<div class="list-group">
+			<h5><%= @q.nil? || @q.empty? ? "A-Z" : @q %></h5>
+			<div class="list-group mb-3">
 			<% @stations.each do |station| %>
 		 		<%= link_to station, station.url, class: "list-group-item" %>
 			<% end %>
