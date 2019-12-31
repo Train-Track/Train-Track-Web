@@ -1,80 +1,60 @@
 Train-Track-Web
 ===============
 
-To Deploy:
+To deploy:
 
 - Create a droplet on Digital Ocean using the Ruby on Rails application image
 - Login with the root password e-mailed to you
 
-    apt-get install git
-    git config --global user.name "Your Name"
-    git config --global user.email "your_email@example.com"
-    ssh-keygen -t rsa -C "your_email@example.com"
-
-- Add the public key generated to your Github Profile
-
-    git clone git@github.com:Train-Track/Train-Track-Web.git /home/rails/trains
     su - rails
-    cd /home/rails/trains
-    chown -R rails .
-    chgrp -R www-data .
+    rvm install 2.6.5
+    rvm use 2.6.5 --default
+    ssh-keygen -t rsa -b 4096 -C "hello@traintrackapp.co.uk"
+
+- Add the public key generated to the repository deploy keys and deploy the app
+
+    git clone git@github.com:Train-Track/Train-Track-Web.git train-track-web
+    cd train-track-web
     bundle install
-    exit
 
-- Create the database user:
+- Setup the secrets in config/secrets.yml:
 
-    su - postgres
-    psql
-    create role trains with createdb login password 'password';
-    \q
-    exit
-
-- Set the secrets in config/secrets.yml.example and rename:
-
-    su - rails
-    cd trains/
     cp config/secrets.yml.example config/secrets.yml
-    vi config/secrets.yml.example
+    vi config/secrets.yml
+    exit
 
 - Set up the database and asset pipeline
 
+    su - rails
+    cd train-track-web
     rake db:create RAILS_ENV=production
     rake db:migrate RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
     exit
 
-- Configure and restart unicorn:
+- Configure and restart rails server:
 
-    vi /etc/unicorn.conf
-    working_directory "/home/rails/trains"
-    cp /home/rails/rails_project/.unicorn.sh /home/rails/trains/
-    chmod 755 /home/rails/trains/.unicorn.sh
-    vi /home/rails/trains/.unicorn.sh
-    Update rails_project to trains
-    vi /etc/systemd/system/unicorn.service
-    Update rails_project to trains
+    vi /etc/systemd/system/rails.service
+    Update example to train-track-web
     systemctl daemon-reload
-    service unicorn restart
+    service rails restart
 
 - Configure and reload nginx:
 
     vi /etc/nginx/sites-enabled/rails
-    root /home/rails/trains/public;
+    Update root /home/rails/train-track-web/public;
     service nginx reload
 
-To Update:
-    cd /home/rails/trains
-    git pull
-    chown -R rails .
-    chgrp -R www-data .
+To update:
     su - rails
-    cd /home/rails/trains
+    cd train-track-web
+    git pull
     bundle install
     rake db:migrate RAILS_ENV=production
     rake assets:precompile RAILS_ENV=production
-    service unicorn restart
+    service rails restart
 
 
-To Contribute:
+To contribute:
 
 Please feel free to make pull requests!
