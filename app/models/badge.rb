@@ -14,8 +14,13 @@ class Badge < ActiveRecord::Base
   end
 
 
+  def image
+    "<img title=\"#{name}\" src=\"#{image_url}\" alt=\"#{name}\">".html_safe
+  end
+
+
   protected
-  
+
   def add_uuid
     self.uuid = SecureRandom.uuid if uuid.nil?
   end

@@ -20,6 +20,8 @@ class UsersController < ApplicationController
         "train-track:username" => @user.username
       }
 
+    @journeys = @user.journeys.page(params[:page])
+
     respond_to do |format|
       format.html
       format.xml { render xml: @user }
