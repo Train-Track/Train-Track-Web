@@ -8,12 +8,12 @@
 	<% if @station.national_rail? %>
 		<% css = if request.original_fullpath == @station.url + "/departures" then "active" else "" end %>
 		<li class="nav-item">
-			<a class="nav-link <%= css %>" href="<%= @station.url + "/departures" %>"><%= icon('resize-full') %> Departures</a>
+			<a class="nav-link <%= css %>" href="<%= @station.url + "/departures" %>"><%= icon('expand-alt') %> Departures</a>
 		</li>
 
 		<% css = if request.original_fullpath == @station.url + "/arrivals" then "active" else end %>
 		<li class=" nav-item">
-			<a class="nav-link <%= css %>" href="<%= @station.url + "/arrivals" %>"><%= icon('resize-small') %> Arrivals</a>
+			<a class="nav-link <%= css %>" href="<%= @station.url + "/arrivals" %>"><%= icon('compress-alt') %> Arrivals</a>
 		</li>
 	<% end %>
 
