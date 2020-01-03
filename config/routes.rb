@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'static_pages#index'
   get '/privacy', to: 'static_pages#privacy'
   get '/terms', to: 'static_pages#terms'
+  get '/cookies', to: 'static_pages#cookies'
   get '/help', to: 'static_pages#help'
   get '/data-feeds', to: 'static_pages#data_feeds'
   get '/download', to: 'static_pages#download'

@@ -9,7 +9,7 @@
 		<div class="input-group mb-3">
 			<%= text_field_tag(:q, nil, class: "form-control", placeholder: "Search for a station", autofocus: true, value: @q) %>
 			<div class="input-group-append">
-				<a class="input-group-text" data-field="q" data-url="<%= stations_path %>" title="Locate Me">Hello<%= icon("map-marker") %></a>
+				<a class="input-group-text" data-field="q" data-url="<%= stations_path %>" title="Locate Me"><%= icon("map-marker") %></a>
 			</div>
 		</div>
 	</div>

@@ -21,20 +21,21 @@
 	<% end %>
 
 		<div class="col-md-6">
+			<h5>Contact Information</h5>
 		<% if @operator.twitter %>
-			<p>Twitter: <%= link_to "@" + @operator.twitter, @operator.tweet_url, target: "_blank" %></p>
+			<p><%= icon("twitter") %> <%= link_to "@" + @operator.twitter, @operator.tweet_url, target: "_blank" %></p>
 		<% end %>
 
 		<% if @operator.website %>
-			<p>Website: <%= link_to @operator.website, @operator.website, target: "_blank" %></p>
+			<p><%= icon("laptop") %> <%= link_to @operator.website, @operator.website, target: "_blank" %></p>
 		<% end %>
 
 		<% if @operator.phone %>
-			<p>Phone: <%= link_to @operator.phone, @operator.phone_url, target: "_blank" %></p>
+			<p><%= icon("phone") %> <%= link_to @operator.phone, @operator.phone_url, target: "_blank" %></p>
 		<% end %>
 
 		<% if @operator.email %>
-			<p>Email: <%= link_to @operator.email, @operator.email_url, target: "_blank" %></p>
+			<p><%= icon("at") %> <%= link_to @operator.email, @operator.email_url, target: "_blank" %></p>
 		<% end %>
 
 		<% if @operator.delay_repay_url %>

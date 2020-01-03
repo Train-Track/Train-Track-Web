@@ -1,10 +1,9 @@
 <% provide(:title, @station) %>
 <% provide(:description, "Real-time train information for #{@station}.") %>
 
-<div class="container">
-	<h1><%= @station %></h1>
-
 <%= render 'navigation' %>
+
+<div class="container">
 
 	<div class="row">
 		<div class="col-md-4">
@@ -20,11 +19,11 @@
 		<% end %>
 
 		<% if @station.phone and !@station.phone.empty? %>
-			<p><%= link_to @station.phone, "tel:" + @station.phone.gsub(" ", "") %></p>
+			<p><%= icon('phone') %> <%= link_to @station.phone, "tel:" + @station.phone.gsub(" ", "") %></p>
 		<% end %>
 
 		<% if @station.twitter and !@station.twitter.empty? %>
-			<p><%= link_to @station.twitter, "http://twitter.com/" + @station.twitter %></p>
+			<p><i class="fab fa-twitter"></i> <%= link_to @station.twitter, "http://twitter.com/" + @station.twitter %></p>
 		<% end %>
 
 		<% if !@station.facilities.empty? %>

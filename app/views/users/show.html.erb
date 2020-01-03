@@ -3,8 +3,41 @@
 
 <div class="container">
 	<h1><%= @user %></h1>
-	<p><%= link_to "Journeys", journeys_path %>: <%= @user.journeys.includes(:journey_legs).inspect %></p>
-	<p><%= link_to "Badges", badges_path %>: <%= @user.badges.inspect %></p>
 	<p>Points: <%= @user.points %></p>
-	<p>Favourite Stations: <%= @user.favourite_stations.inspect %></p>
+
+	<div class="row mb-3">
+		<div class="col-md-4">
+			<h5>Favourites</h5>
+			<div class="list-group">
+				<%= link_to icon('home') + " " + @user.home_station, @user.home_station.url, class: "list-group-item" if @user.home_station %>
+				<%= link_to icon('briefcase') + " " + @user.work_station, @user.work_station.url, class: "list-group-item" if @user.work_station %>
+			<% @user.favourite_stations.each do |station| %>
+				<%= link_to icon('star') + " " + station, station.url, class: "list-group-item" %>
+			<% end %>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<h5>Journeys</h5>
+			<div class="list-group">
+			<% @journeys.each do |journey| %>
+				<a href="<%= journey_path(journey) %>" class="list-group-item">
+					<h5 class="list-group-item-heading"><%= journey %></h5>
+					<small class="list-group-item-text"><%= timestamp journey.created_at %></small>
+				</a>
+			<% end %>
+			</div>
+			<%= paginate @journeys %>
+		</div>
+	</div>
+
+	<h5><%= link_to "Badges", badges_path %></h5>
+	<%= "<p>No badges earned yet</p>".html_safe if @user.badges.count == 0 %>
+	<div class="row">
+	<% @user.badges.each do |badge| %>
+		<div class="col-sm">
+			<%= link_to badge.image, badge.url %>
+		</div>
+	<% end %>
+	</div>
+
 </div>

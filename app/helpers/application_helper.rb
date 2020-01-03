@@ -10,9 +10,9 @@ module ApplicationHelper
     will_paginate page, renderer: WillPaginate::ActionView::BootstrapLinkRenderer
   end
 
-  #glyphicons
+  #font awesome
   def icon type
-    "<span class=\"glyphicon glyphicon-#{type}\" aria-hidden=\"true\"></span>".html_safe
+    "<i class=\"fas fa-#{type}\" aria-hidden=\"true\"></i>".html_safe
   end
 
   # Returns HTML time element with correct timestamps and pretty printed time

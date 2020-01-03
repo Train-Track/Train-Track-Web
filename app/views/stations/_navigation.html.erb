@@ -1,3 +1,10 @@
+<div class="mt-n3 mb-3 big-heading-container d-flex">
+	<div class="container d-flex">
+		<h1 class="display-4 font-weight-bolder text-white d-flex align-items-end"><%= @station %></h1>
+	</div>
+</div>
+
+<div class="container">
 	<ul class="nav nav-tabs mb-3">
 
 		<% css = if request.original_fullpath == @station.url then "active" else "" end %>
@@ -8,12 +15,12 @@
 	<% if @station.national_rail? %>
 		<% css = if request.original_fullpath == @station.url + "/departures" then "active" else "" end %>
 		<li class="nav-item">
-			<a class="nav-link <%= css %>" href="<%= @station.url + "/departures" %>"><%= icon('resize-full') %> Departures</a>
+			<a class="nav-link <%= css %>" href="<%= @station.url + "/departures" %>"><%= icon('expand-alt') %> Departures</a>
 		</li>
 
 		<% css = if request.original_fullpath == @station.url + "/arrivals" then "active" else end %>
 		<li class=" nav-item">
-			<a class="nav-link <%= css %>" href="<%= @station.url + "/arrivals" %>"><%= icon('resize-small') %> Arrivals</a>
+			<a class="nav-link <%= css %>" href="<%= @station.url + "/arrivals" %>"><%= icon('compress-alt') %> Arrivals</a>
 		</li>
 	<% end %>
 
@@ -25,3 +32,4 @@
 	<% end %>
 
 	</ul>
+</div>
