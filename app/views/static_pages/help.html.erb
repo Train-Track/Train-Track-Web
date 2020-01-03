@@ -3,5 +3,40 @@
 
 <div class="container">
 	<h1>Help</h1>
-	<h3><%= @help %></h3>
+	<h5>Hello! How can we help?</h5>
+
+	<div class="row mt-4">
+		<div class="col-5">
+			<h3>Policies</h3>
+			<div class="list-group">
+				<a href="/privacy" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Privacy Policy</h5>
+						<small class="text-muted">Last updated: <%= timestamp(1578072919) %></small>
+					</div>
+					<p class="mb-1">
+						Details on how we manage your data privacy
+					</p>
+					<small>It's not as boring as it sounds.</small>
+				</a>
+				<a href="/cookies" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Cookie Policy</h5>
+						<small class="text-muted">Last updated: <%= timestamp(1578072919) %></small>
+					</div>
+					<p class="mb-1">How we use cookies on the site and what options you have.</p>
+					<small class="text-muted">Cookies are yummy.</small>
+				</a>
+				<a href="/terms" class="list-group-item list-group-item-action flex-column align-items-start">
+					<div class="d-flex w-100 justify-content-between">
+						<h5 class="mb-1">Terms and Conditions</h5>
+						<small class="text-muted">Last updated: <%= timestamp(1578072919) %></small>
+					</div>
+					<p class="mb-1">A few things that are expected of users for them to be able to use the site.</p>
+					<small class="text-muted">Best behaviour type stuff.</small>
+				</a>
+			</div>
+		</div>
+	</div>
+
 </div>

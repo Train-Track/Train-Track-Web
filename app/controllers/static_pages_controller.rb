@@ -23,7 +23,6 @@ class StaticPagesController < ApplicationController
   # GET /help.xml
   def help
     @help = "Coming soon!"
-    @help = ReferenceDataHelper.update_schedule
 
     respond_to do |format|
       format.html
@@ -43,6 +42,20 @@ class StaticPagesController < ApplicationController
       format.html
       format.xml { render xml: @terms }
       format.json { render json: @terms, callback: params['callback'] }
+    end
+  end
+
+
+  # GET /cookies
+  # GET /cookies.json
+  # GET /cookies.xml
+  def cookies
+    @cookies = "Coming soon!"
+
+    respond_to do |format|
+      format.html
+      format.xml { render xml: @cookies }
+      format.json { render json: @cookies, callback: params['callback'] }
     end
   end
 
