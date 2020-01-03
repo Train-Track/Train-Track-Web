@@ -15,15 +15,6 @@
  */
 
 .big-heading-container {
-    position:relative;
     background-color: #1761b3;
     min-height: 220px;
-}
-
-.big-heading {
-    position: absolute;
-    bottom: 0;
-    color: white;
-    font-weight: 900;
-    font-size: 400%;
 }
