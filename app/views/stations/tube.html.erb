@@ -2,10 +2,9 @@
 <% provide(:description, "Real-time train information for UK train stations.") %>
 <% provide(:attribution, "Powered by TfL Open Data") %>
 
-<div class="container">
-	<h1><%= @station %></h1>
-
 <%= render 'navigation' %>
+
+<div class="container">
 
 <% @tube_board.nrcc_messages.each do |message| %>
 	<div class="alert alert-warning" role="alert">

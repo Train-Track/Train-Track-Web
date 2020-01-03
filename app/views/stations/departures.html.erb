@@ -1,10 +1,9 @@
 <% provide(:title, "#{@station} - Departures") %>
 <% provide(:description, "Real-time train departures for #{@station}.") %>
 
-<div class="container">
-	<h1><%= @station %></h1>
-
 <%= render 'navigation' %>
+
+<div class="container">
 
 <% @departure_board.nrcc_messages.each do |message| %>
 	<div class="alert alert-warning" role="alert">

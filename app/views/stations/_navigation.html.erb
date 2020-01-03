@@ -1,3 +1,10 @@
+<div class="mt-n3 mb-3 big-heading-container">
+	<div class="container">
+		<h1 class="big-heading"><%= @station %></h1>
+	</div>
+</div>
+
+<div class="container">
 	<ul class="nav nav-tabs mb-3">
 
 		<% css = if request.original_fullpath == @station.url then "active" else "" end %>
@@ -25,3 +32,4 @@
 	<% end %>
 
 	</ul>
+</div>
