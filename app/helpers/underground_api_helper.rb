@@ -34,7 +34,7 @@ module UndergroundApiHelper
         json = JSON.parse(response.body)
       end
     rescue => e
-      ApiCall.add "GetUndergroundBoard", url, e.response, (Time.now - start_time) * 1000
+      ApiCall.add "GetUndergroundBoard", url, e.message, (Time.now - start_time) * 1000
       return board
     end
     station = Station.find_by underground_naptan: naptan
@@ -103,7 +103,7 @@ module UndergroundApiHelper
           json = JSON.parse(response.body)
         end
       rescue => e
-        ApiCall.add "GetUndergroundService", url, e.response, (Time.now - start_time) * 1000
+        ApiCall.add "GetUndergroundService", url, e.message, (Time.now - start_time) * 1000
         return service
       end
       json['orderedLineRoutes'][0]['naptanIds'].each do |naptan|
@@ -137,7 +137,7 @@ module UndergroundApiHelper
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
-      ApiCall.add "GetUndergroundPrediction", PREDICTION_BASE_URL + code, e.response, (Time.now - start_time) * 1000
+      ApiCall.add "GetUndergroundPrediction", "#{PREDICTION_BASE_URL}#{code}", e.message, (Time.now - start_time) * 1000
       return stations
     end
     xml.remove_namespaces!
@@ -212,7 +212,7 @@ module UndergroundApiHelper
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
-      ApiCall.add "GetUndergroundServicesForLineAtStation", url, e.response, (Time.now - start_time) * 1000
+      ApiCall.add "GetUndergroundServicesForLineAtStation", url, e.message, (Time.now - start_time) * 1000
       return service_items
     end
     xml.remove_namespaces!
@@ -266,7 +266,7 @@ module UndergroundApiHelper
         ApiCall.add "GetUndergroundStatus", STATUS_URL, response, (Time.now - start_time) * 1000
       rescue => e
         puts e.inspect
-        ApiCall.add "GetUndergroundStatus", STATUS_URL, e.response, (Time.now - start_time) * 1000
+        ApiCall.add "GetUndergroundStatus", STATUS_URL, e.message, (Time.now - start_time) * 1000
         return
       end
 

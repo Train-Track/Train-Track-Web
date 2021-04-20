@@ -13,9 +13,12 @@ module ReferenceDataHelper
   #   ReferenceDataHelper.update_reference_data
   # Train Operators:
   #   Download https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/tocs
+  #   curl -d 'username=hello@traintrackapp.co.uk&password=XXXXX' https://opendata.nationalrail.co.uk/authenticate
+  #   curl -H 'X-Auth-Token: XXXXXXX' -o tocs.xml https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/tocs
   #   ReferenceDataHelper.update_tocs
   # Train Stations:
   #   Download https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/stations
+  #   curl -H 'X-Auth-Token: XXXXXXX' -o stations.xml https://opendata.nationalrail.co.uk/api/staticfeeds/4.0/stations
   #   ReferenceDataHelper.update_stations
   # Timing Points:
   #   Download http://datafeeds.networkrail.co.uk/ntrod/SupportingFileAuthenticate?type=CORPUS to CORPUSExtract.json
@@ -26,9 +29,9 @@ module ReferenceDataHelper
   # Operators Contact Information:
   #  Manually managed file: operators.csv
   #  ReferenceDataHelper.update_operators_contact
-  # Underground Line Colours:
-  #  Manually managed file: tube_colours.csv
-  #  ReferenceDataHelper.update_tube_colours
+  # Underground Lines:
+  #  Manually managed file: tube_lines.csv
+  #  ReferenceDataHelper.update_tube_lines
   # Underground Line Distances:
   #  Manually managed file: Tube Station Distances.csv
   #  ReferenceDataHelper.update_train_station_distances
@@ -279,6 +282,15 @@ module ReferenceDataHelper
         attr[:operator] = operator
       end
 
+      facilities = Hash.new
+      f = s.css('StationFacilities').first
+      f.children.select(&:element?).each do |node|
+          available = node.css('Available').first.text if node.css('Available').first
+          available = node.css('Exists').first.text if node.css('Exists').first
+          facilities[node.name] = ActiveRecord::Type::Boolean.new.cast(available)
+      end
+      attr[:facilities] = JSON.dump(facilities)
+
       station = Station.where(crs: crs).first
       if station.nil?
         Station.create(attr)
@@ -393,17 +405,19 @@ module ReferenceDataHelper
     return
   end
 
-  # This populates Tube lines colours from a static file
-  # comma delimited tube_colours.csv
-  def self.update_tube_colours
-    File.readlines('reference/tube_colours.csv').each do |line|
+  # This populates Tube lines from a static file
+  # comma delimited tube_lines.csv
+  # sourced manually and from https://content.tfl.gov.uk/trackernet-data-services-guide-beta.pdf
+  def self.update_tube_lines
+    File.readlines('reference/tube_lines.csv').each do |line|
       parts = line.split(",")
-      next if parts.length < 2
+      next if parts.length < 4
       name = parts[0].strip
       background_colour = parts[1].strip
       text_colour = parts[2].strip
+      code = parts[3].strip
       line = Tube::Line.where(name: name).first_or_create
-      line.update_attributes(background_colour: background_colour, text_colour: text_colour)
+      line.update(background_colour: background_colour, text_colour: text_colour, code: code)
     end
     return
   end
@@ -578,7 +592,7 @@ module ReferenceDataHelper
         end
         location = { name: data[3].strip, tiploc: data[2].strip, lat: ll[0], lng: ll[1] }
         update = TimingPoint.where(code: location[:tiploc]).first_or_create
-        update.update_attributes(lat: location[:lat], lng: location[:lng], name: location[:name]) if update
+        update.update(lat: location[:lat], lng: location[:lng], name: location[:name]) if update
       end
     end
   end

@@ -40,7 +40,7 @@ module NationalRailApiHelper
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
-      ApiCall.add "GetService", URL, e.response, (Time.now - start_time) * 1000
+      ApiCall.add "GetService", URL, e.message, (Time.now - start_time) * 1000
       return
     end
     xml.remove_namespaces!
@@ -90,7 +90,7 @@ module NationalRailApiHelper
       end
     rescue => e
       puts e.inspect
-      puts e.response
+      puts e.message
       return
     end
     xml.remove_namespaces!
@@ -104,7 +104,7 @@ module NationalRailApiHelper
       print reason
       update = Reason.where(code: reason[:code]).first_or_create
       print update
-      update.update_attributes(late_running_reason: reason[:late_running_reason], cancellation_reason: reason[:cancellation_reason]) if update
+      update.update(late_running_reason: reason[:late_running_reason], cancellation_reason: reason[:cancellation_reason]) if update
     end
 
     return
@@ -132,7 +132,7 @@ module NationalRailApiHelper
         xml = Nokogiri::XML(response.body)
       end
     rescue => e
-      ApiCall.add type, URL, e.response, (Time.now - start_time) * 1000
+      ApiCall.add type, URL, e.message, (Time.now - start_time) * 1000
       return
     end
     xml.remove_namespaces!

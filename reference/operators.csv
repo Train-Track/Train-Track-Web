@@ -1,7 +1,7 @@
 AW,ArrivaTW,arrivatrainswales.co.uk,0845 606 1660,customer.services@arrivatrainswales.co.uk,https://www.arrivatrainswales.co.uk/claim/
 CC,c2c_Rail,c2c-online.co.uk,0845 601 4873,contact@c2crail.co.uk,https://www.c2c-online.co.uk/help-and-contact/delay-repay/
 CH,chilternrailway,chilternrailways.co.uk,0845 600 5165,customer.service@chilternrailways.co.uk,https://www.chilternrailways.co.uk/contact-us
-CS,CalSleeper,www.sleeper.scot,0330 060 050,,https://www.sleeper.scot/delay-repay-compensation-form
+CS,CalSleeper,www.sleeper.scot,0330 060 050,enquiry@sleeper.scot,https://www.sleeper.scot/delay-repay-form/
 EM,EMTrains,eastmidlandstrains.co.uk,0845 712 5678,getintouch@eastmidlandstrains.co.uk,https://www.eastmidlandstrains.co.uk/information/Delay-Repay/
 ES,Eurostar,eurostar.com,0843 218 6186,,https://compensation.eurostar.com/
 GC,GC_Rail,grandcentralrail.co.uk,0845 603 4852,customer.services@grandcentralrail.com,https://www.grandcentralrail.com/customer-service/getting-a-refund/compensation-form/
@@ -11,7 +11,7 @@ GW,GWRHelp,www.gwr.com,0845 700 0125,GWRfeedback@GWR.com,
 GX,GatwickExpress,www.gatwickexpress.com,0345 850 1530,customerservices@gatwickexpress.com,
 HC,,heathrowconnect.com,0845 678 6975,queries@heathrowconnect.com,
 HT,Hull_Trains,hulltrains.co.uk,0845 071 0222,customer.services@hulltrains.co.uk,
-HX,HeathrowExpress,heathrowexpress.com,0845 600 1515,,
+HX,HeathrowExpress,heathrowexpress.com,0845 600 1515,,https://www.heathrowexpress.com/help-centre/HelpTopic/how-can-i-claim-compensation-if-my-train-is-delayed/
 IL,SW_Trains,www.southwesttrains.co.uk/island-line.aspx,0845 600 065,customerrelations@swtrains.co.uk,
 LE,greateranglia,greateranglia.co.uk,0845 600 7245,,
 LM,LondonMidland,londonmidland.com,0844 811 0133,comments@londonmidland.com,
@@ -30,4 +30,6 @@ TW,my_metro,www.nexus.org.uk/metro,0191 203 3199,contactus@twmetro.co.uk,
 VT,VirginTrains,virgintrains.co.uk,03445 56 56 50,customer.relations@virgintrains.co.uk,https://www.virgintrains.co.uk/delayrepay
 WR,westcoastrail,www.westcoastrailways.co.uk,0844 850 4685,enquiries@westcoastrailways.net,
 XC,crosscountryuk,crosscountrytrains.co.uk,0844 736 9123,customer.relations@crosscountrytrains.co.uk,
-RT,networkrail,www.networkrail.co.uk/,03457 11 41 41,,
+RT,networkrail,www.networkrail.co.uk,03457 11 41 41,,
+GM,OfficialTfGM,tfgm.com,0161 244 1000,,https://tfgm.com/public-transport/delays-and-refunds
+XP,GPAPassenger,https://www.glasgowprestwick.com/passengers/getting-to-and-from-the-airport/train/,08712230700,,

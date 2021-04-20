@@ -107,7 +107,7 @@ class JourneyLegsController < ApplicationController
     render_404 and return if @journey_leg.nil?
 
     respond_to do |format|
-      if @journey_leg.update_attributes(journey_leg_params)
+      if @journey_leg.update(journey_leg_params)
         format.html { redirect_to @journey, notice: 'Journey leg was successfully updated.' }
         format.json { head :no_content }
       else

@@ -49,7 +49,7 @@ class Station < ActiveRecord::Base
   def facilities
     json = read_attribute(:facilities)
     return [] if json.nil?
-    return [JSON.parse(json)]
+    return JSON.parse(json)
   end
 
   def underground?
