@@ -28,11 +28,10 @@
 
 		<% if !@station.facilities.empty? %>
 			<h5>Facilities</h5>
-			<table class="table-striped">
-				<% @station.facilities.each do |k,v | %>
+			<table class="table table-striped">
+				<% @station.facilities.each do |k, v| %>
 				<tr>
-					<td><%= k %></td>
-					<td><%= v %></td>
+					<td <%= "class=\"text-muted\" title=\"Unavailable\"".html_safe unless v %>><%= facility(k) %></td>
 				</tr>
 			<% end %>
 			</table>

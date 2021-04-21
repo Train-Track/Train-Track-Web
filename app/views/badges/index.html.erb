@@ -3,7 +3,14 @@
 
 <div class="container">
 	<h1>Badges</h1>
-	  
+
+	<span title="Commuter: 5 days in a row in the morning" class="btn-warning border-danger p-4 display-1 mb-5 text-center d-block" style="border:solid 5px;max-width:180px"><i class="fas fa-briefcase"></i></span>
+	<span title="Late: 1 delayed journey" class="btn-danger border-info p-4 display-1 mb-5 text-center d-block" style="border:solid 5px;max-width:180px"><i class="fas fa-clock"></i></span>
+	<span title="Student: 1 journey destination a university station" class="btn-info border-primary p-4 display-1 mb-5 text-center d-block" style="border:solid 5px;max-width:180px"><i class="fas fa-user-graduate"></i></span>
+	<span title="Week streak: 5 days in a row" class="btn-primary border-secondary p-4 display-1 mb-5 text-center d-block" style="border:solid 5px;max-width:180px"><i class="fas fa-calendar-alt"></i></span>
+	<span title="Bus replacement: Taking a bus replacement service" class="btn-secondary border-success p-4 display-1 mb-5 text-center d-block" style="border:solid 5px;max-width:180px"><i class="fas fa-bus"></i></span>
+	<span title="Ship: Taking a boat" class="btn-success border-warning p-4 display-1 mb-5 text-center d-block" style="border:solid 5px;max-width:180px"><i class="fas fa-ship"></i></span>
+
 	<table class="table table-striped">
 	<% @badges.each do |badge| %>
 		<tr><td><%= link_to badge, badge.url %></td></tr>
