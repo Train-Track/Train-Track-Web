@@ -8,8 +8,8 @@ Train-Track-Web
 
     ```
     su - rails
-    rvm install 2.6.5
-    rvm use 2.6.5 --default
+    rvm install 2.7.2
+    rvm use 2.7.2 --default
     ssh-keygen -t rsa -b 4096 -C "hello@traintrackapp.co.uk"
     ```
 

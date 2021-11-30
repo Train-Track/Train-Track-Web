@@ -5,31 +5,34 @@ CS,CalSleeper,www.sleeper.scot,0330 060 050,enquiry@sleeper.scot,https://www.sle
 EM,EMTrains,eastmidlandstrains.co.uk,0845 712 5678,getintouch@eastmidlandstrains.co.uk,https://www.eastmidlandstrains.co.uk/information/Delay-Repay/
 ES,Eurostar,eurostar.com,0843 218 6186,,https://compensation.eurostar.com/
 GC,GC_Rail,grandcentralrail.co.uk,0845 603 4852,customer.services@grandcentralrail.com,https://www.grandcentralrail.com/customer-service/getting-a-refund/compensation-form/
-GN,GNRailUK,greatnorthernrail.com,0345 026 4700,customerservices@greatnorthernrail.com,
+GM,OfficialTfGM,tfgm.com,0161 244 1000,,https://tfgm.com/public-transport/delays-and-refunds
+GN,GNRailUK,greatnorthernrail.com,0345 026 4700,customerservices@greatnorthernrail.com,https://www.greatnorthernrail.com/help-and-support/journey-problems/delay-repay-compensation
 GR,Virgin_TrainsEC,virgintrainseastcoast.com,,,https://www.virgintrainseastcoast.com/customer-service/delay-repay/
-GW,GWRHelp,www.gwr.com,0845 700 0125,GWRfeedback@GWR.com,
-GX,GatwickExpress,www.gatwickexpress.com,0345 850 1530,customerservices@gatwickexpress.com,
+GW,GWRHelp,www.gwr.com,0845 700 0125,GWRfeedback@GWR.com,https://www.gwr.com/help-and-support/refunds-and-compensation/delay-repay
+GX,GatwickExpress,www.gatwickexpress.com,0345 850 1530,customerservices@gatwickexpress.com,https://www.gatwickexpress.com/help-and-support/journey-problems/delay-repay-compensation
 HC,,heathrowconnect.com,0845 678 6975,queries@heathrowconnect.com,
-HT,Hull_Trains,hulltrains.co.uk,0845 071 0222,customer.services@hulltrains.co.uk,
+HT,Hull_Trains,hulltrains.co.uk,0845 071 0222,customer.services@hulltrains.co.uk,https://www.hulltrains.co.uk/support-and-contact/refunds-and-compensation
 HX,HeathrowExpress,heathrowexpress.com,0845 600 1515,,https://www.heathrowexpress.com/help-centre/HelpTopic/how-can-i-claim-compensation-if-my-train-is-delayed/
 IL,SW_Trains,www.southwesttrains.co.uk/island-line.aspx,0845 600 065,customerrelations@swtrains.co.uk,
-LE,greateranglia,greateranglia.co.uk,0845 600 7245,,
+LD,LumoTravel,www.lumo.co.uk,0345 528 0409,customerexperience@lumo.co.uk,https://www.lumo.co.uk/help/delay-repay
+LE,greateranglia,greateranglia.co.uk,0345 600 7245,contactcentre@greateranglia.co.uk,https://www.greateranglia.co.uk/about-us/our-performance/delay-repay
 LM,LondonMidland,londonmidland.com,0844 811 0133,comments@londonmidland.com,
+LN,LNRailway,www.londonnorthwesternrailway.co.uk,,,https://www.londonnorthwesternrailway.co.uk/about-us/delay-repay
 LO,LDNOverground,lorol.co.uk,0845 601 4867,overgroundinfo@tfl.gov.uk,https://tfl.gov.uk/fares-and-payments/replacements-and-refunds/refunds-for-delays
-LT,tube,www.tfl.gov.uk,0343 222 1234,contactus@tfl.gov.uk,https://tfl.gov.uk/fares-and-payments/replacements-and-refunds/refunds-for-delay4s
+LT,tube,www.tfl.gov.uk,0343 222 1234,contactus@tfl.gov.uk,https://tfl.gov.uk/fares/refunds-and-replacements
 ME,merseyrail,merseyrail.org,0151 702 2071,comment@merseyrail.org,https://www.merseyrail.org/tickets-passes/refunds/refund-compensation-form.aspx
 NT,northernrailorg,northernrailway.co.uk,0800 200 6060,enquiries@northernrailway.co.uk,https://www.northernrailway.co.uk/corporate/compensation-information/delay-repay-application
+RT,networkrail,www.networkrail.co.uk,03457 11 41 41,,
 SE,Se_Railway,southeasternrailway.co.uk,0345 322 7021,,https://delayrepay.southeasternrailway.co.uk/customer-details
-SN,SouthernRailUK,southernrailway.com,0845 127 2920,comments@southernrailway.com,
-SR,ScotRail,scotrail.co.uk,0344 811 0141,customer.relations@scotrail.co.uk,
+SN,SouthernRailUK,southernrailway.com,0845 127 2920,comments@southernrailway.com,https://delayrepay.southernrailway.com/
+SR,ScotRail,scotrail.co.uk,0344 811 0141,customer.relations@scotrail.co.uk,https://scotrail.delayrepaycompensation.com/
 SW,SW_Trains,southwesttrains.co.uk,03456000650,customerrelations@swtrains.co.uk,https://www.southwesttrains.co.uk/tickets-explained/compensation/refunds/
-SX,Stansted_Exp,stanstedexpress.com,0845 850 0150,nxea.customerrelations@nationalexpress.com,
+SX,Stansted_Exp,stanstedexpress.com,0845 850 0150,nxea.customerrelations@nationalexpress.com,https://www.stanstedexpress.com/about-us/contact-us/refunds/
 TL,TLRailUK,thameslinkrailway.com,0345 026 4700,customerservices@thameslinkrailway.com,
-TP,TPExpressTrains,tpexpress.co.uk,03456001671,tpecustomer.relations@firstgroup.com,
+TP,TPExpressTrains,tpexpress.co.uk,03456001671,tpecustomer.relations@firstgroup.com,https://www.tpexpress.co.uk/help/delay-repay-compensation
 TW,my_metro,www.nexus.org.uk/metro,0191 203 3199,contactus@twmetro.co.uk,
 VT,VirginTrains,virgintrains.co.uk,03445 56 56 50,customer.relations@virgintrains.co.uk,https://www.virgintrains.co.uk/delayrepay
+WM,WestMidRailway,www.westmidlandsrailway.co.uk,,,https://www.westmidlandsrailway.co.uk/about-us/delay-repay
 WR,westcoastrail,www.westcoastrailways.co.uk,0844 850 4685,enquiries@westcoastrailways.net,
-XC,crosscountryuk,crosscountrytrains.co.uk,0844 736 9123,customer.relations@crosscountrytrains.co.uk,
-RT,networkrail,www.networkrail.co.uk,03457 11 41 41,,
-GM,OfficialTfGM,tfgm.com,0161 244 1000,,https://tfgm.com/public-transport/delays-and-refunds
+XC,crosscountryuk,crosscountrytrains.co.uk,0844 736 9123,customer.relations@crosscountrytrains.co.uk,https://www.crosscountrytrains.co.uk/customer-service/contact-us/delay-repay
 XP,GPAPassenger,https://www.glasgowprestwick.com/passengers/getting-to-and-from-the-airport/train/,08712230700,,
