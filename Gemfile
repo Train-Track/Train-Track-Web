@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1'
+gem 'rails', '~> 7.0.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -33,6 +33,8 @@ gem 'listen',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+
 gem 'pg'
 gem 'will_paginate'
 gem 'will_paginate-bootstrap4'
@@ -41,3 +43,4 @@ gem 'rest-client'
 gem 'nokogiri'
 gem 'blue_geo'
 gem 'puma'
+gem 'rack-cors'
