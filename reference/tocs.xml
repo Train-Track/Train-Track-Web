@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TrainOperatingCompanyList xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:add="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" xmlns:com="http://nationalrail.co.uk/xml/common" xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd" xmlns="http://nationalrail.co.uk/xml/toc">
+<TrainOperatingCompanyList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:add="http://www.govtalk.gov.uk/people/AddressAndPersonalDetails" xmlns:com="http://nationalrail.co.uk/xml/common" xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd" xmlns="http://nationalrail.co.uk/xml/toc">
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-11-18T16:12:12.000Z</com:LastChangedDate>
+      <com:ChangedBy>Gary Gennard</com:ChangedBy>
+      <com:LastChangedDate>2021-09-22T02:58:40.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>VT</AtocCode>
     <AtocMember>true</AtocMember>
@@ -18,7 +18,7 @@
     </OperatingPeriod>
     <HeadOfficeContactDetails>
       <com:PrimaryTelephoneNumber>
-        <com:TelNationalNumber>0</com:TelNationalNumber>
+        <com:TelNationalNumber>03455280253</com:TelNationalNumber>
       </com:PrimaryTelephoneNumber>
       <com:PostalAddress>
         <add:Line>Avanti West Coast</add:Line>
@@ -42,7 +42,7 @@
 <p>(Closed 25 and 26 December)</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>03453280253</com:TelNationalNumber>
+            <com:TelNationalNumber>03455280253</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PostalAddress>
             <add:Line>First Customer Contact Ltd</add:Line>
@@ -58,7 +58,7 @@
       <LostProperty>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>03453280253</com:TelNationalNumber>
+            <com:TelNationalNumber>03455280253</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:Url>https://avantiwestcoast.co.uk/help/lost-property</com:Url>
         </com:ContactDetails>
@@ -67,7 +67,7 @@
       <AssistedTravel>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>03453280253</com:TelNationalNumber>
+            <com:TelNationalNumber>08455280853</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PrimaryMinicomNumber>
             <com:TelNationalNumber>08000158124</com:TelNationalNumber>
@@ -85,7 +85,7 @@
         <p>Monday to Sunday - 08:00 - 22:00</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>08719774222</com:TelNationalNumber>
+            <com:TelNationalNumber>03455280253</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
         </com:ContactDetails>
@@ -293,7 +293,7 @@
     <StationOperator>true</StationOperator>
     <Name>Caledonian Sleeper</Name>
     <LegalName>Serco Caledonian Sleeper</LegalName>
-    <ManagingDirector>Ryan Flaherty</ManagingDirector>
+    <ManagingDirector>Kathryn Darbandi</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/sleeper%20small.png</Logo>
     <NetworkMap>https://www.sleeper.scot/templates/caledonian/media/route-maps/csroutes.pdf</NetworkMap>
     <OperatingPeriod>
@@ -569,7 +569,7 @@
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T10:58:59.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2021-04-21T09:55:26.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>XC</AtocCode>
     <AtocMember>true</AtocMember>
@@ -577,7 +577,7 @@
     <Name>CrossCountry</Name>
     <LegalName>XC Trains Limited</LegalName>
     <ManagingDirector>Tom Joyner</ManagingDirector>
-    <Logo>https://www.nationalrail.co.uk/static/images/structure/XC%20small.png</Logo>
+    <Logo>https://www.nationalrail.co.uk/static/images/structure/XC%20small(2021).png</Logo>
     <NetworkMap>https://www.crosscountrytrains.co.uk/media/1298/crosscountry-route-map.pdf</NetworkMap>
     <OperatingPeriod>
       <StartDate>2007-11-11</StartDate>
@@ -604,8 +604,12 @@
         <com:ContactDetails>
           <com:Annotation>
             <com:Note><![CDATA[<p><strong>Opening hours</strong></p>
-        <p>Monday to Friday - 08:00 - 17:00</p>
-        <p>Saturday - 08:00 - 16:00&nbsp;</p>]]></com:Note>
+
+<p>Sunday - 08:00 - 16:00</p>
+
+<p>Monday to Friday - 08:00 - 20:00</p>
+
+<p>Saturday - 08:00 - 16:00&nbsp;</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
             <com:TelNationalNumber>03447369123</com:TelNationalNumber>
@@ -924,8 +928,8 @@
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T11:11:26.000+01:00</com:LastChangedDate>
+      <com:ChangedBy>Rob Divall</com:ChangedBy>
+      <com:LastChangedDate>2021-07-12T05:06:32.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>GX</AtocCode>
     <AtocMember>true</AtocMember>
@@ -943,11 +947,11 @@
         <com:TelNationalNumber>03458501530</com:TelNationalNumber>
       </com:PrimaryTelephoneNumber>
       <com:PostalAddress>
-        <add:Line>3rd Floor</add:Line>
-        <add:Line>41-51 Grey Street</add:Line>
-        <add:Line>Newcastle upon Tyne</add:Line>
-        <add:Line>Tyne and Wear</add:Line>
-        <add:PostCode>NE1 6EE</add:PostCode>
+        <add:Line>Govia Thameslink Railway</add:Line>
+        <add:Line>PO Box 10240</add:Line>
+        <add:Line>Ashby-De-La-Zouch</add:Line>
+        <add:Line>Leicestershire</add:Line>
+        <add:PostCode>LE65 9EB</add:PostCode>
       </com:PostalAddress>
       <com:EmailAddress>customerservices@gatwickexpress.com</com:EmailAddress>
       <com:Url>https://www.nationalrail.co.uk/</com:Url>
@@ -991,7 +995,7 @@
       <AssistedTravel>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>0800 138 1016</com:TelNationalNumber>
+            <com:TelNationalNumber>03458501530</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PrimaryMinicomNumber>
             <com:TelNationalNumber>0800 138 1018</com:TelNationalNumber>
@@ -1216,7 +1220,7 @@
             <com:Note><![CDATA[<p></p><p><strong>Tickets delivered by First Class Post (free)</strong>&nbsp;will be dispatched within 24 hours and you will receive your tickets within 5 days.</p><p><strong>Self-service ticket machine (free)</strong>&nbsp;You will need the payment card used and your collection reference. Tickets will be ready for collection 2 hours after booking.</p><p><strong>Next day delivery (£6.00)</strong>&nbsp;Guaranteed ticket delivery by 1pm the next working day. You will need to sign for your tickets on delivery.</p><p></p><p><strong>Opening hours</strong></p><p>Monday to Sunday - 08:00 - 22:00</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>03448110071</com:TelNationalNumber>
+            <com:TelNationalNumber>03456034852</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
         </com:ContactDetails>
@@ -1245,8 +1249,8 @@
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T11:13:20.000+01:00</com:LastChangedDate>
+      <com:ChangedBy>Rob Divall</com:ChangedBy>
+      <com:LastChangedDate>2021-07-12T04:15:29.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>GN</AtocCode>
     <AtocMember>true</AtocMember>
@@ -1315,7 +1319,7 @@
         </com:Annotation>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>08000582844</com:TelNationalNumber>
+            <com:TelNationalNumber>03450264700</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PrimaryMinicomNumber>
             <com:TelNationalNumber>08001381018</com:TelNationalNumber>
@@ -1374,8 +1378,8 @@
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>John Hovey</com:ChangedBy>
-      <com:LastChangedDate>2019-10-16T16:53:31.000+01:00</com:LastChangedDate>
+      <com:ChangedBy>Paul Chilver</com:ChangedBy>
+      <com:LastChangedDate>2021-04-01T03:04:27.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>GW</AtocCode>
     <AtocMember>true</AtocMember>
@@ -1384,7 +1388,7 @@
     <LegalName>First Greater Western</LegalName>
     <ManagingDirector>Mark Hopwood</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/GWR.png</Logo>
-    <NetworkMap>https://www.gwr.com/~/media/gwr/pdfs/maps/gwr-network-map.pdf?la=en</NetworkMap>
+    <NetworkMap>https://www.gwr.com/~/media/gwr/pdfs/maps/accessibility-network-map-poster-june-2020.pdf</NetworkMap>
     <OperatingPeriod>
       <StartDate>2006-04-01</StartDate>
     </OperatingPeriod>
@@ -1445,14 +1449,16 @@
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
         </com:ContactDetails>
       </AssistedTravel>
-      <CyclePolicyUrl>https://www.gwr.com/your-journey/journey-information/on-board/cycles</CyclePolicyUrl>
+      <CyclePolicyUrl>https://www.gwr.com/travelling-with-us/on-our-trains/bringing-your-bike</CyclePolicyUrl>
     </SupportAndInformation>
     <TicketingAndFares>
       <TeleSales>
         <com:ContactDetails>
           <com:Annotation>
-            <com:Note><![CDATA[<p><span style="color: rgb(85, 85, 85); line-height: 17.01px; font-family: arial, helvetica, sans-serif; font-size: 12px; background-color: rgb(255, 255, 255);">Allow three working days for delivery. A next day delivery can be arranged at £6 per transaction. Arrangements can be made at some stations to collect tickets (the card must be produced and the tickets signed for by the card holder).</span></p>
-<p><strong>Opening hours</strong></p>
+            <com:Note><![CDATA[<p><span style="color: #555555; line-height: 17.01px; font-family: arial, helvetica, sans-serif; font-size: 12px; background-color: #ffffff;">Allow three working days for delivery. A next day delivery can be arranged at £6 per transaction. Arrangements can be made at some stations to collect tickets (the card must be produced and the tickets signed for by the card holder).</span></p>
+<p><span style="color: #555555; line-height: 17.01px; font-family: arial, helvetica, sans-serif; font-size: 12px; background-color: #ffffff;"><span>Our telesales number is open only for Group booking, Isle of Scilly, Business direct Scholars, Night Riviera or help with pre-purchased tickets bought over the phone. </span></span></p>
+<p><span style="color: #555555; line-height: 17.01px; font-family: arial, helvetica, sans-serif; font-size: 12px; background-color: #ffffff;"><span>To buy standard tickets visit our website <a href="http://gwr.com">www.gwr.com</a> or use our app.</span></span></p>
+<strong>Opening hours</strong>
 <p>06:00 - 23:00 (except Christmas Day)</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
@@ -1490,7 +1496,7 @@
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-02-20T14:03:24.000Z</com:LastChangedDate>
+      <com:LastChangedDate>2020-02-20T02:03:24.000Z</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>LE</AtocCode>
     <AtocMember>true</AtocMember>
@@ -1623,16 +1629,16 @@
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T11:24:40.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2021-07-26T04:37:41.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>HX</AtocCode>
     <AtocMember>true</AtocMember>
     <StationOperator>true</StationOperator>
     <Name>Heathrow Express</Name>
     <LegalName>Heathrow Express</LegalName>
-    <ManagingDirector>Fraser Brown</ManagingDirector>
+    <ManagingDirector>Sophie Chapman</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/HEX3%20small.png</Logo>
-    <NetworkMap>http://www.heathrowairport.com/static/Heathrow/Downloads/PDF/rail_routes_at_Heathrow.pdf</NetworkMap>
+    <NetworkMap>https://www.nationalrail.co.uk/</NetworkMap>
     <OperatingPeriod>
       <StartDate>2005-05-18</StartDate>
     </OperatingPeriod>
@@ -1647,7 +1653,6 @@
         <add:Line>London</add:Line>
         <add:PostCode>TW6 2GW</add:PostCode>
       </com:PostalAddress>
-      <com:EmailAddress>.@.</com:EmailAddress>
       <com:Url>https://www.nationalrail.co.uk/</com:Url>
     </HeadOfficeContactDetails>
     <CompanyWebsite>http://www.heathrowexpress.com</CompanyWebsite>
@@ -1668,10 +1673,11 @@
           <com:PostalAddress>
             <add:Line>Compass Centre</add:Line>
             <add:Line>Nelson Road</add:Line>
+            <add:Line>Hounslow</add:Line>
             <add:Line>London</add:Line>
-            <add:PostCode>W2 6BR</add:PostCode>
+            <add:PostCode>TW6 2GW</add:PostCode>
           </com:PostalAddress>
-          <com:Url>https://www.heathrowexpress.com/</com:Url>
+          <com:Url>https://www.heathrowexpress.com/about-us/contact-us#/</com:Url>
         </com:ContactDetails>
       </CustomerService>
       <LostProperty>
@@ -1695,7 +1701,7 @@
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
         </com:ContactDetails>
       </AssistedTravel>
-      <CyclePolicyUrl>https://www.gwr.com/your-journey/journey-information/on-board/cycles</CyclePolicyUrl>
+      <CyclePolicyUrl>https://www.nationalrail.co.uk/stations_destinations/cycle-policies.aspx</CyclePolicyUrl>
     </SupportAndInformation>
     <TicketingAndFares>
       <TeleSales>
@@ -1738,7 +1744,7 @@
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-08-14T17:23:06.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2020-08-14T05:23:06.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>HT</AtocCode>
     <AtocMember>true</AtocMember>
@@ -1854,7 +1860,7 @@ Christmas Day - &nbsp;Closed<br>Boxing Day - 08:00 - 18:00</p>]]></com:Note>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Katie Scorer</com:ChangedBy>
-      <com:LastChangedDate>2019-06-08T16:19:38.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2019-06-08T04:19:38.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>IL</AtocCode>
     <AtocMember>true</AtocMember>
@@ -1978,7 +1984,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-11-18T16:13:07.000Z</com:LastChangedDate>
+      <com:LastChangedDate>2020-11-18T04:13:07.000Z</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>GR</AtocCode>
     <AtocMember>true</AtocMember>
@@ -2013,9 +2019,11 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
         </com:Annotation>
         <com:ContactDetails>
           <com:Annotation>
-            <com:Note><![CDATA[<p><span style="color: #2b2b2b; font-family: arial, helvetica, sans-serif; font-size: 12px; line-height: 17.015625px;">We welcome your feedback, suggestions and ideas to help us to make changes that can develop and grow our business.</span></p>
-        <p><strong>Opening hours</strong></p>
-        <p>Monday to Sunday - 07:00 - 22:00 </p>]]></com:Note>
+            <com:Note><![CDATA[<p><span style="color:#2b2b2b; font-family:arial,helvetica,sans-serif; font-size:12px; line-height:17.015625px">We welcome your feedback, suggestions and ideas to help us to make changes that can develop and grow our business.</span></p>
+
+<p><strong>Opening hours</strong></p>
+
+<p>Sunday to Saturday 0800-2200</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
             <com:TelNationalNumber>03457225333</com:TelNationalNumber>
@@ -2056,11 +2064,16 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
       <TeleSales>
         <com:ContactDetails>
           <com:Annotation>
-            <com:Note><![CDATA[<p style="margin: 0px; padding: 0px 0px 1em; color: rgb(43, 43, 43); line-height: 1.4em; font-family: arial, helvetica, sans-serif; font-size: 12px;">Tickets delivered by First Class Post if booked within 5 working days of travel.</p>
-<p style="margin: 0px; padding: 0px 0px 1em; color: rgb(43, 43, 43); line-height: 1.4em; font-family: arial, helvetica, sans-serif; font-size: 12px;">Next Day Special Delivery available for a £5.45 fee.</p>
-<p><span style="color: rgb(43, 43, 43); line-height: 1.4em; font-family: arial, helvetica, sans-serif; font-size: 12px;">Ticket on Departure available to all National ToD Issuing locations.</span> </p>
+            <com:Note><![CDATA[<p style="color:#2b2b2b; font-family:arial,helvetica,sans-serif; font-size:12px; line-height:1.4em; margin-bottom:0px; margin-left:0px; margin-right:0px; margin-top:0px; padding:0px 0px 1em">Tickets delivered by First Class Post if booked within 5 working days of travel.</p>
+
+<p style="color:#2b2b2b; font-family:arial,helvetica,sans-serif; font-size:12px; line-height:1.4em; margin-bottom:0px; margin-left:0px; margin-right:0px; margin-top:0px; padding:0px 0px 1em">Next Day Special Delivery available for a £5.45 fee.</p>
+
+<p><span style="color:#2b2b2b; font-family:arial,helvetica,sans-serif; font-size:12px; line-height:1.4em">Ticket on Departure available to all National ToD Issuing locations.</span>&nbsp;</p>
+
 <p><strong>Opening hours</strong></p>
-<p>Monday to Sunday - 08:00 - 20:00</p>
+
+<p>Sunday to Monday 0800-2200</p>
+
 <p>&nbsp;</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
@@ -2078,11 +2091,15 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
       <GroupTravel>
         <com:ContactDetails>
           <com:Annotation>
-            <com:Note><![CDATA[<p>"If you are travelling in a group of 10 or more people we ask that you contact our Group Travel  team, who will be able to direct you to trains with sufficient seats for your group and also advise you on the best value for money ticket option as you may qualify for a group discount on your tickets as well.</p>
-        <p>First Class recorded for bookings between £0.00 - £999.99, and does require a signature</p>
-        <p>Next day Special Delivery on orders over £1,000 or you can choose Next Day Special Delivery at a charge of £6.15 or in line with up to date prices from Royal Mail "</p>
-        <p><strong>Opening Hours</strong></p>
-        <p>Monday-Friday 09:00-18:00</p>]]></com:Note>
+            <com:Note><![CDATA[<p>"If you are travelling in a group of 10 or more people we ask that you contact our&nbsp;Group Travel &nbsp;team, who will be able to direct you to trains with sufficient seats for your group and also advise you on the best value for money ticket option as you may qualify for a group discount on your tickets as well.</p>
+
+<p>First Class recorded for bookings between £0.00 - £999.99, and does require a signature</p>
+
+<p>Next day Special Delivery on orders over £1,000 or you can choose Next Day Special Delivery at a charge of £6.15 or in line with up to date prices from Royal Mail "</p>
+
+<p><strong>Opening Hours</strong></p>
+
+<p>Monday-Friday 0800-2000</p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
             <com:TelNationalNumber>03457225225</com:TelNationalNumber>
@@ -2129,7 +2146,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
     <StationOperator>true</StationOperator>
     <Name>London Northwestern Railway</Name>
     <LegalName>West Midlands Trains</LegalName>
-    <ManagingDirector>Jan Chaudhry-van der Velde</ManagingDirector>
+    <ManagingDirector>Julian Edwards</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/LNWR%20small.png</Logo>
     <NetworkMap>https://www.nationalrail.co.uk/</NetworkMap>
     <OperatingPeriod>
@@ -2254,7 +2271,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Dawn Kolokotroni</com:ChangedBy>
-      <com:LastChangedDate>2020-12-18T13:21:37.000Z</com:LastChangedDate>
+      <com:LastChangedDate>2020-12-18T01:21:37.000Z</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>LO</AtocCode>
     <AtocMember>true</AtocMember>
@@ -2556,6 +2573,123 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
+      <com:LastChangedDate>2021-09-07T09:49:37.000+01:00</com:LastChangedDate>
+    </ChangeHistory>
+    <AtocCode>LD</AtocCode>
+    <AtocMember>true</AtocMember>
+    <StationOperator>false</StationOperator>
+    <Name>Lumo</Name>
+    <LegalName>East Coast Trains Limited</LegalName>
+    <ManagingDirector>Helen Wylde</ManagingDirector>
+    <Logo>https://www.nationalrail.co.uk/static/images/structure/Lumo.jpg</Logo>
+    <NetworkMap>https://www.nationalrail.co.uk/</NetworkMap>
+    <OperatingPeriod>
+      <StartDate>2021-10-24</StartDate>
+    </OperatingPeriod>
+    <HeadOfficeContactDetails>
+      <com:PrimaryTelephoneNumber>
+        <com:TelNationalNumber>03455280409</com:TelNationalNumber>
+      </com:PrimaryTelephoneNumber>
+      <com:PostalAddress>
+        <add:Line>4th Floor, Central Square South</add:Line>
+        <add:Line>Orchard Street</add:Line>
+        <add:Line>Newcastle-upon-Tyne</add:Line>
+        <add:PostCode>NE1 3PG</add:PostCode>
+      </com:PostalAddress>
+      <com:EmailAddress>CustomerExperience@lumo.co.uk</com:EmailAddress>
+      <com:Url>https://www.nationalrail.co.uk/</com:Url>
+    </HeadOfficeContactDetails>
+    <CompanyWebsite>https://www.lumo.co.uk/</CompanyWebsite>
+    <SupportAndInformation>
+      <CustomerService>
+        <com:Annotation>
+          <com:Note><![CDATA[<p>t.b.c. </p>]]></com:Note>
+        </com:Annotation>
+        <com:ContactDetails>
+          <com:Annotation>
+            <com:Note><![CDATA[<p>Opening Hours:</p>
+
+<p>09:00 - 17:00 Everyday (closed Chrismas Day and Boxing Day)</p>]]></com:Note>
+          </com:Annotation>
+          <com:PrimaryTelephoneNumber>
+            <com:TelNationalNumber>03455280409</com:TelNationalNumber>
+          </com:PrimaryTelephoneNumber>
+          <com:PostalAddress>
+            <add:Line>FREEPOST LUMO CUSTOMER SUPPORT</add:Line>
+            <add:Line>First Customer Contact Ltd.</add:Line>
+            <add:Line>The Square, 2 Broad Street West</add:Line>
+            <add:Line>South Yorkshire</add:Line>
+            <add:PostCode>S1 2BQ</add:PostCode>
+          </com:PostalAddress>
+          <com:EmailAddress>customerexperience@lumo.co.uk</com:EmailAddress>
+          <com:Url>https://www.lumo.co.uk</com:Url>
+        </com:ContactDetails>
+      </CustomerService>
+      <LostProperty>
+        <com:ContactDetails>
+          <com:PrimaryTelephoneNumber>
+            <com:TelNationalNumber>03455280409</com:TelNationalNumber>
+          </com:PrimaryTelephoneNumber>
+          <com:EmailAddress>customerexperience@lumo.co.uk</com:EmailAddress>
+          <com:Url>https://www.lumo.co.uk/</com:Url>
+        </com:ContactDetails>
+        <com:Available>true</com:Available>
+      </LostProperty>
+      <AssistedTravel>
+        <com:ContactDetails>
+          <com:PrimaryTelephoneNumber>
+            <com:TelNationalNumber>08000318542</com:TelNationalNumber>
+          </com:PrimaryTelephoneNumber>
+          <com:PrimaryMinicomNumber>
+            <com:TelNationalNumber>0</com:TelNationalNumber>
+          </com:PrimaryMinicomNumber>
+          <com:Url>https://www.nationalrail.co.uk/</com:Url>
+        </com:ContactDetails>
+      </AssistedTravel>
+      <CyclePolicyUrl>https://www.nationalrail.co.uk/</CyclePolicyUrl>
+    </SupportAndInformation>
+    <TicketingAndFares>
+      <TeleSales>
+        <com:ContactDetails>
+          <com:Annotation>
+            <com:Note><![CDATA[<p>Opening Hours:</p>
+
+<p>08:00 - 23:00 Everyday (closed Christmas Day and Boxing Day)</p>]]></com:Note>
+          </com:Annotation>
+          <com:PrimaryTelephoneNumber>
+            <com:TelNationalNumber>03455280409</com:TelNationalNumber>
+          </com:PrimaryTelephoneNumber>
+          <com:Url>https://www.nationalrail.co.uk/</com:Url>
+        </com:ContactDetails>
+      </TeleSales>
+      <GroupTravel>
+        <com:ContactDetails>
+          <com:Url>https://www.nationalrail.co.uk/</com:Url>
+        </com:ContactDetails>
+      </GroupTravel>
+      <BusinessTravel>
+        <com:ContactDetails>
+          <com:PrimaryTelephoneNumber>
+            <com:TelNationalNumber>0000000000</com:TelNationalNumber>
+          </com:PrimaryTelephoneNumber>
+          <com:Url>https://www.nationalrail.co.uk/</com:Url>
+        </com:ContactDetails>
+      </BusinessTravel>
+      <SeatReservations>
+        <com:Annotation>
+          <com:Note><![CDATA[<p>Reservations compolusory on all Lumo services</p>]]></com:Note>
+        </com:Annotation>
+        <com:Available>true</com:Available>
+      </SeatReservations>
+      <PenaltyFaresUrl>https://www.nationalrail.co.uk/www.lumo.co.uk</PenaltyFaresUrl>
+      <BuyingTickets>
+        <com:Note><![CDATA[<p>Tickets are available to purchase onboard.</p>]]></com:Note>
+      </BuyingTickets>
+    </TicketingAndFares>
+  </TrainOperatingCompany>
+  <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
+    <ChangeHistory>
+      <com:ChangedBy>Rob Morgan</com:ChangedBy>
       <com:LastChangedDate>2020-10-13T11:28:51.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>ME</AtocCode>
@@ -2563,7 +2697,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
     <StationOperator>true</StationOperator>
     <Name>Merseyrail</Name>
     <LegalName>Merseyrail Electrics 2002 Limited</LegalName>
-    <ManagingDirector>Jan Chaudhry</ManagingDirector>
+    <ManagingDirector>Andy Heath</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/ME%20small.png</Logo>
     <NetworkMap>http://www.merseyrail.org/_common/map/networkmap.htm</NetworkMap>
     <OperatingPeriod>
@@ -2668,7 +2802,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy></com:ChangedBy>
-      <com:LastChangedDate>2013-06-28T16:34:49.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2013-06-28T04:34:49.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>ZN</AtocCode>
     <AtocMember>false</AtocMember>
@@ -2702,7 +2836,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Juan Londono</com:ChangedBy>
-      <com:LastChangedDate>2021-03-04T20:32:20.000Z</com:LastChangedDate>
+      <com:LastChangedDate>2021-03-04T08:32:20.000Z</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>XX</AtocCode>
     <AtocMember>true</AtocMember>
@@ -2716,7 +2850,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy></com:ChangedBy>
-      <com:LastChangedDate>2017-08-23T19:46:26.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2017-08-23T07:46:26.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>NR</AtocCode>
     <AtocMember>false</AtocMember>
@@ -2809,8 +2943,8 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Craig Alexander</com:ChangedBy>
-      <com:LastChangedDate>2020-10-23T14:41:27.000+01:00</com:LastChangedDate>
+      <com:ChangedBy>Bryan Lodge</com:ChangedBy>
+      <com:LastChangedDate>2021-04-15T10:57:34.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>NT</AtocCode>
     <AtocMember>true</AtocMember>
@@ -2843,7 +2977,8 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
         </com:Annotation>
         <com:ContactDetails>
           <com:Annotation>
-            <com:Note><![CDATA[<p><span class="ophr" style="line-height: normal; background-color: rgb(255, 255, 255);">24 hours a day on every day where a train service runs<br></span></p>]]></com:Note>
+            <com:Note><![CDATA[<p><span class="ophr" style="line-height: normal; background-color: #ffffff;">Customer Services available between 06:00 to 23:00 when trains are running<br />
+</span></p>]]></com:Note>
           </com:Annotation>
           <com:PrimaryTelephoneNumber>
             <com:TelNationalNumber>08002006060</com:TelNationalNumber>
@@ -2867,7 +3002,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
       <AssistedTravel>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>08001385560</com:TelNationalNumber>
+            <com:TelNationalNumber>08002006060</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PrimaryMinicomNumber>
             <com:TelNationalNumber>-</com:TelNationalNumber>
@@ -2925,7 +3060,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2019-06-21T16:10:00.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2019-06-21T04:10:00.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>SR</AtocCode>
     <AtocMember>true</AtocMember>
@@ -3037,15 +3172,15 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T12:49:02.000+01:00</com:LastChangedDate>
+      <com:ChangedBy>Brian Ayres</com:ChangedBy>
+      <com:LastChangedDate>2021-06-25T11:03:14.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>SW</AtocCode>
     <AtocMember>true</AtocMember>
     <StationOperator>true</StationOperator>
     <Name>South Western Railway</Name>
     <LegalName>South Western Railway</LegalName>
-    <ManagingDirector>Mark Hopwood</ManagingDirector>
+    <ManagingDirector>Claire Mann</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/SW%20small.png</Logo>
     <NetworkMap>https://www.nationalrail.co.uk/</NetworkMap>
     <OperatingPeriod>
@@ -3092,7 +3227,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
       <LostProperty>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>020 7401 7861</com:TelNationalNumber>
+            <com:TelNationalNumber>03456000650</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
         </com:ContactDetails>
@@ -3267,8 +3402,8 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T12:54:15.000+01:00</com:LastChangedDate>
+      <com:ChangedBy>Rob Divall</com:ChangedBy>
+      <com:LastChangedDate>2021-07-12T04:57:17.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>SN</AtocCode>
     <AtocMember>true</AtocMember>
@@ -3286,10 +3421,10 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
         <com:TelNationalNumber>03451272920</com:TelNationalNumber>
       </com:PrimaryTelephoneNumber>
       <com:PostalAddress>
-        <add:Line>P.O. Box 3021</add:Line>
-        <add:Line>Bristol</add:Line>
-        <add:Line>-</add:Line>
-        <add:PostCode>BS2 2BS</add:PostCode>
+        <add:Line>Govia Thameslink Railway</add:Line>
+        <add:Line>PO Box 10240</add:Line>
+        <add:Line>Ashby-De-La-Zouch</add:Line>
+        <add:PostCode>LE65 9EB</add:PostCode>
       </com:PostalAddress>
       <com:EmailAddress>comments@southernrailway.com</com:EmailAddress>
       <com:Url>https://www.nationalrail.co.uk/</com:Url>
@@ -3334,7 +3469,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
       <AssistedTravel>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>0800 138 1016</com:TelNationalNumber>
+            <com:TelNationalNumber>03451272920</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PrimaryMinicomNumber>
             <com:TelNationalNumber>0800 138 1018</com:TelNationalNumber>
@@ -3592,8 +3727,8 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T12:56:32.000+01:00</com:LastChangedDate>
+      <com:ChangedBy>Rob Divall</com:ChangedBy>
+      <com:LastChangedDate>2021-07-12T04:46:20.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>TL</AtocCode>
     <AtocMember>true</AtocMember>
@@ -3662,7 +3797,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
         </com:Annotation>
         <com:ContactDetails>
           <com:PrimaryTelephoneNumber>
-            <com:TelNationalNumber>08000582844</com:TelNationalNumber>
+            <com:TelNationalNumber>03450264700</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PrimaryMinicomNumber>
             <com:TelNationalNumber>08009751052</com:TelNationalNumber>
@@ -3722,7 +3857,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T13:00:01.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2020-10-13T01:00:01.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>TP</AtocCode>
     <AtocMember>true</AtocMember>
@@ -3847,7 +3982,7 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2021-03-02T13:05:44.000Z</com:LastChangedDate>
+      <com:LastChangedDate>2021-03-02T01:05:44.000Z</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>GM</AtocCode>
     <AtocMember>true</AtocMember>
@@ -3934,15 +4069,15 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   </TrainOperatingCompany>
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
-      <com:ChangedBy>Ben Ives</com:ChangedBy>
-      <com:LastChangedDate>2019-11-11T11:49:18.000Z</com:LastChangedDate>
+      <com:ChangedBy>Paul Chilver</com:ChangedBy>
+      <com:LastChangedDate>2021-10-05T02:38:26.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>AW</AtocCode>
     <AtocMember>true</AtocMember>
     <StationOperator>true</StationOperator>
     <Name>Transport for Wales</Name>
     <LegalName>Transport for Wales / Trafnidieath Cymru</LegalName>
-    <ManagingDirector>Marie Daly</ManagingDirector>
+    <ManagingDirector>Jan Chaudhry-van der Velde</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/TfW%20Logo%20Sm2.jpg</Logo>
     <NetworkMap>https://www.nationalrail.co.uk/</NetworkMap>
     <OperatingPeriod>
@@ -4030,8 +4165,9 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
             <com:TelNationalNumber>03333211202</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PostalAddress>
-            <add:Line>Cardiff</add:Line>
-            <add:Line>_</add:Line>
+            <add:Line>3 Llys Cadwyn</add:Line>
+            <add:Line>Pontypridd</add:Line>
+            <add:Line>Rhondda, Cynon, Taff</add:Line>
             <add:PostCode>CF37 4TH</add:PostCode>
           </com:PostalAddress>
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
@@ -4044,8 +4180,10 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
         <div>Monday to Friday 09:30 - 16:30 (excluding bank holidays)<br></div>]]></com:Note>
           </com:Annotation>
           <com:PostalAddress>
-            <add:Line>Wokingham</add:Line>
-            <add:Line>_</add:Line>
+            <add:Line>3 Llys Cadwyn</add:Line>
+            <add:Line>Pontypridd</add:Line>
+            <add:Line>Rhondda, Cynon, Taff</add:Line>
+            <add:PostCode>CF37 4TH</add:PostCode>
           </com:PostalAddress>
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
         </com:ContactDetails>
@@ -4059,11 +4197,11 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
             <com:TelNationalNumber>08448560688</com:TelNationalNumber>
           </com:PrimaryTelephoneNumber>
           <com:PostalAddress>
-            <add:Line>Trsport for Wales Business Travel</add:Line>
+            <add:Line>Transport for Wales Business Travel</add:Line>
             <add:Line>3 Llys Cadwyn</add:Line>
             <add:Line>Pontypridd</add:Line>
             <add:Line>Rhondda, Cynon, Taff</add:Line>
-            <add:PostCode>CF10 5DJ</add:PostCode>
+            <add:PostCode>CF37 4TH</add:PostCode>
           </com:PostalAddress>
           <com:Url>https://www.nationalrail.co.uk/</com:Url>
         </com:ContactDetails>
@@ -4084,14 +4222,14 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2020-10-13T13:01:31.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2020-10-13T01:01:31.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>WM</AtocCode>
     <AtocMember>true</AtocMember>
     <StationOperator>true</StationOperator>
     <Name>West Midlands Railway</Name>
     <LegalName>WMTrains Ltd</LegalName>
-    <ManagingDirector>Jan Chaudhry-van der Velde</ManagingDirector>
+    <ManagingDirector>Julian Edwards</ManagingDirector>
     <Logo>https://www.nationalrail.co.uk/static/images/structure/WM%20small.png</Logo>
     <NetworkMap>https://www.nationalrail.co.uk/</NetworkMap>
     <OperatingPeriod>
@@ -4200,15 +4338,15 @@ All Group Travel must be booked in advance: 7 days in advance for up to 49 passe
   <TrainOperatingCompany xsi:schemaLocation="http://internal.nationalrail.co.uk/xml/XsdSchemas/External/Version4.0/nre-toc-v4-0.xsd">
     <ChangeHistory>
       <com:ChangedBy>Rob Morgan</com:ChangedBy>
-      <com:LastChangedDate>2019-07-09T15:30:49.000+01:00</com:LastChangedDate>
+      <com:LastChangedDate>2021-08-23T04:06:07.000+01:00</com:LastChangedDate>
     </ChangeHistory>
     <AtocCode>LM</AtocCode>
     <AtocMember>false</AtocMember>
     <StationOperator>true</StationOperator>
     <Name>West Midlands Trains</Name>
     <LegalName>West Midlands Trains Ltd.</LegalName>
-    <ManagingDirector>Jan Chaudhry-van der Velde</ManagingDirector>
-    <Logo>https://www.nationalrail.co.uk/static/images/structure/TOC%20Logo/Combined%20Logo%20-%20WMT2.jpg</Logo>
+    <ManagingDirector>Julian Edwards</ManagingDirector>
+    <Logo>https://www.nationalrail.co.uk/static/images/structure/WMT-combined(small).jpg</Logo>
     <NetworkMap>https://www.nationalrail.co.uk/</NetworkMap>
     <OperatingPeriod>
       <StartDate>2017-12-10</StartDate>

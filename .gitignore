@@ -30,3 +30,7 @@ node_modules/
 config/secrets.yml
 
 reference/ReferenceData
+
+public/assets
+
+.DS_Store
