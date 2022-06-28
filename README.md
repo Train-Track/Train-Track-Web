@@ -1,15 +1,24 @@
 Train-Track-Web
 ===============
 
-### Install
+### Run locally
+```
+brew install postgresql
+rvm install 3.1.2
+bundle install
+rake db:migrate RAILS_ENV=development
+rails s
+```
+
+### Deploy to Digital Ocean
 
 - Create a droplet on Digital Ocean using the Ruby on Rails application image
 - Login with the root password e-mailed to you
 
     ```
     su - rails
-    rvm install 2.7.2
-    rvm use 2.7.2 --default
+    rvm install 3.1.2
+    rvm use 3.1.2 --default
     ssh-keygen -t rsa -b 4096 -C "hello@traintrackapp.co.uk"
     ```
 

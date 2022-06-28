@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_10_170122) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_01_10_170122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +19,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "record_type", null: false
     t.bigint "record_id", null: false
     t.bigint "blob_id", null: false
-    t.datetime "created_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
@@ -33,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "service_name", null: false
     t.bigint "byte_size", null: false
     t.string "checksum"
-    t.datetime "created_at", precision: 6, null: false
+    t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
@@ -49,8 +48,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.integer "response_code"
     t.text "response"
     t.integer "response_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "badges", id: :serial, force: :cascade do |t|
@@ -58,8 +57,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "description"
     t.string "image_url"
     t.integer "points"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "google_achievement_id"
     t.string "uuid"
     t.index ["uuid"], name: "index_badges_on_uuid", unique: true
@@ -69,14 +68,14 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.integer "journey_id"
     t.integer "departure_station_id", null: false
     t.integer "arrival_station_id", null: false
-    t.datetime "scheduled_departure"
-    t.datetime "scheduled_arrival"
-    t.datetime "actual_departure"
-    t.datetime "actual_arrival"
+    t.datetime "scheduled_departure", precision: nil
+    t.datetime "scheduled_arrival", precision: nil
+    t.datetime "actual_departure", precision: nil
+    t.datetime "actual_arrival", precision: nil
     t.string "departure_platform"
     t.string "arrival_platform"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.integer "operator_id"
     t.string "uuid"
     t.index ["journey_id"], name: "index_journey_legs_on_journey_id"
@@ -85,8 +84,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
 
   create_table "journeys", id: :serial, force: :cascade do |t|
     t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "uuid"
     t.index ["user_id"], name: "index_journeys_on_user_id"
     t.index ["uuid"], name: "index_journeys_on_uuid", unique: true
@@ -97,8 +96,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "code"
     t.string "twitter"
     t.string "delay_repay_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "numeric_code"
     t.string "uuid"
     t.string "phone"
@@ -114,8 +113,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.integer "late"
     t.integer "cancel_very_late"
     t.integer "total"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "name"
     t.index ["operator_id"], name: "index_ppms_on_operator_id"
   end
@@ -125,8 +124,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "uuid"
     t.text "late_running_reason"
     t.text "cancellation_reason"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["uuid", "code"], name: "index_reasons_on_uuid_and_code"
   end
 
@@ -146,8 +145,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "crs"
     t.decimal "lat", precision: 10, scale: 7
     t.decimal "lng", precision: 10, scale: 7
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "number"
     t.text "facilities"
     t.string "phone"
@@ -182,8 +181,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "platform"
     t.text "activities"
     t.text "planned_activities"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["station_id"], name: "index_timetable_calling_points_on_station_id"
     t.index ["timetable_id"], name: "index_timetable_calling_points_on_timetable_id"
     t.index ["timing_point_id"], name: "index_timetable_calling_points_on_timing_point_id"
@@ -200,8 +199,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "train_category"
     t.text "late_running_reason"
     t.text "cancellation_reason"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.index ["uuid"], name: "index_timetables_on_uuid"
   end
 
@@ -212,8 +211,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.integer "station_id"
     t.decimal "lat", precision: 10, scale: 7
     t.decimal "lng", precision: 10, scale: 7
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "stanox"
     t.index ["code", "uuid", "station_id"], name: "index_timing_points_on_code_and_uuid_and_station_id"
     t.index ["stanox"], name: "index_timing_points_on_stanox"
@@ -225,8 +224,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "number"
     t.string "background_colour"
     t.string "text_colour"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
     t.string "uuid"
     t.index ["code", "number"], name: "index_tube_lines_on_code_and_number"
     t.index ["uuid"], name: "index_tube_lines_on_uuid", unique: true
@@ -235,8 +234,8 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
   create_table "user_badges", id: :serial, force: :cascade do |t|
     t.integer "user_id"
     t.integer "badge_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "user_favourite_stations", id: false, force: :cascade do |t|
@@ -252,15 +251,15 @@ ActiveRecord::Schema.define(version: 2022_01_10_170122) do
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
+    t.datetime "reset_password_sent_at", precision: nil
+    t.datetime "remember_created_at", precision: nil
     t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
+    t.datetime "current_sign_in_at", precision: nil
+    t.datetime "last_sign_in_at", precision: nil
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
     t.integer "home_station_id"
     t.integer "work_station_id"
     t.string "uuid"
